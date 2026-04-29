@@ -3,12 +3,10 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 
-
-
 const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-outfit"
-})
+  weight: ["200", "300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,14 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${outfit.className} h-full`}
-    >
+    <html lang="en" className={`${outfit.className} h-full`}>
       <body className="min-h-full flex flex-col">
-        <Navbar/>
+        <Navbar />
         {children}
-        </body>
+      </body>
     </html>
   );
 }
