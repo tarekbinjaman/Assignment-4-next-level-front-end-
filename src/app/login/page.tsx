@@ -1,32 +1,24 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+  CardFooter
+
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function Login() {
   return (
-    <div>
-      <h1>This is login page</h1>
+    <div className="flex justify-center mt-40 ">
     <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
-        <CardAction>
-          <Button variant="link">Sign Up</Button>
-        </CardAction>
-      </CardHeader>
+
 <CardContent>
-  <form>
+  <div className="flex flex-col gap-2">
+  <h3 className="text-4xl font-sans">Welcome back</h3>
+<p className="text-lg text-gray-400 font-sans">Please enter your details</p>
+  </div>
+  <form className="mt-4">
     <div className="flex flex-col gap-6">
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
@@ -36,9 +28,6 @@ export default function Login() {
       <div className="grid gap-2">
         <div className="flex items-center">
           <Label htmlFor="password">Password</Label>
-          <a className="ml-auto text-sm underline hover:underline" href="#">
-            Forgot your password?
-          </a>
         </div>
 
         <Input id="password" type="password" required />
