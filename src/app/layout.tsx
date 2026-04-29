@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -26,7 +23,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} h-full`}
+      className={`${outfit.className} h-full`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar/>
