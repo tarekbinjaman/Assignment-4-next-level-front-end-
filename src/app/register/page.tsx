@@ -1,59 +1,94 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter
-
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Link from "next/link";
-export default async function registration() {
-return (
+import { useState } from "react";
+export default function Registration() {
+  const [role, setRole] = useState("");
+  return (
     <div>
-            <div className="flex justify-center mt-40 ">
-    <Card className="w-full max-w-sm">
+      <div className="flex justify-center mt-10 ">
+        <Card className="w-full max-w-sm">
+          <CardContent>
+            {/* logo */}
+            <div>
+              <h1 className="text-4xl text-blue-400 text-center font-extrabold my-8">
+                Skill Bridge
+              </h1>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3 className="text-2xl font-bold">Create account</h3>
+              <p className="text-lg text-gray-400 font-semibold">
+                Please enter your details
+              </p>
+            </div>
+            <form className="mt-4">
+              <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  {/* Name */}
+                  <Label htmlFor="email">Name</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="enter your name"
+                    required
+                  />
+                </div>
 
-<CardContent>
-  {/* logo */}
-  <div>
-    <h1 className="text-4xl text-blue-400 text-center font-extrabold my-8">Skill Bridge</h1>
-  </div>
-  <div className="flex flex-col gap-2">
-  <h3 className="text-2xl font-bold">Create account</h3>
-<p className="text-lg text-gray-400 font-semibold">Please enter your details</p>
-  </div>
-  <form className="mt-4">
-    <div className="flex flex-col gap-6">
-      <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" placeholder="m@example.com" required />
+                <div className=" ">
+                  {/* Role */}
+                  {/* <Label htmlFor="email">Select role</Label> */}
+                  <select
+                    className="w-full rounded-md border border-input bg-background px-3 py-1 text-sm text-gray-900 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    <option value="">Select role</option>
+                    <option value="TUTOR">Tutor</option>
+                    <option value="STUDENT">Student</option>
+                  </select>
+                </div>
+
+                <div className="grid gap-2">
+                  {/* Email */}
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  {/* Password */}
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Password</Label>
+                  </div>
+
+                  <Input id="password" type="password" required />
+                </div>
+              </div>
+            </form>
+
+            <div className="mt-2">
+              <p className="">
+                Already have an account?{" "}
+                <Link className="underline" href={"/login"}>
+                  Login now!
+                </Link>{" "}
+              </p>
+            </div>
+          </CardContent>
+          <CardFooter className="flex-col gap-2">
+            <Button type="submit" className="w-full">
+              Register
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
-
-      <div className="grid gap-2">
-        <div className="flex items-center">
-          <Label htmlFor="password">Password</Label>
-        </div>
-
-        <Input id="password" type="password" required />
-      </div>
     </div>
-  </form>
-  
-  <div className="mt-2">
-  <p className="">New here? <Link className="underline" href={"/register"}>Register now!</Link> </p>
-  </div>
-</CardContent>
-      <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          Login with Google
-        </Button>
-      </CardFooter>
-    </Card>
-    </div>
-    </div>
-)
+  );
 }
