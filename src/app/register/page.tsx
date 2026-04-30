@@ -7,30 +7,54 @@ import Link from "next/link";
 import { useState } from "react";
 export default function Registration() {
   const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // submit function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formatData = {
+      name,
+      role,
+      email,
+      password,
+    };
+
+    console.log("Student", formatData);
+  };
   return (
     <div>
       <div className="flex justify-center mt-10 ">
         <Card className="w-full max-w-sm">
-          <CardContent>
-            {/* logo */}
+          <CardContent className="p-0">
+            <div className="">
             <div>
+                          {/* logo */}
               <h1 className="text-4xl text-blue-400 text-center font-extrabold my-8">
                 Skill Bridge
               </h1>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 px-3">
               <h3 className="text-2xl font-bold">Create account</h3>
               <p className="text-lg text-gray-400 font-semibold">
                 Please enter your details
               </p>
             </div>
-            <form className="mt-4">
+            <form onSubmit={handleSubmit} className="mt-4">
+              <div className="px-3">
+                {/* form all input fields */}
+              
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                   {/* Name */}
-                  <Label htmlFor="email">Name</Label>
+                  <Label htmlFor="name">Name</Label>
                   <Input
-                    id="email"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                     type="email"
                     placeholder="enter your name"
                     required
@@ -55,7 +79,8 @@ export default function Registration() {
                   {/* Email */}
                   <Label htmlFor="email">Email</Label>
                   <Input
-                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     placeholder="m@example.com"
                     required
@@ -68,25 +93,32 @@ export default function Registration() {
                     <Label htmlFor="password">Password</Label>
                   </div>
 
-                  <Input id="password" type="password" required />
+                  <Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    required
+                  />
                 </div>
               </div>
-            </form>
-
-            <div className="mt-2">
-              <p className="">
-                Already have an account?{" "}
-                <Link className="underline" href={"/login"}>
-                  Login now!
-                </Link>{" "}
-              </p>
-            </div>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button type="submit" className="w-full">
+              <div className="mt-2">
+                <p className="">
+                  Already have an account?{" "}
+                  <Link className="underline" href={"/login"}>
+                    Login now!
+                  </Link>{" "}
+                </p>
+              </div>
+              </div>
+          <CardFooter className="mt-3">
+            <Button className="w-full">
               Register
             </Button>
           </CardFooter>
+            </form>
+            </div>
+
+          </CardContent>
         </Card>
       </div>
     </div>
