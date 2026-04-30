@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,26 +9,45 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formatData = {
+      email,
+      password
+    }
+
+    console.log("User login info", formatData)
+  }
   return (
     <div className="flex justify-center mt-40 ">
     <Card className="w-full max-w-sm">
 
-<CardContent>
+<CardContent className="p-0">
   {/* logo */}
   <div>
     <h1 className="text-4xl text-blue-400 text-center font-extrabold my-8">Skill Bridge</h1>
   </div>
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col gap-2 px-3">
   <h3 className="text-2xl font-bold">Welcome back</h3>
 <p className="text-lg text-gray-400 font-semibold">Please enter your details</p>
   </div>
-  <form className="mt-4">
+  <form onSubmit={handleSubmit} className="mt-4">
+    <div className="px-3">
+    {/* In this div all text and input fields */}
+
+    <div>
+      {/* In this di all input fields */}
     <div className="flex flex-col gap-6">
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" placeholder="m@example.com" required />
+        <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="m@example.com" required />
       </div>
 
       <div className="grid gap-2">
@@ -35,16 +55,19 @@ export default function Login() {
           <Label htmlFor="password">Password</Label>
         </div>
 
-        <Input id="password" type="password" required />
+        <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required />
       </div>
     </div>
-  </form>
-  
+    </div>
+    {/* In here text things like register now! */}
   <div className="mt-2">
   <p className="">New here? <Link className="underline" href={"/register"}>Register now!</Link> </p>
   </div>
-</CardContent>
-      <CardFooter className="flex-col gap-2">
+    </div>
+
+    <div>
+      {/* In this div card footer and other button for login with google */}
+      <CardFooter className="flex-col gap-2 mt-3">
         <Button type="submit" className="w-full">
           Login
         </Button>
@@ -52,6 +75,10 @@ export default function Login() {
           Login with Google
         </Button>
       </CardFooter>
+    </div>
+  </form>
+  
+</CardContent>
     </Card>
     </div>
   );
