@@ -8,22 +8,34 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useAuth } from "@/src/context/AuthContext";
+import { loginUser } from "@/src/services/authService";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const {fetchUser} = useAuth();
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async(e) => {
     e.preventDefault()
 
-    const formatData = {
-      email,
-      password
-    }
+    try {
+      // 1. login > set cookie
+      await loginUser({email, password});
 
-    console.log("User login info", formatData)
+      // 2. get real user
+      await fetchUser();
+
+      // 3. redirect
+      router.push("/")
+    } catch(err) {
+      console.log("Error from login form", err)
+    }
   }
   return (
     <div className="flex justify-center mt-40 ">

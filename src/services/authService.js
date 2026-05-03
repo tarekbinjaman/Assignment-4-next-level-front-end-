@@ -5,6 +5,11 @@ const api = axios.create({
     withCredentials: true,
 });
 
+export const loginUser = async (data) => {
+    const res = await api.post("/auth/login", data);
+    return res.data;
+};
+
 export const getMe = async() => {
     const res = await api.get("/user/me")
     return res.data;
