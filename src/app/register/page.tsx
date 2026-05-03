@@ -3,26 +3,47 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "@/src/context/AuthContext";
+import { loginUser, registerUser } from "@/src/services/authService";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 export default function Registration() {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {fetchUser} = useAuth();
+
+  const router = useRouter();
 
   // submit function
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const formatData = {
       name,
-      role,
       email,
       password,
+      role,
     };
 
-    console.log("Student", formatData);
+    try {
+      // 1. register user
+      await registerUser(formatData);
+
+      // 2. auto login
+      await loginUser({email, password});
+
+      // 3. get user into context
+      await fetchUser()
+
+      // 4. redirect
+      router.push("/")
+
+    } catch(err) {
+      console.log(err)
+    }
   };
   return (
     <div>
@@ -47,22 +68,23 @@ export default function Registration() {
                 {/* form all input fields */}
               
               <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
+               
                   {/* Name */}
+                <div className="grid gap-2">
                   <Label htmlFor="name">Name</Label>
                   <Input
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
-                    type="email"
+                    type="text"
                     placeholder="enter your name"
                     required
                   />
                 </div>
 
-                <div className=" ">
                   {/* Role */}
+                <div className=" ">
                   {/* <Label htmlFor="email">Select role</Label> */}
                   <select
                     className="w-full rounded-md border border-input bg-background px-3 py-1 text-sm text-gray-900 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -81,7 +103,7 @@ export default function Registration() {
                   <Input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    type="email"
+                    type="text"
                     placeholder="m@example.com"
                     required
                   />

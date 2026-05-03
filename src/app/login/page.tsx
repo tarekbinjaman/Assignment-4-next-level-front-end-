@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { useAuth } from "@/src/context/AuthContext";
 import { loginUser } from "@/src/services/authService";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {

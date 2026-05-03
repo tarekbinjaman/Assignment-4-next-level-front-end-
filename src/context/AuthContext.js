@@ -1,3 +1,4 @@
+"use client" 
 import { createContext, useContext, useEffect, useState } from "react";
 import { getMe } from "../services/authService";
 
@@ -12,6 +13,7 @@ const AuthProvider = ({ children }) => {
     try {
       const data = await getMe();
       setUser(data);
+      console.log("user data from fetch user", data)
     } catch (err) {
       console.log(err.message);
       setUser(null);
