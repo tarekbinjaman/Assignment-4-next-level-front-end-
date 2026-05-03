@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
+import AuthProvider from "../services/authService"
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.className} h-full`}>
       <body className="min-h-full flex flex-col">
+        <AuthProvider>
         <Navbar />
         {children}
+        </AuthProvider>
       </body>
     </html>
   );
