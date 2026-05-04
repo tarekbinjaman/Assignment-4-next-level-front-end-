@@ -11,9 +11,9 @@ const AuthProvider = ({ children }) => {
   // fetch user from backend
   const fetchUser = async () => {
     try {
-      const data = await getMe();
-      setUser(data);
-      console.log("user data from fetch user", data)
+      const res = await getMe();
+      setUser(res.data);
+      console.log("user data from fetch user", res.data)
     } catch (err) {
       console.log(err.message);
       setUser(null);
