@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import AuthProvider from "../context/AuthContext"
+import { Toaster } from "sonner";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
         <AuthProvider>
         <Navbar />
         {children}
+           <Toaster />
         </AuthProvider>
       </body>
     </html>

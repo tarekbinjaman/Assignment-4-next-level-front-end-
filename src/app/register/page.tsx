@@ -8,6 +8,7 @@ import { loginUser, registerUser } from "@/src/services/authService";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner"
 export default function Registration() {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
@@ -43,6 +44,7 @@ export default function Registration() {
 
     } catch(err) {
       console.log(err)
+      toast.error("Registration failed")
     }
   };
   return (
