@@ -4,6 +4,7 @@ import { useAuth } from "@/src/context/AuthContext";
 import { logOutUser } from "@/src/services/authService";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import UserDashboard from "./NavbarComponents/userDashboard";
 
 export default function Navbar() {
   const { user, clearAuth } = useAuth();
@@ -33,8 +34,9 @@ export default function Navbar() {
       <div>
         {user ? (
           <>
-            <p>{user?.name}</p>
-            <Button onClick={logOutFunction}>Logout</Button>
+            {/* <p>{user?.name}</p>
+            <Button onClick={logOutFunction}>Logout</Button> */}
+            <UserDashboard />
           </>
         ) : (
           <>
