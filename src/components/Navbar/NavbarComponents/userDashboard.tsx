@@ -35,13 +35,15 @@ export default function UserDashboard () {
       router.push("/login"); // redirect
     };
 
+
+
   return (
     <DropdownMenu>
 <DropdownMenuTrigger asChild>
   <Button variant="ghost" size="icon" className="rounded-full">
     <Avatar>
       <AvatarImage
-        src="https://github.com/shadcn.png"
+        src={user?.image ? user?.image : "https://github.com/shadcn.png"}
         alt="shadcn"
       />
       <AvatarFallback>LR</AvatarFallback>
