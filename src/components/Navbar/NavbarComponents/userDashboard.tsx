@@ -35,7 +35,9 @@ export default function UserDashboard () {
       router.push("/login"); // redirect
     };
 
-
+    const userNavigation = (route : string) => {
+      router.push(route)
+    }
 
   return (
     <DropdownMenu>
@@ -60,7 +62,7 @@ export default function UserDashboard () {
             <CalendarCheckIcon />
             Booking
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => userNavigation("/dashboard")}>
             <LayoutDashboardIcon />
             Dashboard
           </DropdownMenuItem>

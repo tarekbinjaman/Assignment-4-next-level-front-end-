@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/src/components/dashboard/app-sidebar";
+import { AppSidebar } from "@/src/components/dashboard/appsidebar";
 import React from "react";
 
 export default function DashBoardLayout({
@@ -8,15 +8,16 @@ export default function DashBoardLayout({
   children: React.ReactNode;
 }) {
     return (
-        <SidebarProvider>
-            <SidebarProvider>
-                
-            </SidebarProvider>
-            <AppSidebar />
-            <main>
-                <SidebarTrigger />
-                {children}
-            </main>
-        </SidebarProvider>
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full">
+        <AppSidebar />
+
+        <main className="flex-1 p-6">
+          <SidebarTrigger />
+
+          {children}
+        </main>
+      </div>
+    </SidebarProvider>
     )
 }
