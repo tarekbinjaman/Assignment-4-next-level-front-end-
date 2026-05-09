@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar/Navbar";
 import AuthProvider from "../context/AuthContext"
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,13 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.className} h-full`}>
       <body className="min-h-full flex flex-col">
-        <TooltipProvider>
         <AuthProvider>
-        <Navbar />
+        <TooltipProvider>
         {children}
            <Toaster />
-        </AuthProvider>
         </TooltipProvider>
+        </AuthProvider>
       </body>
     </html>
   );
