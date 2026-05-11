@@ -6,12 +6,15 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // fetch user from backend
   const fetchUser = async () => {
+    setLoading(true);
     try {
+      console.log("Fetch started")
       const res = await getMe();
+      console.log("fetch success")
       setUser(res.data);
       console.log("user data from fetch user", res.data)
     } catch (err) {

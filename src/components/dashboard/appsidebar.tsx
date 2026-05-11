@@ -23,27 +23,31 @@ import {
 import { useAuth } from "@/src/context/AuthContext";
 
 export function AppSidebar() {
-  const { user } = useAuth();
+  const { user, loading  } = useAuth();
+
+  if(loading) {
+    return <div>Loading...</div>
+  }
 
   const studentLinks = [
     {
       title: "Overview",
-      href: "/dashboard/student/dashboardOverview",
+      href: "/dashboard/Students/dashboardOverview",
       icon: LayoutDashboard,
     },
     {
       title: "Edit Profile",
-      href: "/dashboard/student/editProfile",
+      href: "/dashboard/Students/editProfile",
       icon: UserPen,
     },
     {
       title: "My Booking",
-      href: "/dashboard/student/mybooking",
+      href: "/dashboard/Students/mybooking",
       icon: CalendarCheck,
     },
     {
       title: "Book a Session",
-      href: "/dashboard/student/bookSession",
+      href: "/dashboard/Students/bookSession",
       icon: BookOpen,
     },
   ];
