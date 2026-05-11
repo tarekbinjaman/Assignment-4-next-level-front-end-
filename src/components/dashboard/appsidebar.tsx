@@ -46,9 +46,27 @@ export function AppSidebar() {
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/dashboard/admin">
+                <Link href="/dashboard/Students/dashboardOverview">
                   <User />
-                  <span>Profile</span>
+                  <span>Student Dashboard</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/tutor/dashboardOverview">
+                  <User />
+                  <span>Tutor Dashboard</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/dashboard/admin/dashboardOverview">
+                  <User />
+                  <span>Admin Dashboard</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

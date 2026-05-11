@@ -54,7 +54,7 @@ export default function UserDashboard () {
 </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={()=> userNavigation("/dashboard/profile")}>
             <UserIcon />
             Profile
           </DropdownMenuItem>
