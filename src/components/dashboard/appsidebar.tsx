@@ -1,7 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, User, CalendarCheck } from "lucide-react";
+import {   LayoutDashboard,
+  UserPen,
+  CalendarCheck,
+  BookOpen,
+  Clock,
+  Star,
+  Users,
+  FolderKanban,
+  House, } from "lucide-react";
 
 import {
   Sidebar,
@@ -19,24 +27,24 @@ export function AppSidebar() {
 
   const studentLinks = [
     {
-      title: "Student Dashboard",
-      href: "/dashboard/Students/dashboardOverview",
+      title: "Overview",
+      href: "/dashboard/student/dashboardOverview",
       icon: LayoutDashboard,
     },
     {
       title: "Edit Profile",
-      href: "/dashboard/Students/editProfile",
-      icon: LayoutDashboard,
+      href: "/dashboard/student/editProfile",
+      icon: UserPen,
     },
     {
       title: "My Booking",
-      href: "/dashboard/Students/mybooking",
-      icon: LayoutDashboard,
+      href: "/dashboard/student/mybooking",
+      icon: CalendarCheck,
     },
     {
       title: "Book a Session",
-      href: "/dashboard/Students/bookSession",
-      icon: LayoutDashboard,
+      href: "/dashboard/student/bookSession",
+      icon: BookOpen,
     },
   ];
 
@@ -49,25 +57,24 @@ export function AppSidebar() {
     {
       title: "Edit Profile",
       href: "/dashboard/tutor/editProfile",
-      icon: LayoutDashboard,
+      icon: UserPen,
     },
     {
       title: "My Sessions",
       href: "/dashboard/tutor/mySession",
-      icon: LayoutDashboard,
+      icon: BookOpen,
     },
     {
       title: "Set Availability",
       href: "/dashboard/tutor/setAvailability",
-      icon: LayoutDashboard,
+      icon: Clock,
     },
     {
       title: "View Reviews",
       href: "/dashboard/tutor/viewReviews",
-      icon: LayoutDashboard,
+      icon: Star,
     },
   ];
-  
 
   const adminLinks = [
     {
@@ -78,17 +85,17 @@ export function AppSidebar() {
     {
       title: "Manage Users",
       href: "/dashboard/admin/manageUsers",
-      icon: LayoutDashboard,
+      icon: Users,
     },
     {
       title: "All Bookings",
       href: "/dashboard/admin/allBooking",
-      icon: LayoutDashboard,
+      icon: CalendarCheck,
     },
     {
       title: "Manage Categories",
       href: "/dashboard/admin/manageCategories",
-      icon: LayoutDashboard,
+      icon: FolderKanban,
     },
   ];
 
@@ -126,7 +133,8 @@ export function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/">
-                  <LayoutDashboard />
+
+                  <House />
                   <span>Home</span>
                 </Link>
               </SidebarMenuButton>
