@@ -21,9 +21,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/src/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { logOutUser } from "@/src/services/authService";
 
 export function AppSidebar() {
-  const { user, loading  } = useAuth();
+  const { user, loading, clearAuth  } = useAuth();
+
+      const router = useRouter();
+      const logOutFunction = async () => {
+        await logOutUser(); // cler cookie
+        clearAuth(); // clear context
+        router.push("/login"); // redirect
+      };
 
   if(loading) {
     return <div>Loading...</div>
@@ -160,6 +169,16 @@ export function AppSidebar() {
             ))
           }
 
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+    
+                <button onClick={logOutFunction}>
+                  <House />
+                  <span>Log out</span>
+                </button>
+
+              </SidebarMenuButton>
+            </SidebarMenuItem>
 
 
 
