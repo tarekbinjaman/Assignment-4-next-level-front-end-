@@ -8,6 +8,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // tutor edit profile modal 
+const [editTutorMOdal, setEditTutorModal] = useState(false);
   // fetch user from backend
   const fetchUser = async () => {
     setLoading(true);
@@ -16,7 +18,7 @@ const AuthProvider = ({ children }) => {
       const res = await getMe();
       console.log("fetch success")
       setUser(res.data);
-      console.log("user data from fetch user", res.data)
+      // console.log("user data from fetch user", res.data)
     } catch (err) {
       console.log(err.message);
       setUser(null);
@@ -45,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, setAuth, clearAuth, fetchUser }}
+      value={{ user, loading, setAuth, clearAuth, fetchUser, editTutorMOdal, setEditTutorModal }}
     >
       {children}
     </AuthContext.Provider>

@@ -6,8 +6,9 @@ import { useAuth } from "@/src/context/AuthContext"
 export default function EditProfile() {
     const {user} = useAuth();
     const isTutorWithoutProfile = user?.role === "TUTOR" && !user?.tutorProfile;
-    console.log("THis is user from tutor edit profile route",  user)
+    // console.log("THis is user from tutor edit profile route",  user)
     return (
+
         <div>
             {
                 isTutorWithoutProfile ? (
@@ -16,6 +17,8 @@ export default function EditProfile() {
                     <CreateprofileCard />
                 )
             }
+
+            <CreateprofileCard />
         </div>
     )
 }
