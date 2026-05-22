@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { useAuth } from "@/src/context/AuthContext";
 import { getAllCategories } from "@/src/services/authService";
+import { LucidePencilLine } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function CreateprofileCard() {
@@ -25,8 +26,12 @@ export default function CreateprofileCard() {
   const [hourlyRate, setHourlyRate] = useState(null);
 
   // Categories (Which categroy subject)
-const [categories, setCategories] = useState<string[]>([]);
-const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  type Category = {
+  id: string;
+  name: string;
+};
+const [categories, setCategories] = useState<Category[]>([]); // this for intializing categories by fetching data
+const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // this is catch selected data
 
   useEffect(() => {
     const load = async () => {
@@ -35,6 +40,15 @@ const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     }
     load();
   },[])
+  
+  useEffect(() => {
+  if (tutorProfile) {
+    setName(tutorProfile.name || "");
+    setBio(tutorProfile.bio || "");
+    setHourlyRate(tutorProfile.hourlyRate || "");
+    setSelectedCategories(tutorProfile.categories || []);
+  }
+}, [tutorProfile]);
 
 const handleCategoryToggle = (id: string) => {
   setSelectedCategories((prev) => {
@@ -46,15 +60,15 @@ const handleCategoryToggle = (id: string) => {
 };
 
   // CLoudinary pohot upload
-  const [file, setFile] = useState(null);
+  const [file, setFiles] = useState(null);
   const cloudName = process.env.VITE_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      let imageUrl = tutorProfile?.profileImage || "";
+      let imageUrl = user?.image || "";
 
       // Upload image to cloudinary if file exists
       if (file) {
@@ -80,7 +94,7 @@ const handleCategoryToggle = (id: string) => {
         name,
         bio,
         hourlyRate: Number(hourlyRate),
-        category,
+        category: selectedCategories,
         profileImage: imageUrl,
       };
 
@@ -110,6 +124,30 @@ const handleCategoryToggle = (id: string) => {
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+          {/* Image */}
+                    <div className="relative flex items-center justify-center group hover:cursor-pointer">
+            {/* Image */}
+            <img
+              src={user?.image}
+              className="rounded-full w-28 h-28 object-cover"
+              alt=""
+            />
+
+            {/* black overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-100 transition duration-300 rounded-full"></div>
+
+            {/* icon */}
+            <LucidePencilLine className="absolute text-gray-300 group-hover:text-white transition duration-300" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setFiles(e.target.files[0]);
+                handelUpload(e.target.files[0]);
+              }}
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+          </div>
             {/* Name */}
             <div>
               <label className="text-sm font-medium block mb-2">
