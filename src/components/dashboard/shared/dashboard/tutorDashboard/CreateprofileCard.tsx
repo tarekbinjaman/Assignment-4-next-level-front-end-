@@ -9,6 +9,7 @@ import {
 import { useAuth } from "@/src/context/AuthContext";
 import { getAllCategories } from "@/src/services/authService";
 import { LucidePencilLine } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function CreateprofileCard() {
@@ -27,42 +28,42 @@ export default function CreateprofileCard() {
 
   // Categories (Which categroy subject)
   type Category = {
-  id: string;
-  name: string;
-};
-const [categories, setCategories] = useState<Category[]>([]); // this for intializing categories by fetching data
-const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // this is catch selected data
+    id: string;
+    name: string;
+  };
+  const [categories, setCategories] = useState<Category[]>([]); // this for intializing categories by fetching data
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // this is catch selected data
 
   useEffect(() => {
     const load = async () => {
       const data = await getAllCategories();
       setCategories(data?.data);
-    }
+    };
     load();
-  },[])
-  
-  useEffect(() => {
-  if (tutorProfile) {
-    setName(tutorProfile.name || "");
-    setBio(tutorProfile.bio || "");
-    setHourlyRate(tutorProfile.hourlyRate || "");
-    setSelectedCategories(tutorProfile.categories || []);
-  }
-}, [tutorProfile]);
+  }, []);
 
-const handleCategoryToggle = (id: string) => {
-  setSelectedCategories((prev) => {
-    if (prev.includes(id)) {
-      return prev.filter((item) => item !== id);
+  useEffect(() => {
+    if (tutorProfile) {
+      setName(tutorProfile.name || "");
+      setBio(tutorProfile.bio || "");
+      setHourlyRate(tutorProfile.hourlyRate || "");
+      setSelectedCategories(tutorProfile.categories || []);
     }
-    return [...prev, id];
-  });
-};
+  }, [tutorProfile]);
+
+  const handleCategoryToggle = (id: string) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id);
+      }
+      return [...prev, id];
+    });
+  };
 
   // CLoudinary pohot upload
   const [file, setFiles] = useState(null);
-  const cloudName = process.env.VITE_CLOUDINARY_CLOUD_NAME;
-  const uploadPreset = process.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +83,7 @@ const handleCategoryToggle = (id: string) => {
           {
             method: "POST",
             body: formData,
-          }
+          },
         );
 
         const data = await res.json();
@@ -98,7 +99,7 @@ const handleCategoryToggle = (id: string) => {
         profileImage: imageUrl,
       };
 
-      console.log(tutorData);
+      console.log(tutorData, cloudName, uploadPreset);
 
       // await createTutorProfile(tutorData)
 
@@ -124,30 +125,31 @@ const handleCategoryToggle = (id: string) => {
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-6">
-          {/* Image */}
-                    <div className="relative flex items-center justify-center group hover:cursor-pointer">
             {/* Image */}
-            <img
-              src={user?.image}
-              className="rounded-full w-28 h-28 object-cover"
-              alt=""
-            />
+            <div className="relative flex items-center justify-center group hover:cursor-pointer">
+              {/* Image */}
+              <Image
+                src={user?.image || "/default-avatar.png"}
+                alt="Profile"
+                width={112}
+                height={112}
+                className="rounded-full object-cover w-28 h-28"
+              />
 
-            {/* black overlay */}
-            <div className="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-100 transition duration-300 rounded-full"></div>
+              {/* black overlay */}
+              <div className="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-100 transition duration-300 rounded-full"></div>
 
-            {/* icon */}
-            <LucidePencilLine className="absolute text-gray-300 group-hover:text-white transition duration-300" />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                setFiles(e.target.files[0]);
-                handelUpload(e.target.files[0]);
-              }}
-              className="absolute inset-0 opacity-0 cursor-pointer"
-            />
-          </div>
+              {/* icon */}
+              <LucidePencilLine className="absolute text-gray-300 group-hover:text-white transition duration-300" />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  setFiles(e.target.files[0]);
+                }}
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+            </div>
             {/* Name */}
             <div>
               <label className="text-sm font-medium block mb-2">
@@ -242,27 +244,27 @@ const handleCategoryToggle = (id: string) => {
             <div>
               <label className="text-sm font-medium block mb-2">Category</label>
 
-  <label className="text-sm font-medium block mb-3">
-    Categories
-  </label>
+              <label className="text-sm font-medium block mb-3">
+                Categories
+              </label>
 
-<div className="flex flex-wrap gap-3">
-  {categories.map((cat) => (
-    <button
-      key={cat.id}
-      type="button"
-      onClick={() => handleCategoryToggle(cat.id)}
-      className={`px-4 py-2 rounded-full border ${
-        selectedCategories.includes(cat.id)
-          ? "bg-black text-white"
-          : "bg-white text-black"
-      }`}
-    >
-      {cat.name}
-    </button>
-  ))}
-</div>
-</div>
+              <div className="flex flex-wrap gap-3">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => handleCategoryToggle(cat.id)}
+                    className={`px-4 py-2 rounded-full border ${
+                      selectedCategories.includes(cat.id)
+                        ? "bg-black text-white"
+                        : "bg-white text-black"
+                    }`}
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Submit Button */}
             <button
