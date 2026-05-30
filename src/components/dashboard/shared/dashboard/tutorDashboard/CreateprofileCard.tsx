@@ -7,13 +7,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/src/context/AuthContext";
-import { getAllCategories } from "@/src/services/authService";
+import { getAllCategories, updateUser } from "@/src/services/authService";
 import { LucidePencilLine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useMe } from "../../../../../hooks/useMe";
+
 
 export default function CreateprofileCard() {
-  const { user, editTutorMOdal, setEditTutorModal } = useAuth();
+  const { user, editTutorMOdal, setEditTutorModal, fetchUser } = useAuth();
+
+  // hook
+  const { refetch } = useMe();
 
   // tutor profile
   const tutorProfile = user?.tutorProfile;
@@ -61,21 +67,22 @@ export default function CreateprofileCard() {
   };
 
   // CLoudinary pohot upload
-  const [file, setFiles] = useState(null);
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleupload = async (selectedFile) => {
+    if (!selectedFile) {
+      return toast.error("Please select an image", { position: "top-center" });
+    }
 
     try {
       let imageUrl = user?.image || "";
 
       // Upload image to cloudinary if file exists
-      if (file) {
+      if (selectedFile) {
         const formData = new FormData();
 
-        formData.append("file", file);
+        formData.append("file", selectedFile);
         formData.append("upload_preset", uploadPreset as string);
 
         const res = await fetch(
@@ -86,17 +93,34 @@ export default function CreateprofileCard() {
           },
         );
 
+        
         const data = await res.json();
+        console.log('Cloudinary response', data)
 
         imageUrl = data.secure_url;
-      }
 
+        await updateUser(user?.id as string, { image: imageUrl });
+        await fetchUser();
+        toast.success("Image upload successfully")
+      }
+    } catch (err) {
+      console.error("Upload Error:", err);
+      toast.error("Something went wrong while image uploading", {
+        position: "top-right",
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
       const tutorData = {
         name,
         bio,
         hourlyRate: Number(hourlyRate),
         category: selectedCategories,
-        profileImage: imageUrl,
+        profileImage: user?.image,
       };
 
       console.log(tutorData, cloudName, uploadPreset);
@@ -145,7 +169,10 @@ export default function CreateprofileCard() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => {
-                  setFiles(e.target.files[0]);
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    handleupload(file);
+                  }
                 }}
                 className="absolute inset-0 opacity-0 cursor-pointer"
               />

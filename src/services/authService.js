@@ -24,6 +24,12 @@ export const registerUser = async (data) => {
     return res.data;
 }
 
+// update user
+export const updateUser = async(id, data) => {
+    const res = await api.patch(`/user/${id}`, data)
+    return res.data;
+}
+
 // category
 
 // GET all categories
@@ -43,5 +49,7 @@ export const createCategory = async (data) => {
     const res = await api.post("/category", data);
     return res.data;
 };
+
+
 
 export default api;

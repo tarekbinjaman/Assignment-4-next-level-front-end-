@@ -16,7 +16,7 @@ const [editTutorMOdal, setEditTutorModal] = useState(false);
     try {
       console.log("Fetch started")
       const res = await getMe();
-      console.log("fetch success")
+      console.log("fetch success", res)
       setUser(res.data);
       // console.log("user data from fetch user", res.data)
     } catch (err) {

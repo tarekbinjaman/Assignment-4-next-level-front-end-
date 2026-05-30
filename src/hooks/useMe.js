@@ -5,7 +5,7 @@ export const useMe = () => {
   return useQuery({
     queryKey: ["me"],
     queryFn: getMe,
-    retry: false,
-    refetchOnWindowFocus: false,
+    retry: false, // If request fails, stop immediately
+    refetchOnWindowFocus: false, // When user leaves tab and comes back, TanStack Query refetches data. Sometimes annoying. so "false"
   });
 };
