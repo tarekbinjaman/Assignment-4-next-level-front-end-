@@ -10,15 +10,9 @@ export default function EditProfile() {
     return (
 
         <div>
-            {
-                isTutorWithoutProfile ? (
-                    <TutorWelcomeCard />
-                ) : (
-                    <CreateprofileCard />
-                )
-            }
-
-            <CreateprofileCard />
+        {/* {isTutorWithoutProfile && <TutorWelcomeCard />} */}
+        <TutorWelcomeCard />
+        <CreateprofileCard />
         </div>
     )
 }

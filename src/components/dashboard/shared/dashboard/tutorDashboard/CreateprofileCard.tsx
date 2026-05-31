@@ -7,7 +7,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/src/context/AuthContext";
-import { getAllCategories, updateUser } from "@/src/services/authService";
+import { updateUser } from "@/src/services/authService";
+import {createTutorProfile, updateTutorProfile} from "@/src/services/tutorService";
+import {getAllCategories} from "@/src/services/categoryService"
 import { LucidePencilLine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -44,16 +46,18 @@ export default function CreateprofileCard() {
     const load = async () => {
       const data = await getAllCategories();
       setCategories(data?.data);
+            console.log("Tutor Categories:", tutorProfile?.categories);
     };
     load();
   }, []);
 
   useEffect(() => {
     if (tutorProfile) {
-      setName(tutorProfile.name || "");
+      setName(user?.name || "");
       setBio(tutorProfile.bio || "");
       setHourlyRate(tutorProfile.hourlyRate || "");
       setSelectedCategories(tutorProfile.categories || []);
+
     }
   }, [tutorProfile]);
 
@@ -111,6 +115,10 @@ export default function CreateprofileCard() {
     }
   };
 
+
+
+  const isTutorWithoutProfile = user?.role === "TUTOR" && !user?.tutorProfile;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -123,13 +131,26 @@ export default function CreateprofileCard() {
         profileImage: user?.image,
       };
 
-      console.log(tutorData, cloudName, uploadPreset);
+      let result;
 
-      // await createTutorProfile(tutorData)
 
-      setEditTutorModal(false);
+      if(isTutorWithoutProfile) {
+        result = await createTutorProfile(tutorData);
+        setEditTutorModal(false);
+        console.log("Tutor profile created", result);
+      } else {
+        result = await updateTutorProfile(user?.tutorProfile?.id, tutorData)
+        setEditTutorModal(false);
+        console.log("Tutor profile updated", result)
+      }
+
+
+      await fetchUser();
+
+      
     } catch (error) {
       console.log(error);
+        console.log(error.response?.data);
     }
   };
   // const handleIImageUpload = async(Files);

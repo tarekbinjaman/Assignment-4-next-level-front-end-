@@ -1,7 +1,8 @@
 import { useAuth } from "@/src/context/AuthContext";
 
 export default function TutorWelcomeCard() {
-  const {editTutorMOdal, setEditTutorModal} = useAuth();
+  const {user, editTutorMOdal, setEditTutorModal} = useAuth();
+    const isTutorWithoutProfile = user?.role === "TUTOR" && !user?.tutorProfile;
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border p-10 text-center">
       <div className="w-20 h-20 mx-auto rounded-full bg-gray-100 flex items-center justify-center text-4xl">
@@ -34,7 +35,7 @@ export default function TutorWelcomeCard() {
     hover:shadow-xl
   "
       >
-        Create Tutor Profile
+        { isTutorWithoutProfile ? <p>Create Tutor Profile</p> : <p>Edit profile</p> }
       </button>
     </div>
   );
