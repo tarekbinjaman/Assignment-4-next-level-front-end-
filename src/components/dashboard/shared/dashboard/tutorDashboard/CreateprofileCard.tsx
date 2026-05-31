@@ -150,7 +150,8 @@ export default function CreateprofileCard() {
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-6">
             {/* Image */}
-            <div className="relative flex items-center justify-center group hover:cursor-pointer">
+            <div className="flex items-center justify-center">
+            <div className="relative w-28 h-28 flex items-center justify-center group hover:cursor-pointer">
               {/* Image */}
               <Image
                 src={user?.image || "/default-avatar.png"}
@@ -176,6 +177,7 @@ export default function CreateprofileCard() {
                 }}
                 className="absolute inset-0 opacity-0 cursor-pointer"
               />
+            </div>
             </div>
             {/* Name */}
             <div>
