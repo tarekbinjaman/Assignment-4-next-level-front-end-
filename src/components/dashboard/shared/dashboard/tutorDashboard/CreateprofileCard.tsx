@@ -40,7 +40,7 @@ export default function CreateprofileCard() {
     name: string;
   };
   const [categories, setCategories] = useState<Category[]>([]); // this for intializing categories by fetching data
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // this is catch selected data
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); // this catch selected data
 
   useEffect(() => {
     const load = async () => {
@@ -56,10 +56,12 @@ export default function CreateprofileCard() {
       setName(user?.name || "");
       setBio(tutorProfile.bio || "");
       setHourlyRate(tutorProfile.hourlyRate || "");
-      setSelectedCategories(tutorProfile.categories || []);
+          setSelectedCategories(
+      tutorProfile.categories?.map((cat) => cat.id) || []
+    );
 
     }
-  }, [tutorProfile]);
+  }, [tutorProfile, user]);
 
   const handleCategoryToggle = (id: string) => {
     setSelectedCategories((prev) => {
@@ -127,7 +129,7 @@ export default function CreateprofileCard() {
         name,
         bio,
         hourlyRate: Number(hourlyRate),
-        category: selectedCategories,
+        categoryIds: selectedCategories,
         profileImage: user?.image,
       };
 
