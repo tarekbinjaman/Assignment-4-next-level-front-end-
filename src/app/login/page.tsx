@@ -17,7 +17,9 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const {fetchUser} = useAuth();
+
 
   const router = useRouter();
 
@@ -62,13 +64,28 @@ export default function Login() {
         <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="m@example.com" required />
       </div>
 
-      <div className="grid gap-2">
-        <div className="flex items-center">
-          <Label htmlFor="password">Password</Label>
-        </div>
+<div className="grid gap-2">
+  <div className="flex items-center">
+    <Label htmlFor="password">Password</Label>
+  </div>
 
-        <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required />
-      </div>
+  <div className="relative">
+    <Input
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      type={showPassword ? "text" : "password"}
+      required
+    />
+
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500"
+    >
+      {showPassword ? "Hide" : "Show"}
+    </button>
+  </div>
+</div>
     </div>
     </div>
     {/* In here text things like register now! */}

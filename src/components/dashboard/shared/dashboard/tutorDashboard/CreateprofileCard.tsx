@@ -138,10 +138,12 @@ export default function CreateprofileCard() {
 
       if(isTutorWithoutProfile) {
         result = await createTutorProfile(tutorData);
+        toast.success("Tutor Profile created")
         setEditTutorModal(false);
         console.log("Tutor profile created", result);
       } else {
         result = await updateTutorProfile(user?.tutorProfile?.id, tutorData)
+        toast.success("Tutor profile updated")
         setEditTutorModal(false);
         console.log("Tutor profile updated", result)
       }
