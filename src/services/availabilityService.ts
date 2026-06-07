@@ -1,4 +1,6 @@
 import api from './authService';
+import { Availability } from '../types/availability';
+import { ApiResponse } from '../types/api';
 
 // Create availability
 export const createAvailability = async(data: {
@@ -6,16 +8,16 @@ export const createAvailability = async(data: {
     day: string;
     startTime: string;
     endTime: string;
-}) => {
-    const res = await api.post("/availability", data);
-    return res.data;
+}): Promise<Availability> => {
+    const res = await api.post<ApiResponse<Availability>>("/availability", data);
+    return res.data.data;
 }
 
 
 // get tutor availability
-export const getAvailability = async (tutorId: string) => {
-    const res = await api.get(`/availability/${tutorId}`);
-    return res.data;
+export const getAvailability = async (): Promise<Availability[]> => {
+    const res = await api.get<ApiResponse<Availability[]>>(`/availability`);
+    return res.data.data;
 }
 
 // update availability
@@ -27,9 +29,9 @@ export const updateAvailability = async (
         startTime?: string;
         endTime: string;
     }
-) => {
-    const res = await api.patch(`/availability/${id}`, data);
-    return res.data;
+): Promise<Availability> => {
+    const res = await api.patch<ApiResponse<Availability>>(`/availability/${id}`, data);
+    return res.data.data;
 }
 
 // Delete availability

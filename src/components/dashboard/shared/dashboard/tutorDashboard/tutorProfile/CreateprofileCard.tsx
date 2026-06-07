@@ -14,7 +14,7 @@ import { LucidePencilLine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useMe } from "../../../../../hooks/useMe";
+import { useMe } from "../../../../../../hooks/useMe";
 
 
 export default function CreateprofileCard() {
@@ -45,7 +45,7 @@ export default function CreateprofileCard() {
   useEffect(() => {
     const load = async () => {
       const data = await getAllCategories();
-      setCategories(data?.data);
+      setCategories(data);
             console.log("Tutor Categories:", tutorProfile?.categories);
     };
     load();

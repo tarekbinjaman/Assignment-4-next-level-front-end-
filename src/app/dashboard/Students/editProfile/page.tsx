@@ -1,6 +1,6 @@
 'use client'
 
-import ProfileCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/CreateprofileCard";
+import ProfileCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/tutorProfile/CreateprofileCard";
 import { useAuth } from "@/src/context/AuthContext"
 
 export default function EditProfile() {
