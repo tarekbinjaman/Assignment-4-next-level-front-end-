@@ -14,7 +14,7 @@ import { LucidePencilLine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useMe } from "../../../../../../hooks/useMe";
+import { useMe } from "../../../../../../hooks/useMe/useMe";
 
 
 export default function CreateprofileCard() {
