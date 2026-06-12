@@ -11,6 +11,22 @@ export default function AvailabilityList({
   const { mutateAsync: deleteSlot, isPending } =
     useDeleteAvailability();
 
+  const formatTime = (time: string) => {
+  const [hours, minutes] = time.split(":");
+
+  return new Date(
+    0,
+    0,
+    0,
+    Number(hours),
+    Number(minutes)
+  ).toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
   const handleDelete = async (id: string) => {
     try {
       await deleteSlot(id);
@@ -32,7 +48,7 @@ export default function AvailabilityList({
             </h3>
 
             <p>
-              {slot.startTime} - {slot.endTime}
+              {formatTime(slot.startTime)} - {formatTime(slot.endTime)}
             </p>
           </div>
 

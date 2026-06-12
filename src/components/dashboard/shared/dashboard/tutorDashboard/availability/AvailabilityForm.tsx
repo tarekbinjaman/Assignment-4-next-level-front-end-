@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCreateAvailability } from "@/src/hooks/availability/useCreateAvailability";
+import { useMyAvailability } from "@/src/hooks/availability/useMyAvailability";
 
 const days = [
   "MONDAY",
@@ -21,6 +22,7 @@ export default function AvailabilityForm({
   const [day, setDay] = useState("MONDAY");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const {data: availability = []} = useMyAvailability();
 
   const { mutateAsync: createSlot, isPending } =
     useCreateAvailability();
@@ -29,6 +31,34 @@ export default function AvailabilityForm({
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
+
+    // Checking is this availability exist before
+
+    const alreadyExists = availability.some((slot) => 
+    slot.day === day && 
+    slot.startTime === startTime && 
+    slot.endTime === endTime
+    );
+
+    if(alreadyExists) {
+      alert("This availability slot already exists.");
+      return;
+    };
+
+    // checking the new availability is overlaping any existing availability or not
+    const hashOverlap = availability.some((slot) => {
+      if(slot.day !== day) return false;
+
+      return (
+        startTime < slot.endTime && 
+        endTime < slot.startTime
+      );
+    });
+
+    if(hashOverlap) {
+      alert("This time overlaps with an existing slot.")
+      return;
+    }
 
     try {
       await createSlot({
