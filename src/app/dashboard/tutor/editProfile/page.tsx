@@ -1,5 +1,6 @@
 'use client'
 import CreateprofileCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/tutorProfile/CreateprofileCard";
+import TutorProfileCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/tutorProfile/TutorProfileCard";
 import TutorWelcomeCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/tutorProfile/tutorwelcomecard";
 import { useAuth } from "@/src/context/AuthContext"
 
@@ -9,10 +10,14 @@ export default function EditProfile() {
     // console.log("THis is user from tutor edit profile route",  user)
     return (
 
-        <div>
-        {/* {isTutorWithoutProfile && <TutorWelcomeCard />} */}
+    <div className="space-y-6">
+      {isTutorWithoutProfile ? (
         <TutorWelcomeCard />
-        <CreateprofileCard />
-        </div>
+      ) : (
+        <TutorProfileCard />
+      )}
+
+      <CreateprofileCard />
+    </div>
     )
 }

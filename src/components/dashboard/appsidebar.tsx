@@ -68,7 +68,7 @@ export function AppSidebar() {
       icon: LayoutDashboard,
     },
     {
-      title: "Edit Profile",
+      title: "Tutor Profile",
       href: "/dashboard/tutor/editProfile",
       icon: UserPen,
     },
