@@ -32,8 +32,8 @@ export default function AvailabilityList({
     try {
       await deleteSlot(id);
       toast.info("Schedule deleted", {
-  position: "top-right",
-})
+        position: "top-right",
+      });
     } catch (error) {
       console.error(error);
     }
@@ -44,26 +44,27 @@ export default function AvailabilityList({
       {data.map((slot) => (
         <div
           key={slot.id}
-          className="flex items-center justify-between border rounded-xl p-4 hover:bg-gray-50 transition"
+          className="flex items-center justify-between border border-gray-200 rounded-xl p-4 bg-white hover:bg-blue-50/40 hover:border-blue-200 transition group"
         >
           <div>
-            <span className="inline-block bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-full mb-2">
+            <span className="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2 py-1 rounded-full mb-2">
               {slot.day}
             </span>
 
-            <p className="font-medium">
-              {formatTime(slot.startTime)} —
-              {" "}
+            <p className="font-medium text-gray-900">
+              {formatTime(slot.startTime)} —{" "}
               {formatTime(slot.endTime)}
+            </p>
+
+            <p className="text-xs text-gray-500 mt-1">
+              Available time slot
             </p>
           </div>
 
           <button
             disabled={isPending}
-            onClick={() =>
-              handleDelete(slot.id)
-            }
-            className="text-red-500 hover:text-red-700 font-medium disabled:opacity-50"
+            onClick={() => handleDelete(slot.id)}
+            className="text-red-500 hover:text-red-600 hover:bg-red-50 px-3 py-1.5 rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Delete
           </button>

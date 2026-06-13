@@ -24,8 +24,7 @@ export default function AvailabilityForm({
   const [endTime, setEndTime] = useState("");
   const [message, setMessage] = useState("");
 
-  const { data: availability = [] } =
-    useMyAvailability();
+  const { data: availability = [] } = useMyAvailability();
 
   const { mutateAsync: createSlot, isPending } =
     useCreateAvailability();
@@ -45,9 +44,7 @@ export default function AvailabilityForm({
     );
 
     if (alreadyExists) {
-      setMessage(
-        "This availability slot already exists."
-      );
+      setMessage("This availability slot already exists.");
       return;
     }
 
@@ -61,9 +58,7 @@ export default function AvailabilityForm({
     });
 
     if (hasOverlap) {
-      setMessage(
-        "This time overlaps with an existing slot."
-      );
+      setMessage("This time overlaps with an existing slot.");
       return;
     }
 
@@ -86,37 +81,28 @@ export default function AvailabilityForm({
   };
 
   return (
-    <div className="bg-white border rounded-2xl p-6 h-fit">
-      <h2 className="text-xl font-semibold mb-1">
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 h-fit shadow-sm">
+      <h2 className="text-xl font-semibold mb-1 text-gray-900">
         Add Availability
       </h2>
 
       <p className="text-sm text-gray-500 mb-6">
-        Set the times when students can book
-        sessions.
+        Set the times when students can book sessions.
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Day
           </label>
 
           <select
             value={day}
-            onChange={(e) =>
-              setDay(e.target.value)
-            }
-            className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-black"
+            onChange={(e) => setDay(e.target.value)}
+            className="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
           >
             {days.map((day) => (
-              <option
-                key={day}
-                value={day}
-              >
+              <option key={day} value={day}>
                 {day}
               </option>
             ))}
@@ -124,32 +110,28 @@ export default function AvailabilityForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Start Time
           </label>
 
           <input
             type="time"
             value={startTime}
-            onChange={(e) =>
-              setStartTime(e.target.value)
-            }
-            className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-black"
+            onChange={(e) => setStartTime(e.target.value)}
+            className="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             End Time
           </label>
 
           <input
             type="time"
             value={endTime}
-            onChange={(e) =>
-              setEndTime(e.target.value)
-            }
-            className="w-full border rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-black"
+            onChange={(e) => setEndTime(e.target.value)}
+            className="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -162,11 +144,9 @@ export default function AvailabilityForm({
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-black text-white py-3 rounded-xl font-medium transition active:scale-95 disabled:opacity-50"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-medium transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isPending
-            ? "Saving..."
-            : "Save Availability"}
+          {isPending ? "Saving..." : "Save Availability"}
         </button>
       </form>
     </div>
