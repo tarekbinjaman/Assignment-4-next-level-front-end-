@@ -36,6 +36,18 @@ export default function AvailabilityForm({
 
     setMessage("");
 
+    // Empty field validation
+    if(!startTime || !endTime) {
+      setMessage("Please select both start time and end time.");
+      return;
+    }
+
+    // End time must be later than start time
+    if(startTime >= endTime) {
+      setMessage("End time must be later than start time.");
+      return;
+    }
+
     const alreadyExists = availability.some(
       (slot) =>
         slot.day === day &&

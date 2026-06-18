@@ -16,9 +16,10 @@ const [editTutorMOdal, setEditTutorModal] = useState(false);
     try {
       console.log("Fetch started")
       const res = await getMe();
-      console.log("fetch success", res)
-      console.log("category from tutroprofile", res.data.tutorProfile.categories)
       setUser(res.data);
+      console.log("fetch success", res?.data)
+      console.log("THis user from authcontext after setUser result", user)
+      console.log("category from tutroprofile", res?.data?.tutorProfile?.categories)
       // console.log("user data from fetch user", res.data)
     } catch (err) {
       console.log(err.message);
@@ -35,6 +36,12 @@ const [editTutorMOdal, setEditTutorModal] = useState(false);
     };
     loadUser();
   }, []);
+
+  // checking user
+    useEffect(() => {
+    console.log("User updated:", user);
+  }, [user]);
+
 
   // setting up user data by setAuth
   const setAuth = (authUser) => {
