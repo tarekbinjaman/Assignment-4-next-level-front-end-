@@ -17,7 +17,7 @@ export const getAllTutors = async ({category, sort}) => {
 };
 
 // get single tutor data
-export const getSingleTutorProfile = async (id: String) => {
+export const getSingleTutorProfile = async (id) => {
   const res = await api.get(`/tutors/${id}`);
   return res.data;
 }
