@@ -6,8 +6,13 @@ export const getTutorProfile = async (id) => {
 };
 
 // Get all tutor profiles
-export const getAllTutors = async () => {
-  const res = await api.get("/tutors");
+export const getAllTutors = async ({category, sort}) => {
+  const res = await api.get("/tutors", {
+    params: {
+      category,
+      sort
+    }
+  });
   return res.data;
 };
 

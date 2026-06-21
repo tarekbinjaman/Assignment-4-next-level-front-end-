@@ -4,7 +4,6 @@ import { ApiResponse } from '../types/api';
 
 // Create availability
 export const createAvailability = async(data: {
-    tutorId: string;
     day: string;
     startTime: string;
     endTime: string;

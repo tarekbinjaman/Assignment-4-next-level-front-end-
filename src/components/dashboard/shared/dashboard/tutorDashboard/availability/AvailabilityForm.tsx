@@ -14,11 +14,7 @@ const days = [
   "SUNDAY",
 ];
 
-export default function AvailabilityForm({
-  tutorId,
-}: {
-  tutorId: string;
-}) {
+export default function AvailabilityForm() {
   const [day, setDay] = useState("MONDAY");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -76,10 +72,9 @@ export default function AvailabilityForm({
 
     try {
       await createSlot({
-        tutorId,
         day,
         startTime,
-        endTime,
+        endTime
       });
 
       setDay("MONDAY");

@@ -2,6 +2,7 @@
 
 import AvailabilityForm from "@/src/components/dashboard/shared/dashboard/tutorDashboard/availability/AvailabilityForm";
 import AvailabilityList from "@/src/components/dashboard/shared/dashboard/tutorDashboard/availability/AvailabilityList";
+import { useAuth } from "@/src/context/AuthContext";
 import { useMyAvailability } from "@/src/hooks/availability/useMyAvailability";
 
 export default function AvailabilityPage() {
@@ -11,7 +12,30 @@ export default function AvailabilityPage() {
     error,
   } = useMyAvailability();
 
-  const tutorId = "YOUR_TUTOR_PROFILE_ID";
+  const {user} = useAuth();
+
+
+  if (!user) {
+  return (
+    <div className="max-w-6xl mx-auto p-6">
+      <div className="bg-white border rounded-2xl p-6">
+        <p className="text-gray-500">Loading user...</p>
+      </div>
+    </div>
+  );
+}
+
+  if(!user.tutorProfile) {
+        return (
+      <div className="max-w-6xl mx-auto p-6">
+        <div className="bg-white border rounded-2xl p-6">
+          <p className="text-gray-500">
+            Update your Tutor Profile first.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -52,7 +76,7 @@ export default function AvailabilityPage() {
       {/* Layout */}
       <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
         {/* Form */}
-        <AvailabilityForm tutorId={tutorId} />
+        <AvailabilityForm />
 
         {/* Schedule */}
         <div className="bg-white border rounded-2xl p-6 max-h-[430px] flex flex-col ">

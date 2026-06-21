@@ -52,8 +52,8 @@ export default function CreateprofileCard() {
   }, []);
 
   useEffect(() => {
+    setName(user?.name || "");
     if (tutorProfile) {
-      setName(user?.name || "");
       setBio(tutorProfile.bio || "");
       setHourlyRate(tutorProfile.hourlyRate || "");
           setSelectedCategories(
