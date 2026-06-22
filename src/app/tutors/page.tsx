@@ -1,44 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import TutorCard from "@/src/components/tutorRoute/TutorCard";
 import TutorFilters from "@/src/components/tutorRoute/TutorFilters";
 import { useTutors } from "@/src/hooks/tutor/useTutors";
 
 export default function Tutors() {
-  const [category, setCategory] =
-    useState("");
+  const [category, setCategory] = useState("");
+  const [sort, setSort] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
-  const [sort, setSort] =
-    useState("");
-
-  const {
-    data,
-    isLoading,
-    error,
-  } = useTutors(category, sort);
+  const { data, isLoading, error } = useTutors(
+    category,
+    sort
+  );
 
   const tutors = data?.data || [];
-  useEffect(() => {
-    console.log(tutors)
-  }, [])
-
-  if (isLoading) {
-    return (
-      <div className="p-10">
-        Loading tutors...
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="p-10 text-red-500">
-        Failed to load tutors
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -46,8 +23,19 @@ export default function Tutors() {
         Find Your Tutor
       </h1>
 
-      <div className="grid grid-cols-12 gap-8">
-        <aside className="col-span-3">
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() =>
+          setShowFilters(!showFilters)
+        }
+        className="lg:hidden mb-4 px-4 py-2 border rounded-lg"
+      >
+        Filter
+      </button>
+
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:block w-64 shrink-0">
           <TutorFilters
             category={category}
             setCategory={setCategory}
@@ -56,8 +44,27 @@ export default function Tutors() {
           />
         </aside>
 
-        <section className="col-span-9">
-          <div className="grid md:grid-cols-2 gap-5">
+        {/* Mobile Filters */}
+        {showFilters && (
+  <div className="absolute top-55 md:top-50 z-50 w-72 rounded-xl border bg-white p-4 shadow-lg">
+    <button
+      onClick={() => setShowFilters(false)}
+      className="absolute right-3 top-3 text-lg font-semibold text-gray-500 hover:text-black"
+    >
+      ✕
+    </button>
+
+    <TutorFilters
+      category={category}
+      setCategory={setCategory}
+      sort={sort}
+      setSort={setSort}
+    />
+  </div>
+        )}
+
+        <section className="flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {tutors.map((tutor: any) => (
               <TutorCard
                 key={tutor.id}
