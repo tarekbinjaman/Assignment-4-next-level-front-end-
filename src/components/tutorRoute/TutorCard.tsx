@@ -7,7 +7,7 @@ export default function TutorCard({
   tutor: any;
 }) {
   return (
-    <div className="flex flex-col h-full rounded-2xl border bg-white p-6 shadow-sm transition-all hover:shadow-md w-sm md:w-[320px] lg:w-[310px]">
+    <div className="flex flex-col h-full rounded-2xl border bg-white p-6 shadow-sm transition-all hover:shadow-md w-sm md:w-[345px] lg:w-[310px] xl:w-[360px]">
       <div className="flex items-center gap-4">
         <Image
           src={tutor.user.image || "/default-avatar.png"}

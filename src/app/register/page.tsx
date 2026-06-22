@@ -52,7 +52,7 @@ export default function Registration() {
 
   return (
     <div>
-      <div className="flex justify-center mt-10 ">
+      <div className="flex justify-center mt-30 ">
         <Card className="w-full max-w-sm">
           <CardContent className="p-0">
             <div className="">

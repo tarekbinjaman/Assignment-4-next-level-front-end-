@@ -18,7 +18,7 @@ export default function Tutors() {
   const tutors = data?.data || [];
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">
         Find Your Tutor
       </h1>
@@ -28,14 +28,14 @@ export default function Tutors() {
         onClick={() =>
           setShowFilters(!showFilters)
         }
-        className="lg:hidden mb-4 px-4 py-2 border rounded-lg"
+        className="xl:hidden mb-4 px-4 py-2 border rounded-lg"
       >
         Filter
       </button>
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Desktop Sidebar */}
-        <aside className="hidden lg:block w-64 shrink-0">
+        <aside className="hidden xl:block w-64 shrink-0">
           <TutorFilters
             category={category}
             setCategory={setCategory}
@@ -63,8 +63,10 @@ export default function Tutors() {
   </div>
         )}
 
+        {/* Tutor cards */}
+
         <section className="flex-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-4 xl:gap-y-9">
             {tutors.map((tutor: any) => (
               <TutorCard
                 key={tutor.id}
