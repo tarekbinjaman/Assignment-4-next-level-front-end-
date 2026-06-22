@@ -7,51 +7,58 @@ export default function TutorCard({
   tutor: any;
 }) {
   return (
-    <div className="border rounded-xl p-5 shadow-sm bg-white">
+    <div className="flex flex-col h-full rounded-2xl border bg-white p-6 shadow-sm transition-all hover:shadow-md">
       <div className="flex items-center gap-4">
         <Image
           src={tutor.user.image || "/default-avatar.png"}
           alt={tutor.user.name}
-          width={70}
-          height={70}
-          className="rounded-full object-cover w-[70px] h-[70px]"
+          width={72}
+          height={72}
+          className="h-[72px] w-[72px] rounded-full object-cover border"
         />
 
         <div>
-          <h2 className="text-xl font-bold">
+          <h2 className="text-lg font-bold">
             {tutor.user.name}
           </h2>
 
-          <p className="font-semibold text-blue-600">
-            ${tutor.hourlyRate}/hour
+          <p className="text-sm text-gray-500">
+            Tutor
           </p>
         </div>
       </div>
 
-      <p className="text-gray-600 mt-4">
-        {tutor.bio}
+      <p className="mt-4 text-2xl font-bold text-blue-600">
+        ${tutor.hourlyRate}
+        <span className="text-sm font-normal text-gray-500">
+          /hour
+        </span>
       </p>
 
-      <div className="flex flex-wrap gap-2 mt-4">
+      <p className="mt-3 text-gray-600 line-clamp-3 min-h-[72px]">
+        {tutor.bio || "Experienced tutor dedicated to helping students achieve their learning goals."}
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-2">
         {tutor.categories.map((category: any) => (
           <span
             key={category.id}
-            className="bg-blue-100 text-blue-700 px-2 py-1 rounded"
+            className="rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700"
           >
             {category.name}
           </span>
         ))}
       </div>
 
-      <div className="flex gap-2 mt-5">
+      <div className="mt-auto pt-6 flex gap-3">
         <Link
           href={`/tutors/${tutor.id}`}
-          className="btn btn-primary"
+          className="btn btn-primary flex-1"
         >
           View Details
         </Link>
 
-        <button className="btn btn-outline">
+        <button className="btn btn-outline flex-1">
           Book Session
         </button>
       </div>
