@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import TutorCard from "@/src/components/tutorRoute/TutorCard";
 import TutorFilters from "@/src/components/tutorRoute/TutorFilters";
@@ -20,6 +20,9 @@ export default function Tutors() {
   } = useTutors(category, sort);
 
   const tutors = data?.data || [];
+  useEffect(() => {
+    console.log(tutors)
+  }, [])
 
   if (isLoading) {
     return (
