@@ -45,23 +45,23 @@ export default function Tutors() {
         </aside>
 
         {/* Mobile Filters */}
-        {showFilters && (
-  <div className="absolute top-55 md:top-50 z-50 w-72 rounded-xl border bg-white p-4 shadow-lg">
-    <button
+{showFilters && (
+  <>
+    <div
+      className="fixed inset-0 bg-black/20 z-40"
       onClick={() => setShowFilters(false)}
-      className="absolute right-3 top-3 text-lg font-semibold text-gray-500 hover:text-black"
-    >
-      ✕
-    </button>
-
-    <TutorFilters
-      category={category}
-      setCategory={setCategory}
-      sort={sort}
-      setSort={setSort}
     />
-  </div>
-        )}
+
+    <div className="absolute top-55 md:top-50 z-50 w-80 animate-in fade-in zoom-in-95 duration-200">
+      <TutorFilters
+        category={category}
+        setCategory={setCategory}
+        sort={sort}
+        setSort={setSort}
+      />
+    </div>
+  </>
+)}
 
         {/* Tutor cards */}
 
