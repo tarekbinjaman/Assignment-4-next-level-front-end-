@@ -18,7 +18,7 @@ export default function Tutors() {
   const tutors = data?.data || [];
 
   const filteredTutors = tutors.filter((tutor: any) =>
-    (tutor?.name ?? "").toLowerCase().includes(search.toLowerCase())
+    (tutor?.name ?? "").toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -34,17 +34,16 @@ export default function Tutors() {
 
       {/* Mobile Filter Button */}
       <div className="xl:flex-none flex gap-4 items-center">
-      <button
-        onClick={() => setShowFilters(!showFilters)}
-        className="xl:hidden mb-4 px-4 py-2 border rounded-lg"
-      >
-        Filter
-      </button>
-      {/* visible in laptop, tablet,mobile */}
-      <div className="xl:hidden lg:w-[875px] md:w-[620px] w-[410px] mb-5">
-        <TutorSearch value={search} onChange={setSearch} />
-      </div>
-
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="xl:hidden mb-4 px-4 py-2 border rounded-lg"
+        >
+          Filter
+        </button>
+        {/* visible in laptop, tablet,mobile */}
+        <div className="xl:hidden lg:w-[875px] md:w-[620px] w-[410px] mb-5">
+          <TutorSearch value={search} onChange={setSearch} />
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6">
@@ -74,6 +73,8 @@ export default function Tutors() {
                 setCategory={setCategory}
                 sort={sort}
                 setSort={setSort}
+                availableDays={availableDays}
+                setAvailableDays={setAvailableDays}
               />
             </div>
           </>
