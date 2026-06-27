@@ -5,6 +5,7 @@ import TutorCard from "@/src/components/tutorRoute/TutorCard";
 import TutorFilters from "@/src/components/tutorRoute/TutorFilters";
 import TutorSearch from "@/src/components/tutorRoute/TutorSearch";
 import { useTutors } from "@/src/hooks/tutor/useTutors";
+import { useDebounce } from "use-debounce";
 
 export default function Tutors() {
   const [category, setCategory] = useState("");
@@ -13,13 +14,16 @@ export default function Tutors() {
   const [availableDays, setAvailableDays] = useState<string[]>([]);
   const [search, setSearch] = useState("");
 
-  const { data } = useTutors(category, sort);
+// using debounce
+const [debouncedSearch] = useDebounce(search, 500);
+
+  const { data } = useTutors(category, sort, debouncedSearch);
 
   const tutors = data?.data || [];
 
-  const filteredTutors = tutors.filter((tutor: any) =>
-    (tutor?.name ?? "").toLowerCase().includes(search.toLowerCase()),
-  );
+  // const filteredTutors = tutors.filter((tutor: any) =>
+  //   (tutor?.name ?? "").toLowerCase().includes(search.toLowerCase()),
+  // );
 
   return (
     <div className="p-6">
@@ -83,7 +87,7 @@ export default function Tutors() {
         {/* Tutor Cards */}
         <section className="flex-1">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-4 xl:gap-y-9">
-            {filteredTutors.map((tutor: any) => (
+            {tutors.map((tutor: any) => (
               <TutorCard key={tutor.id} tutor={tutor} />
             ))}
           </div>

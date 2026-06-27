@@ -6,11 +6,12 @@ export const getTutorProfile = async (id) => {
 };
 
 // Get all tutor profiles
-export const getAllTutors = async ({category, sort}) => {
+export const getAllTutors = async ({category, sort, search}) => {
   const res = await api.get("/tutors", {
     params: {
       category,
-      sort
+      sort,
+      search
     }
   });
   return res.data;
