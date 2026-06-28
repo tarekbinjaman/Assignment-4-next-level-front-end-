@@ -17,7 +17,8 @@ export default function Tutors() {
 // using debounce
 const [debouncedSearch] = useDebounce(search, 500);
 
-  const { data } = useTutors(category, sort, debouncedSearch);
+  const { data } = useTutors(category, sort, debouncedSearch, availableDays);
+  {console.log("Teachers Data", data)}
 
   const tutors = data?.data || [];
 
