@@ -5,7 +5,9 @@ type Props = {
 export default function TutorAvailability({ tutor }: Props) {
   return (
     <section className="rounded-2xl border bg-white p-8 shadow-sm">
-      <h2 className="mb-5 text-2xl font-bold">Availability</h2>
+      <h2 className="mb-5 text-2xl font-bold">
+        Availability
+      </h2>
 
       <div className="flex flex-wrap gap-3">
         {tutor.availability?.map((availability: any) => (

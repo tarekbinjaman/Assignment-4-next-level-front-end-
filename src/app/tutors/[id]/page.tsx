@@ -4,10 +4,8 @@ import { useParams } from "next/navigation";
 import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 import TutorHero from "@/src/components/tutorRoute/TutorHero";
 import TutorAbout from "@/src/components/tutorRoute/TutorAbout";
-import TutorAvailability from "@/src/components/tutorRoute/TutorAvailability";
 import TutorPricingCard from "@/src/components/tutorRoute/TutorPricingCard";
-import TutorStats from "@/src/components/tutorRoute/TutorStats";
-import TutorCategories from "@/src/components/tutorRoute/TutorCategories";
+
 
 export default function TutorProfilePage() {
   const { id } = useParams();
