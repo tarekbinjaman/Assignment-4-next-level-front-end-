@@ -130,7 +130,7 @@ export default function TutorFilters({
                 className="accent-primary"
               />
 
-              <span>{day}</span>
+              <span>{day.slice(0,3)}</span>
             </label>
           ))}
         </div>

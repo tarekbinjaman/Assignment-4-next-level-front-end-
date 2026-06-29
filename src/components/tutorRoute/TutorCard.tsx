@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Eye } from "lucide-react";
+
 
 export default function TutorCard({
   tutor,
@@ -50,18 +52,36 @@ export default function TutorCard({
         ))}
       </div>
 
-      <div className="mt-auto pt-6 flex gap-3">
-        <Link
-          href={`/tutors/${tutor.id}`}
-          className="btn btn-primary flex-1"
-        >
-          View Details
-        </Link>
+<div className="mt-auto pt-6">
+<Link
+  href={`/tutors/${tutor.id}`}
+  className="group relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-slate-900 px-5 py-2 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+>
+  {/* Shine */}
+  <span className="absolute left-[-120%] top-0 h-full w-1/2 -skew-x-12 bg-white/20 transition-all duration-700 group-hover:left-[130%]" />
 
-        <button className="btn btn-outline flex-1">
-          Book Session
-        </button>
-      </div>
+  {/* Content */}
+  <span className="relative flex items-center gap-2">
+    <span className="text-sm">
+    View Details
+    </span>
+
+<svg
+  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  viewBox="0 0 24 24"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M7 17L17 7M9 7h8v8"
+  />
+</svg>
+  </span>
+</Link>
+</div>
     </div>
   );
 }
