@@ -33,6 +33,7 @@ export default function CreateprofileCard() {
   // Professional Information
   const [bio, setBio] = useState(null);
   const [hourlyRate, setHourlyRate] = useState(null);
+  const [experience, setExperience] = useState(null);
 
   // Categories (Which categroy subject)
   type Category = {
@@ -56,6 +57,7 @@ export default function CreateprofileCard() {
     if (tutorProfile) {
       setBio(tutorProfile.bio || "");
       setHourlyRate(tutorProfile.hourlyRate || "");
+      setExperience(tutorProfile?.experience);
           setSelectedCategories(
       tutorProfile.categories?.map((cat) => cat.id) || []
     );
@@ -128,6 +130,7 @@ export default function CreateprofileCard() {
       const tutorData = {
         name,
         bio,
+        experience,
         hourlyRate: Number(hourlyRate),
         categoryIds: selectedCategories,
         profileImage: user?.image,
@@ -269,7 +272,29 @@ export default function CreateprofileCard() {
               "
               />
             </div>
+            {/* Experience */}
+            <div>
+              <label className="text-sm font-medium block mb-2">
+                Experience
+              </label>
 
+              <input
+                type="number"
+                placeholder="10"
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+                className="
+                w-full
+                border
+                rounded-xl
+                px-4
+                py-3
+                outline-none
+                focus:ring-2
+                focus:ring-black
+              "
+              />
+            </div>
             {/* Hourly Rate */}
             <div>
               <label className="text-sm font-medium block mb-2">
