@@ -15,16 +15,20 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useMe } from "../../../../../../hooks/useMe/useMe";
+import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 
 
 export default function CreateprofileCard() {
   const { user, editTutorMOdal, setEditTutorModal, fetchUser } = useAuth();
+  const { data, isLoading, error } = useSingleTutor(
+  user?.tutorProfile?.id
+);
 
   // hook
   const { refetch } = useMe();
 
   // tutor profile
-  const tutorProfile = user?.tutorProfile;
+  const tutorProfile = data?.data;
 
   // Profile Section
   const [name, setName] = useState(null);
@@ -52,6 +56,13 @@ export default function CreateprofileCard() {
     load();
   }, []);
 
+  console.log({
+  id: user?.tutorProfile?.id,
+  tutorProfile,
+  isLoading,
+  error,
+});
+
   useEffect(() => {
     setName(user?.name || "");
     if (tutorProfile) {
@@ -63,6 +74,8 @@ export default function CreateprofileCard() {
     );
 
     }
+
+    console.log("THis is tutor form single tutor service", user?.tutorProfile?.id)
   }, [tutorProfile, user]);
 
   const handleCategoryToggle = (id: string) => {
@@ -130,7 +143,7 @@ export default function CreateprofileCard() {
       const tutorData = {
         name,
         bio,
-        experience,
+        experience: Number(experience),
         hourlyRate: Number(hourlyRate),
         categoryIds: selectedCategories,
         profileImage: user?.image,
