@@ -3,19 +3,18 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTitle
 } from "@/components/ui/dialog";
 import { useAuth } from "@/src/context/AuthContext";
+import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 import { updateUser } from "@/src/services/authService";
-import {createTutorProfile, updateTutorProfile} from "@/src/services/tutorService";
-import {getAllCategories} from "@/src/services/categoryService"
+import { getAllCategories } from "@/src/services/categoryService";
+import { createTutorProfile, updateTutorProfile } from "@/src/services/tutorService";
 import { LucidePencilLine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useMe } from "../../../../../../hooks/useMe/useMe";
-import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 
 
 export default function CreateprofileCard() {
@@ -38,6 +37,7 @@ export default function CreateprofileCard() {
   const [bio, setBio] = useState(null);
   const [hourlyRate, setHourlyRate] = useState(null);
   const [experience, setExperience] = useState(null);
+  const [education, setEducation] = useState(null);
 
   // Categories (Which categroy subject)
   type Category = {
@@ -143,6 +143,7 @@ export default function CreateprofileCard() {
       const tutorData = {
         name,
         bio,
+        education,
         experience: Number(experience),
         hourlyRate: Number(hourlyRate),
         categoryIds: selectedCategories,
@@ -273,6 +274,29 @@ export default function CreateprofileCard() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 rows={4}
+                className="
+                w-full
+                border
+                rounded-xl
+                px-4
+                py-3
+                outline-none
+                focus:ring-2
+                focus:ring-black
+              "
+              />
+            </div>
+                        {/* Education */}
+            <div>
+              <label className="text-sm font-medium block mb-2">
+                Education
+              </label>
+
+              <input
+                type="text"
+                placeholder="education..."
+                value={education}
+                onChange={(e) => setEducation(e.target.value)}
                 className="
                 w-full
                 border

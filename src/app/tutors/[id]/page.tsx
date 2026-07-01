@@ -5,6 +5,7 @@ import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 import TutorHero from "@/src/components/tutorRoute/TutorHero";
 import TutorAbout from "@/src/components/tutorRoute/TutorAbout";
 import TutorPricingCard from "@/src/components/tutorRoute/TutorPricingCard";
+import TutorStats from "@/src/components/tutorRoute/TutorStats";
 
 
 export default function TutorProfilePage() {
@@ -27,6 +28,7 @@ export default function TutorProfilePage() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-10">
       <TutorHero tutor={tutor} />
+      <TutorStats tutor={tutor} />
       <div className="mt-10 grid gap-8 lg:grid-cols-3">
         {/* Left Content */}
         <div className="space-y-8 lg:col-span-2">
