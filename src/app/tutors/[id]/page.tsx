@@ -6,6 +6,7 @@ import TutorHero from "@/src/components/tutorRoute/TutorHero";
 import TutorAbout from "@/src/components/tutorRoute/TutorAbout";
 import TutorPricingCard from "@/src/components/tutorRoute/TutorPricingCard";
 import TutorStats from "@/src/components/tutorRoute/TutorStats";
+import TutorReviews from "@/src/components/tutorRoute/review/TutorReviews";
 
 
 export default function TutorProfilePage() {
@@ -33,6 +34,7 @@ export default function TutorProfilePage() {
         {/* Left Content */}
         <div className="space-y-8 lg:col-span-2">
           <TutorAbout tutor={tutor} />
+          <TutorReviews tutorId={tutor.id} />
         </div>
 
         {/* Right Sidebar */}
