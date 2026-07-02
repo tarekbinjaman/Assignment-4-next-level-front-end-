@@ -1,8 +1,9 @@
 type Props = {
   tutor: any;
+  setOpenBookingModal: any;
 };
 
-export default function TutorPricingCard({ tutor }: Props) {
+export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) {
   return (
     <aside className="sticky top-24">
       <div className="rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg">
@@ -36,7 +37,10 @@ export default function TutorPricingCard({ tutor }: Props) {
           </div>
         </div>
         {/* Book Button */}
-        <button className="group relative mt-8 flex w-full items-center justify-center overflow-hidden rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <button 
+        onClick={() =>setOpenBookingModal(true) }
+        
+        className="group relative mt-8 flex w-full items-center justify-center overflow-hidden rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           {/* Shine */}
           <span className="absolute left-[-120%] top-0 h-full w-1/2 -skew-x-12 bg-white/20 transition-all duration-700 group-hover:left-[130%]" />
 

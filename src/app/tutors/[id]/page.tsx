@@ -7,9 +7,12 @@ import TutorAbout from "@/src/components/tutorRoute/TutorAbout";
 import TutorPricingCard from "@/src/components/tutorRoute/TutorPricingCard";
 import TutorStats from "@/src/components/tutorRoute/TutorStats";
 import TutorReviews from "@/src/components/tutorRoute/review/TutorReviews";
-
+import { useState } from "react";
+import BookingModal from "@/src/components/dashboard/booking/BookingModal";
 
 export default function TutorProfilePage() {
+  const [openBookingModal, setOpenBookingModal] = useState(false);
+
   const { id } = useParams();
 
   const { data, isLoading, isError } = useSingleTutor(id as string);
@@ -38,8 +41,17 @@ export default function TutorProfilePage() {
         </div>
 
         {/* Right Sidebar */}
-        <TutorPricingCard tutor={tutor} />
+        <TutorPricingCard
+          setOpenBookingModal={setOpenBookingModal}
+          tutor={tutor}
+        />
       </div>
+      <BookingModal
+        open={openBookingModal}
+        onOpenChange={setOpenBookingModal}
+        tutorId={tutor.id}
+        tutorName={tutor.user.name}
+      />
     </div>
   );
 }
