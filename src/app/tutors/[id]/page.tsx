@@ -51,6 +51,7 @@ export default function TutorProfilePage() {
         onOpenChange={setOpenBookingModal}
         tutorId={tutor.id}
         tutorName={tutor.user.name}
+        availability={tutor.availability}
       />
     </div>
   );

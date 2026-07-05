@@ -1,6 +1,6 @@
 "use client";
-
-import { useForm } from "react-hook-form";
+import { Calendar } from "@/components/ui/calendar";
+import { useForm, useWatch } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -8,21 +8,36 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useAvailableSlots } from "@/src/hooks/booking/useAvailableSlots";
+import { useState } from "react";
+import { CalendarIcon } from "lucide-react";
 
 type BookingModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   tutorId: string;
   tutorName: string;
+  availability: {
+    day: string;
+    startTime: string;
+    endTime: string;
+  }[];
 };
 
 type BookingFormData = {
   bookingDate: string;
   notes: string;
+  startTime: string;
+  endTime: string;
 };
 
 export default function BookingModal({
@@ -30,19 +45,46 @@ export default function BookingModal({
   onOpenChange,
   tutorId,
   tutorName,
+  availability,
 }: BookingModalProps) {
   const {
     register,
     handleSubmit,
     reset,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<BookingFormData>();
+
+  const selectedDate = useWatch({
+  control,
+  name: "bookingDate",
+});
+
+const { data: availableSlots, isLoading } = useAvailableSlots(
+  tutorId,
+  selectedDate
+);
+
+  const availableDays = availability.map((item) => item.day);
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date>();
+  const dayMap: Record<number, string> = {
+    0: "SUNDAY",
+    1: "MONDAY",
+    2: "TUESDAY",
+    3: "WEDNESDAY",
+    4: "THURSDAY",
+    5: "FRIDAY",
+    6: "SATURDAY",
+  };
 
   const onSubmit = (data: BookingFormData) => {
     console.log({
       tutorId,
       ...data,
     });
+
+    console.log("Date time from backend", availableSlots);
 
     // We'll replace this with the mutation later.
 
@@ -62,10 +104,7 @@ export default function BookingModal({
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-5 mt-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-4">
           {/* Tutor */}
           <div className="space-y-2">
             <Label>Tutor</Label>
@@ -74,21 +113,61 @@ export default function BookingModal({
 
           {/* Booking Date */}
           <div className="space-y-2">
-            <Label>Booking Date</Label>
+<div className="space-y-2">
+  <Label>Booking Date</Label>
 
-            <Input
-              type="date"
-              min={today}
-              {...register("bookingDate", {
-                required: "Booking date is required",
-              })}
-            />
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button
+        variant="outline"
+        className="w-full justify-start text-left font-normal"
+      >
+        <CalendarIcon className="mr-2 h-4 w-4" />
 
-            {errors.bookingDate && (
-              <p className="text-sm text-red-500">
-                {errors.bookingDate.message}
-              </p>
-            )}
+        {selectedCalendarDate
+          ? selectedCalendarDate.toLocaleDateString()
+          : "Select a booking date"}
+      </Button>
+    </PopoverTrigger>
+
+    <PopoverContent className="w-auto p-0">
+      <Calendar
+        mode="single"
+        selected={selectedCalendarDate}
+        onSelect={(date) => {
+          if (!date) return;
+
+          setSelectedCalendarDate(date);
+
+          setValue(
+            "bookingDate",
+            date.toISOString().split("T")[0],
+            {
+              shouldValidate: true,
+            }
+          );
+        }}
+        disabled={(date) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          const dayName = dayMap[date.getDay()];
+
+          return (
+            date < today ||
+            !availableDays.includes(dayName)
+          );
+        }}
+      />
+    </PopoverContent>
+  </Popover>
+
+  {errors.bookingDate && (
+    <p className="text-sm text-red-500">
+      {errors.bookingDate.message}
+    </p>
+  )}
+</div>
           </div>
 
           {/* Notes */}
@@ -115,9 +194,7 @@ export default function BookingModal({
               Cancel
             </Button>
 
-            <Button type="submit">
-              Book Session
-            </Button>
+            <Button type="submit">Book Session</Button>
           </div>
         </form>
       </DialogContent>
