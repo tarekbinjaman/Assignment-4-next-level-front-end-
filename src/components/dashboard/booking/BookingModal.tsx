@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useAvailableSlots } from "@/src/hooks/booking/useAvailableSlots";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarIcon } from "lucide-react";
 import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 
@@ -71,7 +71,24 @@ export default function BookingModal({
 
 const { data: tutor } = useSingleTutor(tutorId);
   
-  console.log("HOurly rate from bookingmodal.tsx", tutor?.data)
+  // console.log("HOurly rate from bookingmodal.tsx", tutor?.data)
+
+  const [selectedTime, setSelectedTime] = useState<{
+  startTime: string;
+  endTime: string;
+} | null>(null);
+
+  useEffect(() => {
+  register("startTime", {
+    required: "Please select a time",
+  });
+
+  register("endTime");
+}, [register]);
+
+
+
+
   
   const hourlyRate = Number(tutor?.data?.hourlyRate);
   const availableDays = availability.map((item) => item.day);
@@ -176,6 +193,48 @@ const { data: tutor } = useSingleTutor(tutorId);
               )}
             </div>
           </div>
+          {/* select time */}
+          <div className="space-y-3">
+  <Label>Select Time</Label>
+
+  {isLoading ? (
+    <p className="text-sm text-muted-foreground">
+      Loading available slots...
+    </p>
+  ) : (
+    <div className="grid grid-cols-4 gap-3">
+      {availableSlots?.data?.map((slot: any) => {
+        const isSelected =
+          selectedTime?.startTime === slot.startTime;
+
+        return (
+          <Button
+            key={`${slot.startTime}-${slot.endTime}`}
+            type="button"
+            variant={isSelected ? "default" : "outline"}
+            className="w-full"
+            onClick={() => {
+              setSelectedTime(slot);
+
+              setValue("startTime", slot.startTime);
+              setValue("endTime", slot.endTime, {
+                shouldValidate: true,
+              });
+            }}
+          >
+            {slot.startTime}
+          </Button>
+        );
+      })}
+    </div>
+  )}
+
+  {errors.startTime && (
+    <p className="text-sm text-red-500">
+      {errors.startTime.message}
+    </p>
+  )}
+</div>
           {/* duration */}
           <div className="space-y-3">
             <Label>Duration</Label>
