@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function TutorHero({ tutor }: Props) {
-    {console.log("Tutor image from tutor hero", tutor)}
+    // {console.log("Tutor image from tutor hero", tutor)}
   return (
     <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 p-8 text-white shadow-xl">
 

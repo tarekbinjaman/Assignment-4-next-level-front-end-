@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAvailableSlots } from "@/src/hooks/booking/useAvailableSlots";
 import { useState } from "react";
 import { CalendarIcon } from "lucide-react";
+import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 
 type BookingModalProps = {
   open: boolean;
@@ -31,6 +32,7 @@ type BookingModalProps = {
     startTime: string;
     endTime: string;
   }[];
+  hourlyRate: number;
 };
 
 type BookingFormData = {
@@ -38,6 +40,7 @@ type BookingFormData = {
   notes: string;
   startTime: string;
   endTime: string;
+  duration: number;
 };
 
 export default function BookingModal({
@@ -57,15 +60,20 @@ export default function BookingModal({
   } = useForm<BookingFormData>();
 
   const selectedDate = useWatch({
-  control,
-  name: "bookingDate",
-});
+    control,
+    name: "bookingDate",
+  });
 
-const { data: availableSlots, isLoading } = useAvailableSlots(
-  tutorId,
-  selectedDate
-);
+  const { data: availableSlots, isLoading } = useAvailableSlots(
+    tutorId,
+    selectedDate,
+  );
 
+const { data: tutor } = useSingleTutor(tutorId);
+  
+  console.log("HOurly rate from bookingmodal.tsx", tutor?.data)
+  
+  const hourlyRate = Number(tutor?.data?.hourlyRate);
   const availableDays = availability.map((item) => item.day);
   const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date>();
   const dayMap: Record<number, string> = {
@@ -77,6 +85,8 @@ const { data: availableSlots, isLoading } = useAvailableSlots(
     5: "FRIDAY",
     6: "SATURDAY",
   };
+  const durationOptions = [30, 60, 90, 120];
+  const [selectedDuration, setSelectedDuration] = useState(60);
 
   const onSubmit = (data: BookingFormData) => {
     console.log({
@@ -113,63 +123,100 @@ const { data: availableSlots, isLoading } = useAvailableSlots(
 
           {/* Booking Date */}
           <div className="space-y-2">
-<div className="space-y-2">
-  <Label>Booking Date</Label>
+            <div className="space-y-2">
+              <Label>Booking Date</Label>
 
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button
-        variant="outline"
-        className="w-full justify-start text-left font-normal"
-      >
-        <CalendarIcon className="mr-2 h-4 w-4" />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start text-left font-normal"
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
 
-        {selectedCalendarDate
-          ? selectedCalendarDate.toLocaleDateString()
-          : "Select a booking date"}
-      </Button>
-    </PopoverTrigger>
+                    {selectedCalendarDate
+                      ? selectedCalendarDate.toLocaleDateString()
+                      : "Select a booking date"}
+                  </Button>
+                </PopoverTrigger>
 
-    <PopoverContent className="w-auto p-0">
-      <Calendar
-        mode="single"
-        selected={selectedCalendarDate}
-        onSelect={(date) => {
-          if (!date) return;
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={selectedCalendarDate}
+                    onSelect={(date) => {
+                      if (!date) return;
 
-          setSelectedCalendarDate(date);
+                      setSelectedCalendarDate(date);
 
-          setValue(
-            "bookingDate",
-            date.toISOString().split("T")[0],
-            {
-              shouldValidate: true,
-            }
-          );
-        }}
-        disabled={(date) => {
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
+                      setValue(
+                        "bookingDate",
+                        date.toISOString().split("T")[0],
+                        {
+                          shouldValidate: true,
+                        },
+                      );
+                    }}
+                    disabled={(date) => {
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0);
 
-          const dayName = dayMap[date.getDay()];
+                      const dayName = dayMap[date.getDay()];
 
-          return (
-            date < today ||
-            !availableDays.includes(dayName)
-          );
-        }}
-      />
-    </PopoverContent>
-  </Popover>
+                      return date < today || !availableDays.includes(dayName);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
 
-  {errors.bookingDate && (
-    <p className="text-sm text-red-500">
-      {errors.bookingDate.message}
-    </p>
-  )}
-</div>
+              {errors.bookingDate && (
+                <p className="text-sm text-red-500">
+                  {errors.bookingDate.message}
+                </p>
+              )}
+            </div>
           </div>
+          {/* duration */}
+          <div className="space-y-3">
+            <Label>Duration</Label>
 
+            <div className="flex flex-wrap gap-2">
+              {durationOptions.map((duration) => (
+                <Button
+                  key={duration}
+                  type="button"
+                  variant={
+                    selectedDuration === duration ? "default" : "outline"
+                  }
+                  onClick={() => setSelectedDuration(duration)}
+                >
+                  {duration} min
+                </Button>
+              ))}
+            </div>
+          </div>
+          {/* new one */}
+          <div className="rounded-lg border p-4 space-y-3">
+  <div className="flex justify-between">
+    <span>Session Duration</span>
+    <span>{selectedDuration} minutes</span>
+  </div>
+
+  <div className="flex justify-between">
+    <span>Rate</span>
+    <span>${hourlyRate}/hour</span>
+  </div>
+
+  <hr />
+
+  <div className="flex justify-between text-lg font-bold">
+    <span>Total Price</span>
+    <span>
+      $
+      {((hourlyRate / 60) * selectedDuration).toFixed(2)}
+    </span>
+  </div>
+</div>
           {/* Notes */}
           <div className="space-y-2">
             <Label>Notes (Optional)</Label>
