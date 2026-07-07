@@ -25,6 +25,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { useAvailableSlots } from "@/src/hooks/booking/useAvailableSlots";
 import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
+import { createBooking } from "@/src/services/bookingService";
+import { toast } from "sonner";
 
 // ========================= Types =========================
 
@@ -147,27 +149,30 @@ export default function BookingModal({
 
   // ========================= Handlers =========================
 
-const onSubmit = async (data: BookingFormData) => {
-  try {
-    const bookingData = {
-      tutorId,
-      date: data.bookingDate,
-      startTime: data.startTime,
-      endTime: data.endTime,
-      duration: selectedDuration,
-      notes: data.notes,
-    };
+  const onSubmit = async (data: BookingFormData) => {
+    try {
+      const bookingData = {
+        tutorId,
+        date: data.bookingDate,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        duration: selectedDuration,
+        notes: data.notes,
+      };
 
-    console.log(bookingData);
+      console.log(bookingData);
 
-    // await createBooking(bookingData); // we'll connect this later
+      // await createBooking(bookingData); // we'll connect this later
+      const res = await createBooking(bookingData);
 
-    reset();
-    onOpenChange(false);
-  } catch (error) {
-    console.error(error);
-  }
-};
+      console.log(res);
+      reset();
+      onOpenChange(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong")
+    }
+  };
 
   // ========================= UI =========================
 
