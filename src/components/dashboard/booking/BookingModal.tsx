@@ -147,15 +147,27 @@ export default function BookingModal({
 
   // ========================= Handlers =========================
 
-  const onSubmit = (data: BookingFormData) => {
-    console.log({
+const onSubmit = async (data: BookingFormData) => {
+  try {
+    const bookingData = {
       tutorId,
-      ...data,
-    });
+      date: data.bookingDate,
+      startTime: data.startTime,
+      endTime: data.endTime,
+      duration: selectedDuration,
+      notes: data.notes,
+    };
+
+    console.log(bookingData);
+
+    // await createBooking(bookingData); // we'll connect this later
 
     reset();
     onOpenChange(false);
-  };
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   // ========================= UI =========================
 
