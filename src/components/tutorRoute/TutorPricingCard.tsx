@@ -1,3 +1,5 @@
+import { Calendar } from "lucide-react";
+
 type Props = {
   tutor: any;
   setOpenBookingModal: any;
@@ -15,25 +17,25 @@ export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) 
             Availability
           </h3>
 
-          <div className="space-y-3">
+
+          <div className="flex gap-4">
+            {/* =============parent div============= */}
+            <div>
+              <Calendar />
+            </div>
+          <div className="flex gap-4 flex-wrap">
             {tutor.availability.map((slot: any) => (
               <div
                 key={slot.id}
-                className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 transition hover:bg-slate-100"
+                className="flex items-center justify-between rounded-xl"
               >
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-green-500" />
-
-                  <span className="font-medium">
+                  <span className="font-medium text-sm text-gray-500">
                     {slot.day}
                   </span>
-                </div>
 
-                <span className="text-sm text-gray-500">
-                  {slot.startTime} - {slot.endTime}
-                </span>
               </div>
             ))}
+          </div>
           </div>
         </div>
         {/* Book Button */}
