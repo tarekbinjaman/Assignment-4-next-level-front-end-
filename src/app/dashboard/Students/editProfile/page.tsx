@@ -1,14 +1,13 @@
 'use client'
 
-import ProfileCard from "@/src/components/dashboard/shared/dashboard/tutorDashboard/tutorProfile/CreateprofileCard";
+import EditProfileForm from "@/src/components/dashboard/student/editprofile/EditProfileForm ";
 import { useAuth } from "@/src/context/AuthContext"
 
 export default function EditProfile() {
     const {user} = useAuth();
     return (
-        <div>
-            <h1>This is user edit profile route</h1>
-            <ProfileCard />
-        </div>
+    <div className="p-6">
+      <EditProfileForm />
+    </div>
     )
 }
