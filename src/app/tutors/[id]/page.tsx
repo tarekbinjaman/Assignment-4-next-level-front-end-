@@ -8,7 +8,7 @@ import TutorPricingCard from "@/src/components/tutorRoute/TutorPricingCard";
 import TutorStats from "@/src/components/tutorRoute/TutorStats";
 import TutorReviews from "@/src/components/tutorRoute/review/TutorReviews";
 import { useState } from "react";
-import BookingModal from "@/src/components/dashboard/booking/BookingModal";
+import BookingModal from "@/src/components/booking/BookingModal";
 
 export default function TutorProfilePage() {
   const [openBookingModal, setOpenBookingModal] = useState(false);

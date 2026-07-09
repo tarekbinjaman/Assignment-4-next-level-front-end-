@@ -25,3 +25,7 @@ export const getAvailableSlots = async (tutorId: string, date: string) => {
     return response?.data;
 }
 
+export const getMybooking = async () => {
+    const res = await api.get("/booking/me");
+    return res.data;
+};

@@ -56,7 +56,7 @@ export function AppSidebar() {
     },
     {
       title: "Book a Session",
-      href: "/dashboard/Students/bookSession",
+      href: "/tutors",
       icon: BookOpen,
     },
   ];
