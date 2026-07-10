@@ -67,18 +67,6 @@ export default function studentDashboard() {
       <QuickActions />
       {/* learning in progress */}
       <LearningProgress completedSessions={18} totalSessions={30} />
-      {/* LatestReview.tsx */}
-      <LatestReview
-        review={{
-          tutorName: "Charles Babbage",
-          rating: 5,
-          comment:
-            "Excellent tutor! Explained every concept clearly and patiently.",
-          createdAt: "15 July 2026",
-        }}
-      />
-      {/* student overview */}
-      <StudentOverview />
     </div>
   );
 }

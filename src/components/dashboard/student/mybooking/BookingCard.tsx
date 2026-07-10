@@ -13,7 +13,7 @@ export default function BookingCard({ booking }: any) {
             alt={booking.tutor.user.name}
             width={70}
             height={70}
-            className="rounded-full object-cover"
+            className="h-[70px] w-[70px] rounded-full object-cover"
           />
 
           <div>

@@ -19,21 +19,16 @@ const actions = [
   {
     title: "My Bookings",
     description: "Manage your sessions",
-    href: "/dashboard/student/bookings",
+    href: "/dashboard/Students/mybooking",
     icon: CalendarDays,
   },
   {
     title: "Edit Profile",
     description: "Update your profile",
-    href: "/dashboard/student/edit-profile",
+    href: "/dashboard/Students/editProfile",
     icon: User,
   },
-  {
-    title: "Browse Categories",
-    description: "Explore subjects",
-    href: "/categories",
-    icon: BookOpen,
-  },
+
 ];
 
 export default function QuickActions() {
