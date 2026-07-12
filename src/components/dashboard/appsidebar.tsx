@@ -63,7 +63,7 @@ export function AppSidebar() {
 
   const tutorLinks = [
     {
-      title: "Tutor Dashboard",
+      title: "Dashboard overview",
       href: "/dashboard/tutor/dashboardOverview",
       icon: LayoutDashboard,
     },
