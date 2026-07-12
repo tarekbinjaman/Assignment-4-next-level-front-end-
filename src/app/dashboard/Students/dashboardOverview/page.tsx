@@ -1,12 +1,10 @@
 "use client";
 
-import LatestReview from "@/src/components/dashboard/student/overview/LatestReview";
 import LearningProgress from "@/src/components/dashboard/student/overview/LearningProgress";
 import NextSessionCard from "@/src/components/dashboard/student/overview/NextSessionCard";
 import Header from "@/src/components/dashboard/student/overview/Header";
 import QuickActions from "@/src/components/dashboard/student/overview/QuickActions";
 import RecentBookings from "@/src/components/dashboard/student/overview/RecentBookings";
-import StudentOverview from "@/src/components/dashboard/student/overview/StudentOverview";
 import StudentStats from "@/src/components/dashboard/student/overview/StudentStats";
 
 export default function studentDashboard() {
