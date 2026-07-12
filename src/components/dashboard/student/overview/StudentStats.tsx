@@ -22,22 +22,22 @@ export default function StudentStats({
   const cards = [
     {
       title: "Upcoming Sessions",
-      value: stats.upcomingSessions,
+      value: stats?.upcomingSessions,
       icon: CalendarDays,
     },
     {
       title: "Completed Sessions",
-      value: stats.completedSessions,
+      value: stats?.completedSessions,
       icon: CheckCircle2,
     },
     {
       title: "Total Spent",
-      value: `$${stats.totalSpent}`,
+      value: `$${stats?.totalSpent}`,
       icon: DollarSign,
     },
     {
       title: "Reviews Given",
-      value: stats.reviewsGiven,
+      value: stats?.reviewsGiven,
       icon: Star,
     },
   ];

@@ -2,13 +2,14 @@
 
 import { CalendarDays, Clock3, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type NextSessionCardProps = {
   session: {
     tutorName: string;
     category: string;
     date: string;
-    time: string;
+    startTime: string;
     status: string;
   } | null;
 };
@@ -33,7 +34,7 @@ export default function NextSessionCard({
           </p>
 
           <Button className="mt-6">
-            Browse Tutors
+           <Link href="/tutors">Browse Tutors</Link>
           </Button>
         </div>
       </div>
@@ -106,7 +107,7 @@ export default function NextSessionCard({
             </p>
 
             <p className="font-semibold">
-              {session.time}
+              {session.startTime}
             </p>
           </div>
         </div>
