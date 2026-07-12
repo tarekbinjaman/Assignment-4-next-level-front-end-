@@ -9,30 +9,27 @@ import StudentStats from "@/src/components/dashboard/student/overview/StudentSta
 import { useStudentDashboard } from "@/src/hooks/dashboard/useStudentDashboard";
 
 export default function studentDashboard() {
-const {data, isLoading} = useStudentDashboard();
-  console.log("Current data from dashboard:", data); 
+  const { data, isLoading } = useStudentDashboard();
+  console.log("Current data from dashboard:", data);
 
   return (
     <div className="space-y-8">
       {/* ====================Header========================== */}
       <Header />
       {/* ================= STATS ================= */}
-      <StudentStats
-        stats={data?.stats}
-      />
+      <StudentStats stats={data?.stats} />
       {/* ================= MAIN GRID ================= */}
-      <NextSessionCard
-        session={data?.nextSession}
-      />
+      <NextSessionCard session={data?.nextSession} />
       {/* Recent Bookings */}
-      <RecentBookings
-        bookings={data?.recentBookings}
-      />
+      <RecentBookings bookings={data?.recentBookings} />
 
       {/* Right Side */}
       <QuickActions />
       {/* learning in progress */}
-      <LearningProgress completedSessions={18} totalSessions={30} />
+      <LearningProgress
+        completedSessions={data?.stats?.completedSessions}
+        totalSessions={data?.totalSessions}
+      />
     </div>
   );
 }
