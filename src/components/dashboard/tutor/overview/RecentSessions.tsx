@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 
 type Session = {
@@ -22,16 +23,12 @@ const statusStyles = {
   ACCEPTED:
     "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
 
-  COMPLETED:
-    "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  COMPLETED: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
 
-  CANCELLED:
-    "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  CANCELLED: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
 };
 
-export default function RecentSessions({
-  sessions,
-}: RecentSessionsProps) {
+export default function RecentSessions({ sessions }: RecentSessionsProps) {
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-6 flex items-center justify-between">
@@ -63,9 +60,7 @@ export default function RecentSessions({
                   {session.studentName}
                 </h3>
 
-                <p className="text-sm text-slate-500">
-                  {session.category}
-                </p>
+                <p className="text-sm text-slate-500">{session.category}</p>
               </div>
             </div>
 
@@ -83,10 +78,14 @@ export default function RecentSessions({
                 {session.status}
               </span>
 
-              <button className="btn btn-outline btn-sm flex items-center gap-1">
-                <span>View</span>
-                <Eye size={16} />
-              </button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-xl px-4 hover:border-primary hover:bg-primary/5 hover:text-primary"
+              >
+                <Eye className="mr-2 h-4 w-4" />
+                View Details
+              </Button>
             </div>
           </div>
         ))}

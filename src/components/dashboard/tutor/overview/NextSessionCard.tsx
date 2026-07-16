@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  BookOpen,
-  Calendar,
-  Clock3,
-  User,
-} from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, Clock3, User } from "lucide-react";
 
 type NextSession = {
   studentName: string;
@@ -21,9 +15,7 @@ type NextSessionCardProps = {
   session: NextSession;
 };
 
-export default function NextSessionCard({
-  session,
-}: NextSessionCardProps) {
+export default function NextSessionCard({ session }: NextSessionCardProps) {
   const statusColor = {
     Accepted:
       "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
@@ -65,9 +57,7 @@ export default function NextSessionCard({
             {session.studentName}
           </h3>
 
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Student
-          </p>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Student</p>
         </div>
       </div>
 
@@ -99,16 +89,19 @@ export default function NextSessionCard({
       </div>
 
       {/* Footer */}
-      <div className="mt-8 flex items-center justify-between rounded-2xl bg-slate-50 p-4 dark:bg-slate-800 hover:bg-slate-200 transition duration-300">
+      <div className="mt-8 flex items-center justify-between rounded-2xl bg-slate-50 p-4 dark:bg-slate-800">
         <div>
           <p className="text-sm text-slate-500">
             Stay prepared for your upcoming lesson.
           </p>
         </div>
 
-        <button className="btn btn-primary btn-sm flex items-center gap-1">
-          View Session
-          <ArrowRight size={18} />
+        <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 active:translate-y-0">
+          <span>View Session</span>
+          <ArrowRight
+            size={16}
+            className="transition-transform duration-200 group-hover:translate-x-1"
+          />
         </button>
       </div>
     </section>
@@ -131,9 +124,7 @@ function InfoItem({
         <span className="text-sm font-medium">{label}</span>
       </div>
 
-      <p className="font-semibold text-slate-900 dark:text-white">
-        {value}
-      </p>
+      <p className="font-semibold text-slate-900 dark:text-white">{value}</p>
     </div>
   );
 }
