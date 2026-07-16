@@ -1,28 +1,58 @@
 "use client";
 
 import { ArrowRight, BookOpen, Calendar, Clock3, User } from "lucide-react";
+import Image from "next/image";
 
 type NextSession = {
+  id: string;
   studentName: string;
-  category: string;
+  studentImage?: string;
+  category?: string;
   date: string;
-  time: string;
+  startTime: string;
+  endTime: string;
   duration: string;
-  status: "Accepted" | "Pending" | "Completed";
+  status: "PENDING" | "ACCEPTED" | "COMPLETED" | "CANCELLED";
 };
 
 type NextSessionCardProps = {
-  session: NextSession;
+  session: NextSession | null;
 };
 
 export default function NextSessionCard({ session }: NextSessionCardProps) {
+  if (!session) {
+    return (
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+            <Calendar size={38} className="text-primary" />
+          </div>
+
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+            No Upcoming Session
+          </h2>
+
+          <p className="mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+            You don't have any accepted tutoring sessions scheduled yet. New
+            bookings will appear here automatically.
+          </p>
+
+          <button className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25">
+            View My Sessions
+            <ArrowRight size={16} />
+          </button>
+        </div>
+      </section>
+    );
+  }
   const statusColor = {
-    Accepted:
+    ACCEPTED:
       "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-    Pending:
+    PENDING:
       "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
-    Completed:
+    COMPLETED:
       "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    CANCELLED: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
   };
 
   return (
@@ -40,21 +70,29 @@ export default function NextSessionCard({ session }: NextSessionCardProps) {
         </div>
 
         <span
-          className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColor[session.status]}`}
+          className={`rounded-full px-3 py-1 text-xs font-semibold ${statusColor[session?.status]}`}
         >
-          {session.status}
+          {session?.status}
         </span>
       </div>
 
       {/* Student */}
       <div className="mt-8 flex items-center gap-4">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-lg font-bold text-primary">
-          {session.studentName.charAt(0)}
+          {session?.studentImage ? (
+            <Image
+              src={session?.studentImage}
+              alt={session?.studentName}
+              className="h-14 w-14 rounded-full object-cover"
+            />
+          ) : (
+            session?.studentName.charAt(0)
+          )}
         </div>
 
         <div>
           <h3 className="font-semibold text-slate-900 dark:text-white">
-            {session.studentName}
+            {session?.studentName}
           </h3>
 
           <p className="text-sm text-slate-500 dark:text-slate-400">Student</p>
@@ -66,25 +104,25 @@ export default function NextSessionCard({ session }: NextSessionCardProps) {
         <InfoItem
           icon={<BookOpen size={18} />}
           label="Subject"
-          value={session.category}
+          value={session?.category ?? "General"}
         />
 
         <InfoItem
           icon={<Calendar size={18} />}
           label="Date"
-          value={session.date}
+          value={session?.date}
         />
 
         <InfoItem
           icon={<Clock3 size={18} />}
           label="Time"
-          value={session.time}
+          value={`${session?.startTime} - ${session?.endTime}`}
         />
 
         <InfoItem
           icon={<User size={18} />}
           label="Duration"
-          value={session.duration}
+          value={session?.duration}
         />
       </div>
 

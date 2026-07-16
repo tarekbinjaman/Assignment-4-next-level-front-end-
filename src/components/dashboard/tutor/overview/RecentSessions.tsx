@@ -6,9 +6,11 @@ import { Eye } from "lucide-react";
 type Session = {
   id: string;
   studentName: string;
+  studentImage?: string;
   category: string;
   date: string;
-  time: string;
+  startTime: string;
+  endTime: string;
   status: "PENDING" | "ACCEPTED" | "COMPLETED" | "CANCELLED";
 };
 
@@ -29,6 +31,30 @@ const statusStyles = {
 };
 
 export default function RecentSessions({ sessions }: RecentSessionsProps) {
+  if (!sessions || sessions.length === 0) {
+  return (
+    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+          <Eye size={36} className="text-primary" />
+        </div>
+
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+          No Sessions Yet
+        </h2>
+
+        <p className="mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+          You haven't conducted any tutoring sessions yet. Once students book
+          sessions with you, they'll appear here.
+        </p>
+
+        <Button className="mt-8 rounded-xl">
+          View All Sessions
+        </Button>
+      </div>
+    </section>
+  );
+}
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-6 flex items-center justify-between">
@@ -44,30 +70,30 @@ export default function RecentSessions({ sessions }: RecentSessionsProps) {
       </div>
 
       <div className="space-y-4">
-        {sessions.map((session) => (
+        {sessions?.map((session) => (
           <div
-            key={session.id}
+            key={session?.id}
             className="flex flex-col gap-4 rounded-2xl border border-slate-200 p-4 transition-all hover:shadow-md dark:border-slate-700 lg:flex-row lg:items-center lg:justify-between"
           >
             {/* Left */}
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
-                {session.studentName.charAt(0)}
+                {session?.studentName?.charAt(0)}
               </div>
 
               <div>
                 <h3 className="font-semibold text-slate-900 dark:text-white">
-                  {session.studentName}
+                  {session?.studentName}
                 </h3>
 
-                <p className="text-sm text-slate-500">{session.category}</p>
+                <p className="text-sm text-slate-500">{session?.category}</p>
               </div>
             </div>
 
             {/* Middle */}
             <div className="flex flex-col text-sm text-slate-500">
-              <span>{session.date}</span>
-              <span>{session.time}</span>
+              <span>{session?.date}</span>
+              <span>{session?.startTime} - {session?.endTime}</span>
             </div>
 
             {/* Right */}

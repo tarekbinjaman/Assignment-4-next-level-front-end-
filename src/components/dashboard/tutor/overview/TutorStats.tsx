@@ -9,9 +9,9 @@ import {
 
 type Stats = {
   upcomingSessions: number;
-  completedSessions: number;
-  totalStudents: number;
-  averageRating: number;
+  completedSession: number;
+  totalStudent: number;
+  averageRatingResult: number;
 };
 
 type TutorStatsProps = {
@@ -26,19 +26,19 @@ const statCards = [
     color: "text-blue-600 bg-blue-100",
   },
   {
-    key: "completedSessions",
+    key: "completedSession",
     title: "Completed Sessions",
     icon: CheckCircle2,
     color: "text-green-600 bg-green-100",
   },
   {
-    key: "totalStudents",
+    key: "totalStudent",
     title: "Total Students",
     icon: GraduationCap,
     color: "text-purple-600 bg-purple-100",
   },
   {
-    key: "averageRating",
+    key: "averageRatingResult",
     title: "Average Rating",
     icon: Star,
     color: "text-yellow-600 bg-yellow-100",
