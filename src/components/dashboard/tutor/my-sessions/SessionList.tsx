@@ -9,6 +9,8 @@ type Session = {
   category: string;
   date: string;
   time: string;
+  startTime: string;  
+  endTime: string;
   status: "PENDING" | "ACCEPTED" | "COMPLETED" | "CANCELLED";
 };
 

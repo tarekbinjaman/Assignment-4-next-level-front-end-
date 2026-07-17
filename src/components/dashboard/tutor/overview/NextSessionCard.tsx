@@ -2,6 +2,7 @@
 
 import { ArrowRight, BookOpen, Calendar, Clock3, User } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type NextSession = {
   id: string;
@@ -36,11 +37,12 @@ export default function NextSessionCard({ session }: NextSessionCardProps) {
             You don't have any accepted tutoring sessions scheduled yet. New
             bookings will appear here automatically.
           </p>
-
-          <button className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25">
-            View My Sessions
-            <ArrowRight size={16} />
-          </button>
+          <Link href="/dashboard/tutor/mySession">
+            <button className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25">
+              View My Sessions
+              <ArrowRight size={16} />
+            </button>
+          </Link>
         </div>
       </section>
     );

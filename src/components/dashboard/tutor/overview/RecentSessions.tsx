@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Eye } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
+import Link from "next/link";
 
 type Session = {
   id: string;
@@ -32,29 +33,31 @@ const statusStyles = {
 
 export default function RecentSessions({ sessions }: RecentSessionsProps) {
   if (!sessions || sessions.length === 0) {
-  return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-          <Eye size={36} className="text-primary" />
+    return (
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+            <Eye size={36} className="text-primary" />
+          </div>
+
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+            No Sessions Yet
+          </h2>
+
+          <p className="mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+            You haven't conducted any tutoring sessions yet. Once students book
+            sessions with you, they'll appear here.
+          </p>
+          <Link href="/dashboard/tutor/mySession">
+            <button className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25">
+              View all Sessions
+              <ArrowRight size={16} />
+            </button>
+          </Link>
         </div>
-
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
-          No Sessions Yet
-        </h2>
-
-        <p className="mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
-          You haven't conducted any tutoring sessions yet. Once students book
-          sessions with you, they'll appear here.
-        </p>
-
-        <Button className="mt-8 rounded-xl">
-          View All Sessions
-        </Button>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-6 flex items-center justify-between">
@@ -93,7 +96,9 @@ export default function RecentSessions({ sessions }: RecentSessionsProps) {
             {/* Middle */}
             <div className="flex flex-col text-sm text-slate-500">
               <span>{session?.date}</span>
-              <span>{session?.startTime} - {session?.endTime}</span>
+              <span>
+                {session?.startTime} - {session?.endTime}
+              </span>
             </div>
 
             {/* Right */}
