@@ -35,9 +35,9 @@ export default function SessionList({ sessions }: Props) {
 
   return (
     <div className="space-y-5">
-      {sessions.map((session) => (
+      {sessions?.map((session) => (
         <SessionCard
-          key={session.id}
+          key={session?.id}
           session={session}
         />
       ))}

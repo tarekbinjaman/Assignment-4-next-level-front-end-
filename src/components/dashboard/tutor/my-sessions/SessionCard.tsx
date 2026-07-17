@@ -12,12 +12,14 @@ import {
 import StatusBadge from "./StatusBadge";
 
 type Session = {
-  id: string;
+    id: string;
   studentName: string;
   studentImage?: string;
   category: string;
   date: string;
   time: string;
+  startTime: string;  
+  endTime: string;
   status: "PENDING" | "ACCEPTED" | "COMPLETED" | "CANCELLED";
 };
 
@@ -34,13 +36,13 @@ export default function SessionCard({ session }: Props) {
         <div className="flex items-center gap-4">
           <div className="avatar placeholder">
             <div className="bg-primary text-primary-content w-16 rounded-2xl text-xl font-bold">
-              <span>{session.studentName.charAt(0)}</span>
+              <span>{session?.studentName?.charAt(0)}</span>
             </div>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold">
-              {session.studentName}
+              {session?.studentName}
             </h3>
 
             <p className="mt-1 flex items-center gap-2 text-sm text-slate-500">
@@ -50,7 +52,7 @@ export default function SessionCard({ session }: Props) {
           </div>
         </div>
 
-        <StatusBadge status={session.status} />
+        <StatusBadge status={session?.status} />
       </div>
 
       {/* Details */}
@@ -64,7 +66,7 @@ export default function SessionCard({ session }: Props) {
             </p>
 
             <p className="font-medium">
-              {session.category}
+              {session?.category}
             </p>
           </div>
         </div>
@@ -78,7 +80,7 @@ export default function SessionCard({ session }: Props) {
             </p>
 
             <p className="font-medium">
-              {session.date}
+              {session?.date}
             </p>
           </div>
         </div>
@@ -92,7 +94,7 @@ export default function SessionCard({ session }: Props) {
             </p>
 
             <p className="font-medium">
-              {session.time}
+              {session?.time}
             </p>
           </div>
         </div>
@@ -100,7 +102,7 @@ export default function SessionCard({ session }: Props) {
 
 {/* Actions */}
 <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 pt-5 dark:border-slate-800">
-  {session.status === "PENDING" && (
+  {session?.status === "PENDING" && (
     <>
       <button className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-emerald-700 hover:shadow-md">
         <CheckCircle2 size={16} />
@@ -114,7 +116,7 @@ export default function SessionCard({ session }: Props) {
     </>
   )}
 
-  {session.status === "ACCEPTED" && (
+  {session?.status === "ACCEPTED" && (
     <>
       <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-md">
         <CheckCircle2 size={16} />
@@ -128,8 +130,8 @@ export default function SessionCard({ session }: Props) {
     </>
   )}
 
-  {(session.status === "COMPLETED" ||
-    session.status === "CANCELLED") && (
+  {(session?.status === "COMPLETED" ||
+    session?.status === "CANCELLED") && (
     <button className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-all hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800">
       <Eye size={16} />
       View Details

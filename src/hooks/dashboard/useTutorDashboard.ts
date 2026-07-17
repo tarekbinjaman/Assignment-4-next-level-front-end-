@@ -1,9 +1,9 @@
 import { getTutorDashboard } from "@/src/services/dashboardService"
 import { useQuery } from "@tanstack/react-query"
 
-export const UseTutorDashboard = () => {
+export const UseTutorDashboard = ({ search, status, sort }: { search: string; status: string; sort: string }) => {
     return useQuery({
-        queryKey: ["tutorDashboard"],
-        queryFn: getTutorDashboard,
+        queryKey: ["tutorDashboard", search, status, sort],
+        queryFn: () => getTutorDashboard(search, status, sort),
     });
 }
