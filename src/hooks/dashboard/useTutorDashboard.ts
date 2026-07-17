@@ -1,9 +1,20 @@
-import { getTutorDashboard } from "@/src/services/dashboardService"
-import { useQuery } from "@tanstack/react-query"
+import { getTutorDashboard, getTutorSessions } from "@/src/services/dashboardService";
+import { useQuery } from "@tanstack/react-query";
 
-export const UseTutorDashboard = ({ search, status, sort }: { search: string; status: string; sort: string }) => {
+export const UseTutorDashboard = () => {
+  return useQuery({
+    queryKey: ["tutorDashboard"],
+    queryFn: getTutorDashboard,
+  });
+};
+
+export const useTutorSessions = (
+  search: string,
+  status: string,
+  sort: string,
+) => {
     return useQuery({
-        queryKey: ["tutorDashboard", search, status, sort],
-        queryFn: () => getTutorDashboard(search, status, sort),
-    });
-}
+        queryKey: ["tutorSessions", search, status, sort],
+        queryFn: () => getTutorSessions(search, status, sort),
+    })
+};
