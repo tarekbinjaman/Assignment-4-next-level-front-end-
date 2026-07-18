@@ -30,6 +30,7 @@ type Props = {
 
 export default function SessionCard({ session }: Props) {
   const {mutate, isPending} = useTutorSessionsByStatus();
+  console.log("Session data from session card", session);
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
       {/* Top */}
