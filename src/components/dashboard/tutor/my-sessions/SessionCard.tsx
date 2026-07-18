@@ -10,6 +10,7 @@ import {
   XCircle,
 } from "lucide-react";
 import StatusBadge from "./StatusBadge";
+import { useTutorSessionsByStatus } from "@/src/hooks/dashboard/useTutorDashboard";
 
 type Session = {
   id: string;
@@ -28,6 +29,7 @@ type Props = {
 };
 
 export default function SessionCard({ session }: Props) {
+  const {mutate, isPending} = useTutorSessionsByStatus();
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
       {/* Top */}
@@ -98,12 +100,21 @@ export default function SessionCard({ session }: Props) {
       <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 pt-5 dark:border-slate-800">
         {session?.status === "PENDING" && (
           <>
-            <button className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-emerald-700 hover:shadow-md">
+            <button
+            disabled={isPending}
+            onClick={() => mutate({sessionId: session?.id, status: "ACCEPTED"})}
+            className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-emerald-700 hover:shadow-md">
               <CheckCircle2 size={16} />
               Accept
             </button>
 
-            <button className="inline-flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-all hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
+            <button
+            disabled={isPending}
+            onClick={() => mutate({
+              sessionId: session?.id,
+              status: "CANCELLED"
+            })}
+            className="inline-flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-all hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
               <XCircle size={16} />
               Reject
             </button>
@@ -112,7 +123,13 @@ export default function SessionCard({ session }: Props) {
 
         {session?.status === "ACCEPTED" && (
           <>
-            <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-md">
+            <button
+            disabled={isPending}
+            onClick={() => mutate({
+              sessionId: session?.id,
+              status: "COMPLETED"
+            })}
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90 hover:shadow-md">
               <CheckCircle2 size={16} />
               Mark Complete
             </button>
