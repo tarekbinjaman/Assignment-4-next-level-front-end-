@@ -1,9 +1,10 @@
 "use client";
 
-import NextSessionCard from "@/src/components/dashboard/tutor/overview/NextSessionCard";
+// import  from "@/src/components/dashboard/tutor/overview/UpcomingSessions";
 import RecentSessions from "@/src/components/dashboard/tutor/overview/RecentSessions";
 import Header from "@/src/components/dashboard/tutor/overview/TutorHeader";
 import TutorStats from "@/src/components/dashboard/tutor/overview/TutorStats";
+import UpcomingSessions from "@/src/components/dashboard/tutor/overview/UpcomingSessions";
 import { UseTutorDashboard } from "@/src/hooks/dashboard/useTutorDashboard";
 
 export default function DashboardOverview() {
@@ -27,9 +28,8 @@ export default function DashboardOverview() {
         }}
       />
       {/* =============session card============= */}
-      <NextSessionCard
-        session={data?.nextSession}
-      />
+      <UpcomingSessions sessions={data?.nextSession} />
+      
 
       {/* ============Recent sesssion============= */}
       <RecentSessions sessions={data?.nextSession ?? null} />
