@@ -18,7 +18,7 @@ export default function MySession() {
         search={search}
         status={status}
         sort={sort}
-        totalSessions={24}
+        totalSessions={data?.allSessions?.length || 0}
         onSearchChange={setSearch}
         onStatusChange={setStatus}
         onSortChange={setSort}
