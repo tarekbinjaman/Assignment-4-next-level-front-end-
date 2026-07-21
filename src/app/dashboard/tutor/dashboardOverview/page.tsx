@@ -28,11 +28,11 @@ export default function DashboardOverview() {
         }}
       />
       {/* =============session card============= */}
-      <UpcomingSessions sessions={data?.nextSession} />
+      <UpcomingSessions sessions={data?.nextSession ?? null} />
       
 
       {/* ============Recent sesssion============= */}
-      <RecentSessions sessions={data?.nextSession ?? null} />
+      <RecentSessions sessions={data?.recentSessions ?? null} />
     </div>
   );
 }

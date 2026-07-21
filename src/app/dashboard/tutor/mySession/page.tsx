@@ -4,12 +4,15 @@ import SessionHeader from "@/src/components/dashboard/tutor/my-sessions/SessionH
 import SessionList from "@/src/components/dashboard/tutor/my-sessions/SessionList";
 import {  useTutorSessions } from "@/src/hooks/dashboard/useTutorDashboard";
 import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 export default function MySession() {
   const [search, setSearch] = useState("");
+  // using debounce
+  const [debouncedSearch] = useDebounce(search, 500);
   const [status, setStatus] = useState("");
   const [sort, setSort] = useState("desc");
-  const {data, isLoading} = useTutorSessions(search, status, sort);
+  const {data, isLoading} = useTutorSessions(debouncedSearch, status, sort);
   console.log("Tutor sessions data from my session page", data);
   return (
     <div className="space-y-8">
