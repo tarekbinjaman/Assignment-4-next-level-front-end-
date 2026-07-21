@@ -143,10 +143,12 @@ export default function UpcomingSessions({ sessions }: UpcomingSessionsProps) {
             </div>
 
             <div className="mt-6 flex justify-end">
+              <Link href={`/dashboard/tutor/mySession/${session.id}`}>              
               <button className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90">
                 View Session
                 <ArrowRight size={16} />
               </button>
+              </Link>
             </div>
           </div>
         ))}

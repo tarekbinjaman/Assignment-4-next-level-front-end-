@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 import { useTutorSessionsByStatus } from "@/src/hooks/dashboard/useTutorDashboard";
+import Link from "next/link";
 
 type Session = {
   id: string;
@@ -144,10 +145,13 @@ export default function SessionCard({ session }: Props) {
 
         {(session?.status === "COMPLETED" ||
           session?.status === "CANCELLED") && (
+            <Link href={`/dashboard/tutor/mySession/${session?.id}`}>
+            
           <button className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-all hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800">
             <Eye size={16} />
             View Details
           </button>
+            </Link>
         )}
       </div>
     </div>
