@@ -1,12 +1,13 @@
 "use client";
 
+import { useTutorSessionsByStatus } from "@/src/hooks/dashboard/useTutorDashboard";
 import {
   CheckCircle2,
   XCircle,
   RotateCcw,
 } from "lucide-react";
 
-import { useUpdateTutorSessionStatus } from "@/src/hooks/dashboard/useTutorDashboard";
+// import { useUpdateTutorSessionStatus } from "@/src/hooks/dashboard/useTutorDashboard";
 
 type Props = {
   bookingId: string;
@@ -17,7 +18,7 @@ export default function SessionActions({
   bookingId,
   status,
 }: Props) {
-  const { mutate, isPending } = useUpdateTutorSessionStatus();
+  const { mutate, isPending } = useTutorSessionsByStatus();
 
   return (
     <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
