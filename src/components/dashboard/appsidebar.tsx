@@ -87,6 +87,11 @@ export function AppSidebar() {
       href: "/dashboard/tutor/viewReviews",
       icon: Star,
     },
+    {
+      title: "History",
+      href: "/dashboard/tutor/history",
+      icon: Clock,
+    }
   ];
 
   const adminLinks = [

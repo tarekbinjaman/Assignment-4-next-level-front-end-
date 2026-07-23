@@ -3,10 +3,12 @@ import { updateTutorSessionsStatus } from "@/src/services/updateTutorSessionsSta
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const UseTutorDashboard = () => {
+export const UseTutorDashboard = (  search?: string,
+  status?: string,
+  sort?: "asc" | "desc") => {
   return useQuery({
-    queryKey: ["tutorDashboard"],
-    queryFn: getTutorDashboard,
+    queryKey: ["tutorDashboard", search, status, sort],
+    queryFn: () => getTutorDashboard(search, status, sort),
   });
 };
 

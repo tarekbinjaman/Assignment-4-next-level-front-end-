@@ -6,8 +6,16 @@ export const getStudentDashboard = async () => {
 }
 
 
-export const getTutorDashboard = async () => {
-    const response = await api.get("/dashboard/tutor");
+export const getTutorDashboard = async (  search?: string,
+  status?: string,
+  sort?: "asc" | "desc") => {
+    const response = await api.get("/dashboard/tutor", {
+        params: {
+            search,
+            status,
+            sort
+        }
+    });
     return response?.data?.data;
 }
 
