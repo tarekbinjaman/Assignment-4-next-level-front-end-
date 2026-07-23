@@ -21,10 +21,10 @@ export default function DashboardOverview() {
       {/* ===========stats============= */}
       <TutorStats
         stats={{
-          upcomingSessions: data?.stasts?.upcomingSessions || 0,
-          completedSession: data?.stasts?.completedSession || 0,
-          totalStudent: data?.stasts?.totalStudent || 0,
-          averageRatingResult: data?.stasts?.averageRatingResult || 0,
+          upcomingSessions: data?.stats?.upcomingSessions || 0,
+          completedSession: data?.stats?.completedSession || 0,
+          totalStudent: data?.stats?.totalStudent || 0,
+          averageRatingResult: data?.stats?.averageRatingResult || 0,
         }}
       />
       {/* =============session card============= */}

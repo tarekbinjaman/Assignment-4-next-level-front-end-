@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useAuth } from "@/src/context/AuthContext";
+import { useState } from "react";
 
 export default function TutorProfileCard() {
   const { user, setEditTutorModal } = useAuth();
+  const [seeMore, setSeeMore] = useState(false);
 
   const tutorProfile = user?.tutorProfile;
 
@@ -37,13 +39,9 @@ export default function TutorProfileCard() {
             />
 
             <div>
-              <h1 className="text-3xl font-bold">
-                {user?.name}
-              </h1>
+              <h1 className="text-3xl font-bold">{user?.name}</h1>
 
-              <p className="text-gray-500">
-                {user?.email}
-              </p>
+              <p className="text-gray-500">{user?.email}</p>
             </div>
           </div>
 
@@ -67,21 +65,28 @@ export default function TutorProfileCard() {
 
         {/* Bio */}
         <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-2">
-            About
-          </h2>
+          <h2 className="text-lg font-semibold mb-2">About</h2>
 
           <p className="text-gray-600 leading-relaxed">
-            {tutorProfile.bio}
+            {seeMore || tutorProfile.bio.length <= 600
+              ? tutorProfile.bio
+              : `${tutorProfile.bio.slice(0, 600)}...`}
+
+            {tutorProfile.bio.length > 600 && (
+              <span
+                onClick={() => setSeeMore(!seeMore)}
+                className="ml-1 cursor-pointer font-medium text-blue-600"
+              >
+                {seeMore ? "See Less" : "See More"}
+              </span>
+            )}
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-4 mt-8">
           <div className="border rounded-xl p-4">
-            <p className="text-sm text-gray-500">
-              Hourly Rate
-            </p>
+            <p className="text-sm text-gray-500">Hourly Rate</p>
 
             <h3 className="text-2xl font-bold mt-1">
               ${tutorProfile.hourlyRate}
@@ -89,9 +94,7 @@ export default function TutorProfileCard() {
           </div>
 
           <div className="border rounded-xl p-4">
-            <p className="text-sm text-gray-500">
-              Categories
-            </p>
+            <p className="text-sm text-gray-500">Categories</p>
 
             <h3 className="text-2xl font-bold mt-1">
               {tutorProfile.categories?.length || 0}
@@ -99,21 +102,15 @@ export default function TutorProfileCard() {
           </div>
 
           <div className="border rounded-xl p-4">
-            <p className="text-sm text-gray-500">
-              Status
-            </p>
+            <p className="text-sm text-gray-500">Status</p>
 
-            <h3 className="text-green-600 font-semibold mt-1">
-              Active Tutor
-            </h3>
+            <h3 className="text-green-600 font-semibold mt-1">Active Tutor</h3>
           </div>
         </div>
 
         {/* Categories */}
         <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-3">
-            Subjects
-          </h2>
+          <h2 className="text-lg font-semibold mb-3">Subjects</h2>
 
           <div className="flex flex-wrap gap-3">
             {tutorProfile.categories?.map((category) => (
