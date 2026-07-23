@@ -170,7 +170,7 @@ export default function BookingModal({
       onOpenChange(false);
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong")
+      toast.error(error?.response?.data?.message || "Failed to create booking");
     }
   };
 
