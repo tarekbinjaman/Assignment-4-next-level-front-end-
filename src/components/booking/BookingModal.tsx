@@ -27,6 +27,7 @@ import { useAvailableSlots } from "@/src/hooks/booking/useAvailableSlots";
 import { useSingleTutor } from "@/src/hooks/tutor/useSingleTutor";
 import { createBooking } from "@/src/services/bookingService";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // ========================= Types =========================
 
@@ -84,6 +85,7 @@ export default function BookingModal({
   // ========================= API Hooks =========================
 
   const { data: tutor } = useSingleTutor(tutorId);
+
 
   const { data: availableSlots, isLoading } = useAvailableSlots(
     tutorId,
@@ -146,7 +148,9 @@ export default function BookingModal({
 
       return slots;
     }) || [];
-
+    
+    // ===============Router========================
+const router = useRouter();
   // ========================= Handlers =========================
 
   const onSubmit = async (data: BookingFormData) => {
@@ -168,6 +172,7 @@ export default function BookingModal({
       console.log(res);
       reset();
       onOpenChange(false);
+      router.push("/dashboard/Students/mybooking")
     } catch (error) {
       console.error(error);
       toast.error(error?.response?.data?.message || "Failed to create booking");
