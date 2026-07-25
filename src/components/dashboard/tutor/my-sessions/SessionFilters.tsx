@@ -12,12 +12,12 @@ import {
 type SessionFiltersProps = {
   search: string;
   status: string;
-  sort: string;
+  sort: "asc" | "desc";
   totalSessions: number;
 
   onSearchChange: (value: string) => void;
   onStatusChange: (value: string) => void;
-  onSortChange: (value: string) => void;
+  onSortChange: (value: "asc" | "desc") => void;
 };
 
 export default function SessionFilters({

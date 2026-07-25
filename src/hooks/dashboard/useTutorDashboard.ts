@@ -15,11 +15,13 @@ export const UseTutorDashboard = (  search?: string,
 export const useTutorSessions = (
   search: string,
   status: string,
-  sort: string,
+  sort: "asc" | "desc",
+  page = 1,
+  limit = 5,
 ) => {
     return useQuery({
-        queryKey: ["tutorSessions", search, status, sort],
-        queryFn: () => getTutorSessions(search, status, sort),
+        queryKey: ["tutorSessions", search, status, sort, page, limit],
+        queryFn: () => getTutorSessions(search, status, sort, page, limit),
     })
 };
 

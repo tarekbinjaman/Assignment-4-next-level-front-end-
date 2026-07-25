@@ -20,12 +20,14 @@ export const getTutorDashboard = async (  search?: string,
 }
 
 
-export const getTutorSessions = async (search: string, status: string, sort: string) => {
+export const getTutorSessions = async (search: string, status: string, sort: string, page: number, limit: number) => {
     const response = await api.get("/dashboard/tutor/", {
         params: {
             search,
             status,
             sort,
+            page,
+            limit,
         }
     });
     return response?.data?.data;
