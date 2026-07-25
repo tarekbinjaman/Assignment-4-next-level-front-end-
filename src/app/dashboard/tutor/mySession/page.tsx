@@ -1,5 +1,5 @@
 "use client";
-import Pagination from "@/src/components/dashboard/tutor/my-sessions/Pagination";
+import Pagination from "@/src/components/pagination/Pagination";
 import SessionFilters from "@/src/components/dashboard/tutor/my-sessions/SessionFilters";
 import SessionHeader from "@/src/components/dashboard/tutor/my-sessions/SessionHeader";
 import SessionList from "@/src/components/dashboard/tutor/my-sessions/SessionList";
