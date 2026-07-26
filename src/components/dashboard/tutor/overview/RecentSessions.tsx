@@ -48,7 +48,7 @@ export default function RecentSessions({ sessions }: RecentSessionsProps) {
             You haven't conducted any tutoring sessions yet. Once students book
             sessions with you, they'll appear here.
           </p>
-          <Link href="/dashboard/tutor/mySession">
+          <Link href={`/dashboard/tutor/mySession/`}>
             <button className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25">
               View all Sessions
               <ArrowRight size={16} />
@@ -108,7 +108,7 @@ export default function RecentSessions({ sessions }: RecentSessionsProps) {
               >
                 {session.status}
               </span>
-
+            <Link href={`/dashboard/tutor/mySession/${session?.id}`}>            
               <Button
                 variant="outline"
                 size="sm"
@@ -117,6 +117,7 @@ export default function RecentSessions({ sessions }: RecentSessionsProps) {
                 <Eye className="mr-2 h-4 w-4" />
                 View Details
               </Button>
+            </Link>
             </div>
           </div>
         ))}

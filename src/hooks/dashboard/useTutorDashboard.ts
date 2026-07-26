@@ -1,9 +1,13 @@
-import { getTutorDashboard, getTutorSessions } from "@/src/services/dashboardService";
+import {
+  getTutorDashboard,
+  getTutorSessions,
+} from "@/src/services/dashboardService";
 import { updateTutorSessionsStatus } from "@/src/services/updateTutorSessionsStatus";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const UseTutorDashboard = (  search?: string,
+export const UseTutorDashboard = (
+  search?: string,
   status?: string,
   sort?: "asc" | "desc",
   page = 1,
@@ -22,15 +26,18 @@ export const useTutorSessions = (
   page = 1,
   limit = 5,
 ) => {
-    return useQuery({
-        queryKey: ["tutorSessions", search, status, sort, page, limit],
-        queryFn: () => getTutorSessions(search, status, sort, page, limit),
-    })
+  return useQuery({
+    queryKey: ["tutorSessions", search, status, sort, page, limit],
+    queryFn: () => {
+      console.log("Fetching sessions...");
+      return getTutorSessions(search, status, sort, page, limit);
+    },
+  });
 };
 
 export const useTutorSessionsByStatus = () => {
-const queryClient = useQueryClient();
-return useMutation({
+  const queryClient = useQueryClient();
+  return useMutation({
     mutationFn: ({
       sessionId,
       status,
@@ -38,13 +45,16 @@ return useMutation({
       sessionId: string;
       status: "ACCEPTED" | "CANCELLED" | "COMPLETED";
     }) => updateTutorSessionsStatus(sessionId, status),
-onSuccess: () => {
-  toast.success("Session status updated successfully");
-  queryClient.invalidateQueries({ queryKey: ["tutorSessions"] });
-  queryClient.invalidateQueries({ queryKey: ["tutorDashboard"] });
-},
-onError: (error: any) => {
-  toast.error(error?.response?.data?.message || "Failed to update session status");
-},
-});
+
+    onSuccess: (_, variables) => {
+      toast.success("Session status updated successfully");
+       queryClient.invalidateQueries({ queryKey: ["tutor-session-details", variables?.sessionId] });
+    },
+    
+    onError: (error: any) => {
+      toast.error(
+        error?.response?.data?.message || "Failed to update session status",
+      );
+    },
+  });
 };
