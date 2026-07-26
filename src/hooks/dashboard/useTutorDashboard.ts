@@ -5,10 +5,13 @@ import { toast } from "sonner";
 
 export const UseTutorDashboard = (  search?: string,
   status?: string,
-  sort?: "asc" | "desc") => {
+  sort?: "asc" | "desc",
+  page = 1,
+  limit = 5,
+) => {
   return useQuery({
-    queryKey: ["tutorDashboard", search, status, sort],
-    queryFn: () => getTutorDashboard(search, status, sort),
+    queryKey: ["tutorDashboard", search, status, sort, page, limit],
+    queryFn: () => getTutorDashboard(search, status, sort, page, limit),
   });
 };
 

@@ -2,24 +2,24 @@
 
 type Props = {
   search: string;
-  setSearch: (value: string) => void;
+  onSearchChange: (value: string) => void;
 
   sort: "asc" | "desc";
-  setSort: (value: "asc" | "desc") => void;
+  onSortChange: (value: "asc" | "desc") => void;
 };
 
 export default function HistoryFilters({
   search,
-  setSearch,
+  onSearchChange,
   sort,
-  setSort,
+  onSortChange,
 }: Props) {
   return (
     <div className="rounded-3xl border bg-white p-5 shadow-sm dark:bg-slate-900">
       <div className="grid gap-4 md:grid-cols-2">
         <input
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search student..."
           className="rounded-xl border px-4 py-3 outline-none focus:border-primary"
         />
@@ -27,7 +27,7 @@ export default function HistoryFilters({
         <select
           value={sort}
           onChange={(e) =>
-            setSort(e.target.value as "asc" | "desc")
+            onSortChange(e.target.value as "asc" | "desc")
           }
           className="rounded-xl border px-4 py-3 outline-none focus:border-primary"
         >
