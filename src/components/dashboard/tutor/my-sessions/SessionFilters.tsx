@@ -99,19 +99,23 @@ export default function SessionFilters({
         </div>
 
         {/* Total Sessions */}
-        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 transition-all hover:shadow-sm">
-          <p className="text-sm font-medium text-slate-500">
-            Total Sessions
-          </p>
+<div className="flex h-40 flex-col rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
 
-          <h2 className="mt-3 text-4xl font-bold text-primary">
-            {totalSessions}
-          </h2>
 
-          <p className="mt-2 text-xs text-slate-500">
-            Matching current filters
-          </p>
-        </div>
+  <div className="flex flex-1 flex-col items-center justify-center">
+<h2 className="relative inline-block text-5xl font-extrabold tracking-tight text-primary">
+  {totalSessions}
+
+  <span className="absolute -right-12 top-1 text-sm font-medium text-primary/40">
+    Sessions
+  </span>
+</h2>
+
+    <p className="mt-2 text-sm text-slate-500">
+      Matching current filters
+    </p>
+  </div>
+</div>
       </div>
     </section>
   );

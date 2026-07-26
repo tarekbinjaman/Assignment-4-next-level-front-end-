@@ -133,20 +133,11 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar>
+    <Sidebar className="mt-4">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
 
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href="/dashboard">
-                  <LayoutDashboard />
-                  <span>Dashboard</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
