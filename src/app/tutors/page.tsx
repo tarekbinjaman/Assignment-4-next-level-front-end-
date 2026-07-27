@@ -6,6 +6,7 @@ import TutorFilters from "@/src/components/tutorRoute/TutorFilters";
 import TutorSearch from "@/src/components/tutorRoute/TutorSearch";
 import { useTutors } from "@/src/hooks/tutor/useTutors";
 import { useDebounce } from "use-debounce";
+import Pagination from "@/src/components/pagination/Pagination";
 
 export default function Tutors() {
   const [category, setCategory] = useState("");
@@ -13,18 +14,42 @@ export default function Tutors() {
   const [showFilters, setShowFilters] = useState(false);
   const [availableDays, setAvailableDays] = useState<string[]>([]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const limit = 8;
 
-// using debounce
-const [debouncedSearch] = useDebounce(search, 500);
+  // using debounce
+  const [debouncedSearch] = useDebounce(search, 500);
 
-  const { data } = useTutors(category, sort, debouncedSearch, availableDays);
-  {console.log("Teachers Data", data)}
+  const { data } = useTutors(category, sort, debouncedSearch, availableDays, page, limit);
+  {
+    console.log("Teachers Data", data);
+  }
 
-  const tutors = data?.data || [];
+  const tutors = data?.data?.data || [];
 
-  // const filteredTutors = tutors.filter((tutor: any) =>
-  //   (tutor?.name ?? "").toLowerCase().includes(search.toLowerCase()),
-  // );
+  const handleSearch = (value: string) => {
+  setSearch(value);
+  setPage(1);
+};
+
+const handleCategoryChange = (value: string) => {
+  setCategory(value);
+  setPage(1);
+};
+
+const handleSortChange = (value: string) => {
+  setSort(value);
+  setPage(1);
+};
+
+const handleAvailableDaysChange = (days: string[]) => {
+  setAvailableDays(days);
+  setPage(1);
+};
+
+const handlePageChange = (page: number) => {
+  setPage(page);
+};
 
   return (
     <div className="p-6">
@@ -33,7 +58,7 @@ const [debouncedSearch] = useDebounce(search, 500);
         <h1 className="text-3xl text-nowrap font-bold  ">Find Your Tutor</h1>
 
         <div className="2xl:w-[1554px] xl:w-[1104px] xl:block hidden">
-          <TutorSearch value={search} onChange={setSearch} />
+          <TutorSearch value={search} onChange={handleSearch} />
         </div>
       </div>
 
@@ -47,7 +72,7 @@ const [debouncedSearch] = useDebounce(search, 500);
         </button>
         {/* visible in laptop, tablet,mobile */}
         <div className="xl:hidden lg:w-[875px] md:w-[620px] w-[410px] mb-5">
-          <TutorSearch value={search} onChange={setSearch} />
+          <TutorSearch value={search} onChange={handleSearch} />
         </div>
       </div>
 
@@ -56,11 +81,11 @@ const [debouncedSearch] = useDebounce(search, 500);
         <aside className="hidden xl:block w-64 shrink-0">
           <TutorFilters
             category={category}
-            setCategory={setCategory}
+            setCategory={handleCategoryChange}
             sort={sort}
-            setSort={setSort}
+            setSort={handleSortChange}
             availableDays={availableDays}
-            setAvailableDays={setAvailableDays}
+            setAvailableDays={handleAvailableDaysChange}
           />
         </aside>
 
@@ -75,11 +100,11 @@ const [debouncedSearch] = useDebounce(search, 500);
             <div className="absolute top-55 md:top-50 z-50 w-80 animate-in fade-in zoom-in-95 duration-200">
               <TutorFilters
                 category={category}
-                setCategory={setCategory}
+                setCategory={handleCategoryChange}
                 sort={sort}
-                setSort={setSort}
+                setSort={handleSortChange}
                 availableDays={availableDays}
-                setAvailableDays={setAvailableDays}
+                setAvailableDays={handleAvailableDaysChange}
               />
             </div>
           </>
@@ -93,7 +118,14 @@ const [debouncedSearch] = useDebounce(search, 500);
             ))}
           </div>
         </section>
+
       </div>
+        {/* pagination */}
+        <Pagination
+          page={data?.data?.pagination?.page}
+          totalPages={data?.data?.pagination.totalPages || 1}
+          onPageChange={handlePageChange}
+        />
     </div>
   );
 }

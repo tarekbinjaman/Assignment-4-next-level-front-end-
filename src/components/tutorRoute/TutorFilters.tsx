@@ -6,14 +6,15 @@ import { useState } from "react";
 
 type Props = {
   category: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  setCategory: (value: string) => void;
 
   sort: string;
-  setSort: React.Dispatch<React.SetStateAction<string>>;
+  setSort: (value: string) => void;
 
-  availableDays?: string[]; // ✅ optional to prevent undefined crash
-  setAvailableDays: React.Dispatch<React.SetStateAction<string[]>>;
+  availableDays: string[];
+  setAvailableDays: (days: string[]) => void;
 };
+
 
 export default function TutorFilters({
   category,
