@@ -13,7 +13,7 @@ export const useCreateReview = () => {
 
       // Refresh this tutor's reviews
       queryClient.invalidateQueries({
-        queryKey: ["reviews"],
+        queryKey: ["reviews", variables.bookingId],
       });
 
       // Refresh completed bookings

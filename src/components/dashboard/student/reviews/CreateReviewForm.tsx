@@ -7,12 +7,13 @@ import { useCreateReview } from "@/src/hooks/reviews/useCreateReview";
 type Props = {
   bookingId: string;
   tutorId: string;
+
+  review?: any;
+
+  onCancel?: () => void;
 };
 
-export default function CreateReviewForm({
-  bookingId,
-  tutorId,
-}: Props) {
+export default function CreateReviewForm({ bookingId, tutorId }: Props) {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
@@ -34,9 +35,7 @@ export default function CreateReviewForm({
 
   return (
     <div className="rounded-3xl border bg-white p-6 shadow-sm">
-      <h3 className="text-xl font-semibold">
-        Leave a Review
-      </h3>
+      <h3 className="text-xl font-semibold">Leave a Review</h3>
 
       {/* Rating */}
       <div className="mt-6">
@@ -44,11 +43,7 @@ export default function CreateReviewForm({
 
         <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => setRating(item)}
-            >
+            <button key={item} type="button" onClick={() => setRating(item)}>
               <Star
                 size={28}
                 className={
@@ -64,9 +59,7 @@ export default function CreateReviewForm({
 
       {/* Comment */}
       <div className="mt-6">
-        <label className="mb-2 block font-medium">
-          Comment
-        </label>
+        <label className="mb-2 block font-medium">Comment</label>
 
         <textarea
           rows={5}

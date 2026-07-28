@@ -5,6 +5,7 @@ import BookingNotesCard from "@/src/components/dashboard/student/mybooking/view/
 import BookingSessionCard from "@/src/components/dashboard/student/mybooking/view/BookingSessionCard";
 import BookingTutorCard from "@/src/components/dashboard/student/mybooking/view/BookingTutorCard";
 import CreateReviewForm from "@/src/components/dashboard/student/reviews/CreateReviewForm";
+import ReviewSection from "@/src/components/dashboard/student/reviews/ReviewSection";
 import { useSingleBooking } from "@/src/hooks/booking/useSingleBooking";
 import { useParams } from "next/navigation";
 
@@ -36,9 +37,12 @@ export default function BookingDetailsPage() {
       {/* Actions */}
       <BookingActions data={booking} />
 
-      {status === "COMPLETED" && (
-        <CreateReviewForm bookingId={booking?.id} tutorId={booking?.tutorId} />
-      )}
+{status === "COMPLETED" && (
+  <ReviewSection
+    bookingId={booking.id}
+    tutorId={booking.tutorId}
+  />
+)}
     </div>
   );
 }
