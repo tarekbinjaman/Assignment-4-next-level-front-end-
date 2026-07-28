@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import BookingActions from "@/src/components/dashboard/student/mybooking/view/BookingActions";
 import BookingHero from "@/src/components/dashboard/student/mybooking/view/BookingHero";
 import BookingNotesCard from "@/src/components/dashboard/student/mybooking/view/BookingNotesCard";
@@ -9,14 +9,12 @@ import { useSingleBooking } from "@/src/hooks/booking/useSingleBooking";
 import { useParams } from "next/navigation";
 
 export default function BookingDetailsPage() {
-      const params = useParams();
+  const params = useParams();
 
-  const { data: booking, isPending } = useSingleBooking(
-    params.id as string
-  );
+  const { data: booking, isPending } = useSingleBooking(params.id as string);
 
   const status = booking?.status;
-  console.log("THis is single booking from single booking page", booking)
+  console.log("THis is single booking from single booking page", booking);
 
   if (isPending) {
     return <div>Loading...</div>;
@@ -39,11 +37,8 @@ export default function BookingDetailsPage() {
       <BookingActions data={booking} />
 
       {status === "COMPLETED" && (
-  <CreateReviewForm
-    bookingId={booking?.id}
-    tutorId={booking?.tutorId}
-  />
-)}
+        <CreateReviewForm bookingId={booking?.id} tutorId={booking?.tutorId} />
+      )}
     </div>
   );
 }
