@@ -31,6 +31,11 @@ export const createReview = async (data: CreateReviewPayload) => {
   return res.data;
 };
 
+export const getBookingReview = async (bookingId: string) => {
+  const res = await api.get(`/reviews/booking/${bookingId}`);
+  return res.data;
+};
+
 // Update review
 export const updateReview = async (id, data) => {
   const res = await api.patch(`/reviews/${id}`, data);
