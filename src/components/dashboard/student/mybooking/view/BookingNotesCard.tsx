@@ -1,6 +1,6 @@
 import { StickyNote } from "lucide-react";
 
-export default function BookingNotesCard() {
+export default function BookingNotesCard({data}) {
   const notes =
     "I want to learn web development!";
 
@@ -12,9 +12,9 @@ export default function BookingNotesCard() {
       </div>
 
       <div className="rounded-lg bg-muted/40 p-4">
-        {notes ? (
+        {data ? (
           <p className="leading-7 text-muted-foreground">
-            {notes}
+            {data}
           </p>
         ) : (
           <p className="italic text-muted-foreground">

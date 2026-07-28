@@ -1,6 +1,6 @@
 import { BriefcaseBusiness, GraduationCap, Wallet } from "lucide-react";
 
-export default function BookingTutorCard() {
+export default function BookingTutorCard({ data }) {
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
       <h2 className="mb-6 text-xl font-semibold">Tutor Information</h2>
@@ -11,7 +11,7 @@ export default function BookingTutorCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Education</p>
-            <p className="font-medium">PhD</p>
+            <p className="font-medium">{data?.education}</p>
           </div>
         </div>
 
@@ -20,7 +20,7 @@ export default function BookingTutorCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Experience</p>
-            <p className="font-medium">5 Years</p>
+            <p className="font-medium">{data?.experience} Years</p>
           </div>
         </div>
 
@@ -29,7 +29,7 @@ export default function BookingTutorCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Hourly Rate</p>
-            <p className="font-medium">$53/hr</p>
+            <p className="font-medium">${data?.hourlyRate}/hr</p>
           </div>
         </div>
       </div>

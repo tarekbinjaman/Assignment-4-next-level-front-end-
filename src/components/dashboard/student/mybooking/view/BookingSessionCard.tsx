@@ -6,7 +6,24 @@ import {
   BookOpen,
 } from "lucide-react";
 
-export default function BookingSessionCard() {
+export default function BookingSessionCard({ data }) {
+  const formattedDate = new Date(data?.date).toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const formatTime = (time: string) => {
+    const [hour, minute] = time.split(":").map(Number);
+
+    return new Date(0, 0, 0, hour, minute).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
       <h2 className="mb-6 text-xl font-semibold">Session Details</h2>
@@ -17,7 +34,7 @@ export default function BookingSessionCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Date</p>
-            <p className="font-medium">Tuesday, July 28, 2026</p>
+            <p className="font-medium">{formattedDate}</p>
           </div>
         </div>
 
@@ -26,7 +43,9 @@ export default function BookingSessionCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Time</p>
-            <p className="font-medium">7:00 AM - 8:00 AM</p>
+            <p className="font-medium">
+              {formatTime(data?.startTime)} - {formatTime(data?.endTime)}
+            </p>
           </div>
         </div>
 
@@ -35,7 +54,7 @@ export default function BookingSessionCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Duration</p>
-            <p className="font-medium">60 Minutes</p>
+            <p className="font-medium">{data?.duration} Minutes</p>
           </div>
         </div>
 
@@ -44,7 +63,7 @@ export default function BookingSessionCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Total Price</p>
-            <p className="font-medium">$53</p>
+            <p className="font-medium">${data?.totalPrice}</p>
           </div>
         </div>
 
@@ -53,7 +72,9 @@ export default function BookingSessionCard() {
 
           <div>
             <p className="text-sm text-muted-foreground">Subject</p>
-            <p className="font-medium">Cyber Security</p>
+            <p className="font-medium">
+              {data?.tutor?.categories?.[0]?.name}
+            </p>
           </div>
         </div>
       </div>

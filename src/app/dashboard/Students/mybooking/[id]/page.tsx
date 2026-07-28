@@ -22,19 +22,19 @@ export default function BookingDetailsPage() {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8 space-y-6">
       {/* Hero */}
-      <BookingHero />
+      <BookingHero data={booking} />
 
       {/* Session */}
-      <BookingSessionCard />
+      <BookingSessionCard data={booking} />
 
       {/* Tutor */}
-      <BookingTutorCard />
+      <BookingTutorCard data={booking?.tutor} />
 
       {/* Notes */}
-      <BookingNotesCard />
+      <BookingNotesCard data={booking?.notes} />
 
       {/* Actions */}
-      <BookingActions />
+      <BookingActions status={booking?.status} />
     </div>
   );
 }

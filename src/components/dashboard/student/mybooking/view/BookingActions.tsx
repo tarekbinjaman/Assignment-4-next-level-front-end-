@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Star, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function BookingActions() {
-  const status = "PENDING";
+export default function BookingActions({status}) {
+  // const status = "PENDING";
 
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
