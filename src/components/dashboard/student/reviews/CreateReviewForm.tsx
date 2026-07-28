@@ -46,6 +46,8 @@ export default function CreateReviewForm({
       updateReview.mutate(
         {
           id: review.id,
+          bookingId,
+          tutorId,
           data: {
             rating,
             comment,
