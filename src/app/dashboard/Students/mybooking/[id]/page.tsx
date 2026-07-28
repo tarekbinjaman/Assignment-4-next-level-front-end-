@@ -4,6 +4,7 @@ import BookingHero from "@/src/components/dashboard/student/mybooking/view/Booki
 import BookingNotesCard from "@/src/components/dashboard/student/mybooking/view/BookingNotesCard";
 import BookingSessionCard from "@/src/components/dashboard/student/mybooking/view/BookingSessionCard";
 import BookingTutorCard from "@/src/components/dashboard/student/mybooking/view/BookingTutorCard";
+import CreateReviewForm from "@/src/components/dashboard/student/reviews/CreateReviewForm";
 import { useSingleBooking } from "@/src/hooks/booking/useSingleBooking";
 import { useParams } from "next/navigation";
 
@@ -14,6 +15,7 @@ export default function BookingDetailsPage() {
     params.id as string
   );
 
+  const status = booking?.status;
   console.log("THis is single booking from single booking page", booking)
 
   if (isPending) {
@@ -34,7 +36,14 @@ export default function BookingDetailsPage() {
       <BookingNotesCard data={booking?.notes} />
 
       {/* Actions */}
-      <BookingActions status={booking?.status} />
+      <BookingActions data={booking} />
+
+      {status === "COMPLETED" && (
+  <CreateReviewForm
+    bookingId={booking?.id}
+    tutorId={booking?.tutorId}
+  />
+)}
     </div>
   );
 }

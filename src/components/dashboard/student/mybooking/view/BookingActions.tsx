@@ -2,8 +2,10 @@ import Link from "next/link";
 import { ArrowRight, Star, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function BookingActions({status}) {
-  // const status = "PENDING";
+export default function BookingActions({data}) {
+  const status = data?.status;
+
+  console.log("What is the status then", data)
 
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
@@ -27,12 +29,6 @@ export default function BookingActions({status}) {
           </Button>
         )}
 
-        {status === "COMPLETED" && (
-          <Button className="flex-1">
-            <Star className="mr-2 h-4 w-4" />
-            Leave Review
-          </Button>
-        )}
       </div>
     </div>
   );
