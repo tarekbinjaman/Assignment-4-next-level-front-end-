@@ -37,12 +37,11 @@ export default function BookingDetailsPage() {
       {/* Actions */}
       <BookingActions data={booking} />
 
-{status === "COMPLETED" && (
-  <ReviewSection
-    bookingId={booking.id}
-    tutorId={booking.tutorId}
-  />
-)}
+      {/* Review */}
+      <h1>Review</h1>
+      {status === "COMPLETED" && (
+        <ReviewSection bookingId={booking.id} tutorId={booking.tutorId} />
+      )}
     </div>
   );
 }
