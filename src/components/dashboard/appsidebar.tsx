@@ -133,7 +133,7 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar className="mt-4">
+    <Sidebar>
       <SidebarContent>
         <SidebarGroup>
 
