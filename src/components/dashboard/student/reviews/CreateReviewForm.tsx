@@ -1,41 +1,82 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useCreateReview } from "@/src/hooks/reviews/useCreateReview";
+import { useUpdateReview } from "@/src/hooks/reviews/useUpdateReview";
 
 type Props = {
   bookingId: string;
   tutorId: string;
 
-  review?: any;
+  review?: {
+    id: string;
+    rating: number;
+    comment: string;
+  };
 
   onCancel?: () => void;
 };
 
-export default function CreateReviewForm({ bookingId, tutorId }: Props) {
-  const [rating, setRating] = useState(5);
-  const [comment, setComment] = useState("");
+export default function CreateReviewForm({
+  bookingId,
+  tutorId,
+  review,
+  onCancel,
+}: Props) {
+  const [rating, setRating] = useState(review?.rating ?? 5);
+  const [comment, setComment] = useState(review?.comment ?? "");
 
-  const { mutate, isPending } = useCreateReview();
+  const createReview = useCreateReview();
+  const updateReview = useUpdateReview();
+
+  // Update form values whenever review changes
+  useEffect(() => {
+    if (review) {
+      setRating(review.rating);
+      setComment(review.comment);
+    }
+  }, [review]);
 
   const handleSubmit = () => {
     if (!comment.trim()) return;
 
-    mutate({
+    if (review) {
+      updateReview.mutate(
+        {
+          id: review.id,
+          data: {
+            rating,
+            comment,
+          },
+        },
+        {
+          onSuccess: () => {
+            onCancel?.();
+          },
+        }
+      );
+
+      return;
+    }
+
+    createReview.mutate({
       bookingId,
       tutorId,
       rating,
       comment,
     });
-
-    setComment("");
-    setRating(5);
   };
+
+  const isPending =
+    createReview.isPending || updateReview.isPending;
 
   return (
     <div className="rounded-3xl border bg-white p-6 shadow-sm">
-      <h3 className="text-xl font-semibold">Leave a Review</h3>
+      <h3 className="text-xl font-semibold">
+        {review ? "Edit Review" : "Leave a Review"}
+      </h3>
 
       {/* Rating */}
       <div className="mt-6">
@@ -43,7 +84,11 @@ export default function CreateReviewForm({ bookingId, tutorId }: Props) {
 
         <div className="flex gap-2">
           {[1, 2, 3, 4, 5].map((item) => (
-            <button key={item} type="button" onClick={() => setRating(item)}>
+            <button
+              key={item}
+              type="button"
+              onClick={() => setRating(item)}
+            >
               <Star
                 size={28}
                 className={
@@ -59,7 +104,9 @@ export default function CreateReviewForm({ bookingId, tutorId }: Props) {
 
       {/* Comment */}
       <div className="mt-6">
-        <label className="mb-2 block font-medium">Comment</label>
+        <label className="mb-2 block font-medium">
+          Comment
+        </label>
 
         <textarea
           rows={5}
@@ -70,13 +117,29 @@ export default function CreateReviewForm({ bookingId, tutorId }: Props) {
         />
       </div>
 
-      <button
-        onClick={handleSubmit}
-        disabled={isPending}
-        className="mt-6 rounded-xl bg-primary px-6 py-3 text-white disabled:opacity-50"
-      >
-        {isPending ? "Submitting..." : "Submit Review"}
-      </button>
+      {/* Buttons */}
+      <div className="mt-6 flex gap-3">
+        {review && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
+        )}
+
+        <Button
+          onClick={handleSubmit}
+          disabled={isPending}
+        >
+          {isPending
+            ? "Saving..."
+            : review
+            ? "Update Review"
+            : "Submit Review"}
+        </Button>
+      </div>
     </div>
   );
 }
