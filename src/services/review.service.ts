@@ -18,8 +18,15 @@ export const getTutorReviews = async (tutorId) => {
   return res.data;
 };
 
+type CreateReviewPayload = {
+  bookingId: string;
+  tutorId: string;
+  rating: number;
+  comment: string;
+};
+
 // Create review
-export const createReview = async (data) => {
+export const createReview = async (data: CreateReviewPayload) => {
   const res = await api.post("/reviews", data);
   return res.data;
 };
