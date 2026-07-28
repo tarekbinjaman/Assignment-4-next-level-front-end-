@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import BookingStatusBadge from "./BookingStatusBadge";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function BookingCard({ booking }: any) {
+  console.log("Booking data from my booking route", booking)
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm">
       <div className="flex justify-between items-start">
@@ -65,6 +68,11 @@ export default function BookingCard({ booking }: any) {
           <p>{booking.notes}</p>
         </div>
       )}
+      <div className="flex justify-end">
+        <Link href={`/dashboard/Students/mybooking/${booking?.id}`}>
+        <Button className="px-4">view</Button>
+        </Link>
+      </div>
     </div>
   );
 }

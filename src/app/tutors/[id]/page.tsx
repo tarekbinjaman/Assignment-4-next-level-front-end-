@@ -37,15 +37,18 @@ export default function TutorProfilePage() {
         {/* Left Content */}
         <div className="space-y-8 lg:col-span-2">
           <TutorAbout tutor={tutor} />
-          <TutorReviews tutorId={tutor.id} />
         </div>
-
         {/* Right Sidebar */}
         <TutorPricingCard
           setOpenBookingModal={setOpenBookingModal}
           tutor={tutor}
         />
       </div>
+      
+      {/* Tutor reviews */}
+      <TutorReviews tutorId={tutor.id} />
+
+      {/* Booking modal */}
       <BookingModal
         open={openBookingModal}
         onOpenChange={setOpenBookingModal}

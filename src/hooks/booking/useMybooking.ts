@@ -7,3 +7,7 @@ export const useMybooking = () => {
         queryFn: getMybooking,
     });
 };
+
+// export const useSingleBooking = (id) => {
+
+// }
