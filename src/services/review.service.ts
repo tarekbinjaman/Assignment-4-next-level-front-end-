@@ -13,7 +13,7 @@ export const getSingleReview = async (id) => {
 };
 
 // Get reviews for a tutor
-export const getTutorReviews = async (tutorId) => {
+export const getTutorReviews = async (tutorId: string) => {
   const res = await api.get(`/reviews/tutor/${tutorId}`);
   return res.data;
 };

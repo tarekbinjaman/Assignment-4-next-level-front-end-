@@ -27,6 +27,8 @@ export default function TutorProfilePage() {
     );
   }
 
+  console.log("data from single tutro page", data)
+
   const tutor = data.data;
 
   return (
@@ -46,7 +48,7 @@ export default function TutorProfilePage() {
       </div>
       
       {/* Tutor reviews */}
-      <TutorReviews tutorId={tutor.id} />
+      <TutorReviews tutorId={tutor?.id} />
 
       {/* Booking modal */}
       <BookingModal

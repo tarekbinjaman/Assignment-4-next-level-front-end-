@@ -24,11 +24,17 @@ export default function TutorReviews({
     );
   }
 
-  const reviews = data?.data || [];
+  const reviews = data?.data?.reviews || [];
+const average = data?.data?.averageRating ?? 0;
+const totalReviews = data?.data?.totalReviews ?? 0;
+
+  console.log("THis is review data from sigle tutor route", reviews, average, totalReviews)
+  console.log("average:", average);
+console.log("typeof average:", typeof average);
 
   const filteredReviews = reviews
     .filter((review) =>
-      review.studentName
+      review.user.name
         .toLowerCase()
         .includes(search.toLowerCase())
     )
@@ -47,13 +53,6 @@ export default function TutorReviews({
       );
     });
 
-  const average =
-    reviews.length > 0
-      ? (
-          reviews.reduce((acc, r) => acc + r.rating, 0) /
-          reviews.length
-        ).toFixed(1)
-      : "0.0";
 
   return (
     <section className="space-y-8 mt-4">
