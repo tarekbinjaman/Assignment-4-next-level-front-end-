@@ -49,6 +49,7 @@ export const useTutorSessionsByStatus = () => {
     onSuccess: (_, variables) => {
       toast.success("Session status updated successfully");
        queryClient.invalidateQueries({ queryKey: ["tutor-session-details","tutorSessions", variables?.sessionId] });
+       queryClient.invalidateQueries({ queryKey: ["tutorSessions"] });
     },
     
     onError: (error: any) => {
