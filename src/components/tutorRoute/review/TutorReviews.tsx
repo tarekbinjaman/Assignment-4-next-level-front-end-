@@ -4,15 +4,18 @@ import { Star, Search, Filter } from "lucide-react";
 import { useState } from "react";
 import { useTutorReviews } from "@/src/hooks/reviews/useTutorReviews";
 import ReviewCard from "./ReviewCard";
+import { useDebounce } from "use-debounce";
 
 export default function TutorReviews({
   tutorId,
 }: {
   tutorId: string;
 }) {
-  const { data, isLoading } = useTutorReviews(tutorId);
-
-  const [search, setSearch] = useState("");
+  
+    const [search, setSearch] = useState("");
+      // using debounce
+      const [debouncedSearch] = useDebounce(search, 500);
+  const { data, isLoading } = useTutorReviews(tutorId, sort, search, rating);
   const [rating, setRating] = useState("ALL");
   const [sort, setSort] = useState("Newest");
 
