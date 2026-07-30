@@ -60,12 +60,7 @@ export default function ReviewFilters({
             Rating
           </label>
 
-          <Select
-            value={rating || "ALL"}
-            onValueChange={(value) =>
-              onRatingChange(value === "ALL" ? "" : value)
-            }
-          >
+          <Select value={rating} onValueChange={onRatingChange}>
             <SelectTrigger className="w-full rounded-xl">
               <SelectValue placeholder="All Ratings" />
             </SelectTrigger>
@@ -93,10 +88,9 @@ export default function ReviewFilters({
             </SelectTrigger>
 
             <SelectContent>
-              <SelectItem value="desc">Newest First</SelectItem>
-              <SelectItem value="asc">Oldest First</SelectItem>
-              <SelectItem value="highest">Highest Rating</SelectItem>
-              <SelectItem value="lowest">Lowest Rating</SelectItem>
+              <SelectItem value="Newest">Newest</SelectItem>
+              <SelectItem value="Highest">Highest Rating</SelectItem>
+              <SelectItem value="Lowest">Lowest Rating</SelectItem>
             </SelectContent>
           </Select>
         </div>

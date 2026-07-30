@@ -4,22 +4,24 @@ import ReviewCard from "./ReviewCard";
 
 type Review = {
   id: string;
-  studentName: string;
-  studentImage?: string;
-  category: string;
   rating: number;
   comment: string;
-  date: string;
+  createdAt: string;
+  user: {
+    id: string;
+    name: string;
+    image?: string;
+  };
 };
 
 type ReviewListProps = {
-  reviews: Review[];
+  data?: Review[];
 };
 
 export default function ReviewList({
-  reviews,
+  data = [],
 }: ReviewListProps) {
-  if (reviews.length === 0) {
+  if (data.length === 0) {
     return (
       <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center shadow-sm dark:border-slate-700 dark:bg-slate-900">
         <h3 className="text-xl font-semibold">
@@ -35,7 +37,7 @@ export default function ReviewList({
 
   return (
     <div className="space-y-6">
-      {reviews.map((review) => (
+      {data.map((review) => (
         <ReviewCard
           key={review.id}
           review={review}

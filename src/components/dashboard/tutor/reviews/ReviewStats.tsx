@@ -1,55 +1,36 @@
 "use client";
 
-import {
-  Star,
-  MessageSquare,
-  TrendingUp,
-  Award,
-} from "lucide-react";
+import { Star, MessageSquare } from "lucide-react";
 
 type ReviewStatsProps = {
   stats: {
     averageRating: number;
     totalReviews: number;
-    positiveReviews: number;
-    monthlyRating: number;
   };
 };
 
-export default function ReviewStats({ stats }: ReviewStatsProps) {
+export default function ReviewStats({
+  stats,
+}: ReviewStatsProps) {
   const cards = [
     {
       title: "Average Rating",
-      value: stats.averageRating.toFixed(1),
+      value: (stats.averageRating ?? 0).toFixed(1),
       icon: Star,
       color: "text-yellow-500",
       bg: "bg-yellow-100 dark:bg-yellow-900/30",
     },
     {
       title: "Total Reviews",
-      value: stats.totalReviews,
+      value: stats.totalReviews ?? 0,
       icon: MessageSquare,
       color: "text-blue-500",
       bg: "bg-blue-100 dark:bg-blue-900/30",
     },
-    {
-      title: "Positive Reviews",
-      value: `${stats.positiveReviews}%`,
-      icon: TrendingUp,
-      color: "text-green-500",
-      bg: "bg-green-100 dark:bg-green-900/30",
-    },
-    {
-      title: "This Month",
-      value: stats.monthlyRating.toFixed(1),
-      icon: Award,
-      color: "text-purple-500",
-      bg: "bg-purple-100 dark:bg-purple-900/30",
-    },
   ];
 
   return (
-    <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <section className="grid gap-6 sm:grid-cols-2">
       {cards.map((card) => {
         const Icon = card.icon;
 
