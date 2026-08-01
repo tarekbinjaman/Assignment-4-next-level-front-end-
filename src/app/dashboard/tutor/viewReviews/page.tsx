@@ -33,7 +33,7 @@ export default function ViewReviews() {
   const totalReviews = data?.data?.totalReviews ?? 0;
 
   console.log("all in one", {reviews, averageRating, totalReviews, tutorId, data})
-
+  console.log("Search, rating, sort", search, rating, sort)
   return (
     <div className="space-y-8">
       <ReviewHeader />
