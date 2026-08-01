@@ -20,6 +20,12 @@ export const useCreateReview = () => {
       queryClient.invalidateQueries({
         queryKey: ["studentBookings"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["booking", variables?.bookingId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["bookingReview", variables?.bookingId],
+      });
     },
 
     onError: (error: any) => {

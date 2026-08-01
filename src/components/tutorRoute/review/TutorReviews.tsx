@@ -72,7 +72,7 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
           <div className="flex items-center justify-center gap-2">
             <Star className="fill-yellow-400 text-yellow-400" size={24} />
 
-            <span className="text-3xl font-bold">{average}</span>
+            <span className="text-3xl font-bold">{average.toFixed(1)}</span>
           </div>
 
           <p className="mt-1 text-sm text-slate-500">

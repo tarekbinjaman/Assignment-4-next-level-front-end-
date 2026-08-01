@@ -27,7 +27,9 @@ export const useUpdateReview = () => {
       queryClient.invalidateQueries({
         queryKey: ["reviews", variables.tutorId],
       });
-
+            queryClient.invalidateQueries({
+        queryKey: ["booking", variables?.bookingId],
+      });
       // Single review (if used anywhere)
       queryClient.invalidateQueries({
         queryKey: ["review", variables.id],
