@@ -1,5 +1,5 @@
 "use client";
-
+import { AnimatePresence, motion } from "framer-motion";
 import SessionCard from "./SessionCard";
 
 type Session = {
@@ -35,12 +35,26 @@ export default function SessionList({ sessions }: Props) {
 
   return (
     <div className="space-y-5">
-      {sessions?.map((session) => (
-        <SessionCard
-          key={session?.id}
-          session={session}
-        />
-      ))}
+<AnimatePresence mode="popLayout">
+  {sessions.map((session) => (
+    <motion.div
+      key={session.id}
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{
+        opacity: 0,
+        y: -20,
+        scale: 0.95,
+        transition: {
+          duration: 0.3,
+        },
+      }}
+    >
+      <SessionCard session={session} />
+    </motion.div>
+  ))}
+</AnimatePresence>
     </div>
   );
 }
