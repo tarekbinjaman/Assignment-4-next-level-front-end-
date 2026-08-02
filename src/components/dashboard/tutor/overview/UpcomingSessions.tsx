@@ -1,5 +1,6 @@
 "use client";
 
+import Pagination from "@/src/components/pagination/Pagination";
 import { ArrowRight, BookOpen, Calendar, Clock3, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,10 +18,19 @@ type NextSession = {
 };
 
 type UpcomingSessionsProps = {
-  sessions: NextSession[] | null;
+    sessions: NextSession[];
+  pagination?: {
+    page: number;
+    totalPages: number;
+  };
+  onPageChange: (page: number) => void;
 };
 
-export default function UpcomingSessions({ sessions }: UpcomingSessionsProps) {
+export default function UpcomingSessions({
+  sessions,
+  pagination,
+  onPageChange,
+}: UpcomingSessionsProps) {
   if (!sessions?.length) {
     return (
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -153,6 +163,13 @@ export default function UpcomingSessions({ sessions }: UpcomingSessionsProps) {
           </div>
         ))}
       </div>
+      {pagination && (
+  <Pagination
+    page={pagination.page}
+    totalPages={pagination.totalPages}
+    onPageChange={onPageChange}
+  />
+)}
     </section>
   );
 }

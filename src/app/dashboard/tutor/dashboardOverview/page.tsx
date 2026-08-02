@@ -6,9 +6,12 @@ import Header from "@/src/components/dashboard/tutor/overview/TutorHeader";
 import TutorStats from "@/src/components/dashboard/tutor/overview/TutorStats";
 import UpcomingSessions from "@/src/components/dashboard/tutor/overview/UpcomingSessions";
 import { UseTutorDashboard } from "@/src/hooks/dashboard/useTutorDashboard";
+import { useState } from "react";
 
 export default function DashboardOverview() {
-  const { data, isLoading } = UseTutorDashboard();
+  const [nextPage, setNextPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading } = UseTutorDashboard({ nextPage, nextLimit: limit });
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -28,8 +31,11 @@ export default function DashboardOverview() {
         }}
       />
       {/* =============session card============= */}
-      <UpcomingSessions sessions={data?.nextSession ?? null} />
-      
+      <UpcomingSessions
+        sessions={data?.nextSession ?? []}
+        pagination={data?.nextSessionPagination}
+        onPageChange={setNextPage}
+      />
 
       {/* ============Recent sesssion============= */}
       <RecentSessions sessions={data?.recentSessions ?? null} />

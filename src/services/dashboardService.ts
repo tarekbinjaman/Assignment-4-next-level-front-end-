@@ -8,7 +8,7 @@ export const getStudentDashboard = async () => {
 
 export const getTutorDashboard = async (  search?: string,
   status?: string,
-  sort?: "asc" | "desc", page = 1, limit = 5) => {
+  sort?: "asc" | "desc", page = 1, limit = 5, nextPage = 1, nextLimit = 5) => {
     const response = await api.get("/dashboard/tutor", {
         params: {
             search,
@@ -16,6 +16,8 @@ export const getTutorDashboard = async (  search?: string,
             sort,
             page,
             limit,
+            nextPage,
+            nextLimit,
         }
     });
     return response?.data?.data;
