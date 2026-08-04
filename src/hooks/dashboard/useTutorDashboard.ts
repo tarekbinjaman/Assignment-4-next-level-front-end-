@@ -42,7 +42,7 @@ export const useTutorSessions = (
   return useQuery({
     queryKey: ["tutorSessions", search, status, sort, page, limit],
     queryFn: () => {
-      console.log("Fetching sessions...");
+      console.log("Fetching sessions... for all session");
       return getTutorSessions(search, status, sort, page, limit);
     },
   });

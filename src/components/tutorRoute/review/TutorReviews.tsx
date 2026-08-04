@@ -123,8 +123,8 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
 
       {/* Review List */}
       <div className="space-y-5">
-        {filteredReviews.length > 0 ? (
-          filteredReviews.map((review) => (
+        {reviews.length > 0 ? (
+          reviews.map((review) => (
             <ReviewCard key={review.id} review={review} />
           ))
         ) : (

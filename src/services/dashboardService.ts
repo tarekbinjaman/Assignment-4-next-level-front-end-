@@ -34,5 +34,6 @@ export const getTutorSessions = async (search: string, status: string, sort: str
             limit,
         }
     });
+    console.log("checking my session fetcihng", response?.data?.data);
     return response?.data?.data;
 }
