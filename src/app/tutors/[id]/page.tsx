@@ -17,7 +17,11 @@ export default function TutorProfilePage() {
   const { id } = useParams();
 
   const { data, isLoading, isError } = useSingleTutor(id as string);
-
+  
+  
+    // pagination states
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(5);
   if (isLoading) {
     return <div className="container mx-auto px-4 py-20">Loading...</div>;
   }
@@ -27,10 +31,6 @@ export default function TutorProfilePage() {
       <div className="container mx-auto px-4 py-20">Something went wrong.</div>
     );
   }
-
-  // pagination states
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
 
   const tutor = data.data;
 
