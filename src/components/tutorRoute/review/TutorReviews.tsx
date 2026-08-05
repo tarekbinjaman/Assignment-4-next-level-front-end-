@@ -5,8 +5,9 @@ import { useState } from "react";
 import { useTutorReviews } from "@/src/hooks/reviews/useTutorReviews";
 import ReviewCard from "./ReviewCard";
 import { useDebounce } from "use-debounce";
+import Pagination from "../../pagination/Pagination";
 
-export default function TutorReviews({ tutorId }: { tutorId: string }) {
+export default function TutorReviews({ tutorId, page, setPage, limit }: { tutorId: string; page: number; setPage: (page: number) => void; limit: number }) {
   const [search, setSearch] = useState("");
   // using debounce
   const [debouncedSearch] = useDebounce(search, 500);
@@ -17,6 +18,8 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
     sort,
     debouncedSearch,
     rating,
+    page,
+    limit
   );
 
   if (isLoading) {
@@ -30,29 +33,21 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
   const reviews = data?.data?.reviews || [];
   const average = data?.data?.averageRating ?? 0;
   const totalReviews = data?.data?.totalReviews ?? 0;
-
+  const currentPage = data?.data?.currentPage ?? 1;
+  const totalPages = data?.data?.totalPages ?? 1;
+  const totalItem = data?.data?.totalItem ?? 0;
   console.log(
     "THis is review data from sigle tutor route",
-    reviews,
-    average,
-    totalReviews,
+data?.data,
+totalReviews,
+totalItem,
+totalPages,
+currentPage
   );
-  console.log("average:", average);
-  console.log("typeof average:", typeof average);
-
-  const filteredReviews = reviews
-    .filter((review) =>
-      review.user.name.toLowerCase().includes(search.toLowerCase()),
-    )
-    .filter((review) =>
-      rating === "ALL" ? true : review.rating === Number(rating),
-    )
-    .sort((a, b) => {
-      if (sort === "Highest") return b.rating - a.rating;
-      if (sort === "Lowest") return a.rating - b.rating;
-
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
+const handleSearchChnage = (value: string) => {
+  setSearch(value);
+  setPage(1); // Reset to first page when search changes
+}
 
   return (
     <section className="space-y-8 mt-4">
@@ -89,7 +84,7 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
 
           <input
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleSearchChnage(e.target.value)}
             placeholder="Search student..."
             className="w-full rounded-xl border py-2.5 pl-10 pr-3 outline-none focus:border-primary"
           />
@@ -139,6 +134,8 @@ export default function TutorReviews({ tutorId }: { tutorId: string }) {
           </div>
         )}
       </div>
+
+      <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
     </section>
   );
 }

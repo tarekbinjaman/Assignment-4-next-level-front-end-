@@ -10,6 +10,7 @@ import TutorReviews from "@/src/components/tutorRoute/review/TutorReviews";
 import { useState } from "react";
 import BookingModal from "@/src/components/booking/BookingModal";
 
+
 export default function TutorProfilePage() {
   const [openBookingModal, setOpenBookingModal] = useState(false);
 
@@ -27,7 +28,9 @@ export default function TutorProfilePage() {
     );
   }
 
-  console.log("data from single tutro page", data)
+  // pagination states
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
 
   const tutor = data.data;
 
@@ -48,7 +51,9 @@ export default function TutorProfilePage() {
       </div>
       
       {/* Tutor reviews */}
-      <TutorReviews tutorId={tutor?.id} />
+      <TutorReviews tutorId={tutor?.id} page={page} setPage={setPage} limit={limit} />
+
+      {/* pagination */}
 
       {/* Booking modal */}
       <BookingModal
