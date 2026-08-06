@@ -14,13 +14,13 @@ export default function HistoryPage() {
   const [sort, setSort] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const limit = 5;
-  const { data, isLoading } = UseTutorDashboard(
-    debouncedSearch,
-    "COMPLETED,CANCELLED",
+  const { data, isLoading } = UseTutorDashboard({
+    search: debouncedSearch,
+    status: "COMPLETED,CANCELLED",
     sort,
     page,
-    limit,
-  );
+    limit
+  });
   if (isLoading) {
     return <p>Loading...</p>;
   }
