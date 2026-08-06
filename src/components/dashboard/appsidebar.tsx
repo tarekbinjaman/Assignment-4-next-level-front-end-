@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import {   LayoutDashboard,
+import {
+  LayoutDashboard,
   UserPen,
   CalendarCheck,
   BookOpen,
@@ -9,7 +10,8 @@ import {   LayoutDashboard,
   Star,
   Users,
   FolderKanban,
-  House, } from "lucide-react";
+  House,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -21,21 +23,21 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/src/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { logOutUser } from "@/src/services/authService";
 
 export function AppSidebar() {
-  const { user, loading, clearAuth  } = useAuth();
+  const { user, loading, clearAuth } = useAuth();
 
-      const router = useRouter();
-      const logOutFunction = async () => {
-        await logOutUser(); // cler cookie
-        clearAuth(); // clear context
-        router.push("/login"); // redirect
-      };
-
-  if(loading) {
-    return <div>Loading...</div>
+  const router = useRouter();
+  const logOutFunction = async () => {
+    await logOutUser(); // cler cookie
+    clearAuth(); // clear context
+    router.push("/login"); // redirect
+  };
+  const pathname = usePathname();
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   const studentLinks = [
@@ -91,7 +93,7 @@ export function AppSidebar() {
       title: "History",
       href: "/dashboard/tutor/history",
       icon: Clock,
-    }
+    },
   ];
 
   const adminLinks = [
@@ -117,18 +119,17 @@ export function AppSidebar() {
     },
   ];
 
-
   let links = [];
 
-  if(user?.role === "STUDENT") {
+  if (user?.role === "STUDENT") {
     links = studentLinks;
   }
 
-  if(user?.role === "TUTOR") {
+  if (user?.role === "TUTOR") {
     links = tutorLinks;
   }
 
-  if(user?.role === "ADMIN") {
+  if (user?.role === "ADMIN") {
     links = adminLinks;
   }
 
@@ -136,13 +137,10 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-
           <SidebarMenu>
-
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/">
-
                   <House />
                   <span>Home</span>
                 </Link>
@@ -151,39 +149,32 @@ export function AppSidebar() {
 
             {/* user buttons */}
 
-          
-          {
-            links.map((link)=> (
+            {links.map((link) => (
               <SidebarMenuItem key={link.href}>
-                <SidebarMenuButton asChild>
-                  <Link href={link.href}>
-                  <link.icon />
-                  <span>{link.title}</span>
+                <SidebarMenuButton asChild isActive={pathname === link.href}>
+                  <Link
+                    href={link.href}
+                    className={`flex items-center gap-2 rounded-md px-2 py-2 ${
+                      pathname === link.href
+                        ? "bg-primary text-primary-foreground border border-black"
+                        : "hover:bg-muted"
+                    }`}
+                  >
+                    <link.icon />
+                    <span>{link.title}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            ))
-          }
+            ))}
 
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-    
                 <button onClick={logOutFunction}>
                   <House />
                   <span>Log out</span>
                 </button>
-
               </SidebarMenuButton>
             </SidebarMenuItem>
-
-
-
-
-
-
-
-
-
 
             {/* <SidebarMenuItem>
               <SidebarMenuButton asChild>
@@ -229,11 +220,6 @@ export function AppSidebar() {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem> */}
-
-
-
-
-
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
