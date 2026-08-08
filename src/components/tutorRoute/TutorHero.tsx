@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useState } from "react";
 
 type Props = {
   tutor: any;
@@ -15,14 +14,14 @@ const statusColor =
 
       <div className="relative flex flex-col items-center gap-6 md:flex-row">
         {/* Avatar */}
-<div className="relative ">
-  <Image
-    src={tutor.user.image || "/default-avatar.png"}
-    alt={tutor.user.name}
-    width={120}
-    height={120}
-    className="rounded-full border-4 border-white object-cover"
-  />
+<div className="relative rounded-full">
+        <Image
+          src={tutor.user.image || "/default-avatar.png"}
+          alt={tutor.user.name}
+          width={120}
+          height={120}
+          className="h-[120px] w-[120px] rounded-full object-cover"
+        />
 
   {/* <span className="absolute mb-2 bottom-0 right-2 p-4 z-20 rounded-full bg-green-700 border border-white" /> */}
   <span style={{backgroundColor: statusColor, border: "1.5px solid white",}}

@@ -3,10 +3,13 @@ import Link from "next/link";
 import { Eye, GraduationCap, Clock3, BookOpen, DollarSign } from "lucide-react";
 
 export default function TutorCard({ tutor }: { tutor: any }) {
+ const statusColor =
+  tutor.availability?.length > 0 ? "#22c55e" : "#ef4444";
   return (
     <div className="flex flex-col h-full rounded-2xl border bg-white p-6 shadow-sm transition-all hover:shadow-md w-sm md:w-[345px] lg:w-[310px] xl:w-[360px]">
       <div className="flex-1">
       <div className="flex items-center gap-4">
+        <div className="relative">
         <Image
           src={tutor.user.image || "/default-avatar.png"}
           alt={tutor.user.name}
@@ -14,6 +17,9 @@ export default function TutorCard({ tutor }: { tutor: any }) {
           height={72}
           className="h-[72px] w-[72px] rounded-full object-cover border"
         />
+          <span style={{backgroundColor: statusColor, border: "1.5px solid white",}}
+  className="absolute z-50 bottom-0 right-0 mb-2 mr-4 h-4 w-4 border-2 border-white rounded-full" />
+        </div>
 
         <div>
           <h2 className="text-lg font-bold">{tutor.user.name}</h2>
