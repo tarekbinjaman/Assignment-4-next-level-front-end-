@@ -1,19 +1,21 @@
 import Image from "next/image";
+import { useState } from "react";
 
 type Props = {
   tutor: any;
 };
 
 export default function TutorHero({ tutor }: Props) {
-  // {console.log("Tutor image from tutor hero", tutor)}
-  return (
+  {console.log("Tutor image from tutor hero", tutor)}
+const statusColor =
+  tutor.availability?.length > 0 ? "#22c55e" : "#ef4444";  return (
     <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 p-8 text-white shadow-xl">
       {/* Background Glow */}
       <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
       <div className="relative flex flex-col items-center gap-6 md:flex-row">
         {/* Avatar */}
-<div className="relative w-fit border">
+<div className="relative ">
   <Image
     src={tutor.user.image || "/default-avatar.png"}
     alt={tutor.user.name}
@@ -22,7 +24,9 @@ export default function TutorHero({ tutor }: Props) {
     className="rounded-full border-4 border-white object-cover"
   />
 
-  <span className="absolute mb-4 bottom-0 right-2 h-5 w-5 z-10 rounded-full border-4 border-green-500 bg-green-500" />
+  {/* <span className="absolute mb-2 bottom-0 right-2 p-4 z-20 rounded-full bg-green-700 border border-white" /> */}
+  <span style={{backgroundColor: statusColor, border: "1.5px solid white",}}
+  className="absolute z-50 bottom-0 right-0 mb-4 mr-4 h-4 w-4 border-2 border-white rounded-full" />
 </div>
 
         {/* Info */}
