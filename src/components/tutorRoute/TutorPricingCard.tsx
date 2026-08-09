@@ -8,7 +8,7 @@ type Props = {
 export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) {
   return (
     <aside className="sticky top-24">
-      <div className="rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg h-[280px]">
+      <div className="rounded-3xl border bg-white p-8 transition-all duration-300 hover:shadow-lg h-[280px]">
 
 
         {/* Availability */}

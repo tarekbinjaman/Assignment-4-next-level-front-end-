@@ -50,9 +50,9 @@ const handleSearchChnage = (value: string) => {
 }
 
   return (
-    <section className="space-y-8 mt-4">
+    <section className=" mt-4 bg-white rounded-3xl pb-4">
       {/* Header */}
-      <div className="flex flex-col gap-6 rounded-3xl border bg-white p-6 shadow-sm lg:flex-row lg:items-center lg:justify-between dark:bg-slate-900">
+      <div className="flex flex-col gap-6 rounded-3xl bg-white p-6 lg:flex-row lg:items-center lg:justify-between dark:bg-slate-900">
         {/* Left */}
         <div>
           <h2 className="text-2xl font-bold">Student Reviews</h2>
@@ -77,7 +77,7 @@ const handleSearchChnage = (value: string) => {
       </div>
 
       {/* Filters */}
-      <div className="grid gap-4 rounded-3xl border bg-white p-6 shadow-sm md:grid-cols-3 dark:bg-slate-900">
+      <div className="grid gap-4 rounded-3xl bg-white p-6 md:grid-cols-3 dark:bg-slate-900">
         {/* Search */}
         <div className="relative">
           <Search size={18} className="absolute left-3 top-3 text-slate-400" />

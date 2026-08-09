@@ -38,17 +38,18 @@ export default function TutorProfilePage() {
     <div className="container mx-auto max-w-7xl px-4 py-10">
       <TutorHero tutor={tutor} />
       <TutorStats tutor={tutor} />
-      <div className="mt-10 grid gap-8 lg:grid-cols-3">
-        {/* Left Content */}
-        <div className="space-y-8 lg:col-span-2">
-          <TutorAbout tutor={tutor} />
-        </div>
-        {/* Right Sidebar */}
-        <TutorPricingCard
-          setOpenBookingModal={setOpenBookingModal}
-          tutor={tutor}
-        />
-      </div>
+<div className="mt-10 grid gap-8 lg:grid-cols-[2fr_1fr]">
+  {/* Left Content */}
+  <div className="space-y-8">
+    <TutorAbout tutor={tutor} />
+  </div>
+
+  {/* Right Sidebar */}
+  <TutorPricingCard
+    setOpenBookingModal={setOpenBookingModal}
+    tutor={tutor}
+  />
+</div>
       
       {/* Tutor reviews */}
       <TutorReviews tutorId={tutor?.id} page={page} setPage={setPage} limit={limit} />
