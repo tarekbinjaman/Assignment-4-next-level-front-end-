@@ -18,7 +18,7 @@ export default function TutorCard({ tutor }: { tutor: any }) {
           className="h-[72px] w-[72px] rounded-full object-cover border"
         />
           <span style={{backgroundColor: statusColor, border: "1.5px solid white",}}
-  className="absolute z-50 bottom-0 right-0 mb-2 mr-4 h-4 w-4 border-2 border-white rounded-full" />
+  className="absolute z-50 bottom-0 right-0 mb-2 mr-0 h-4 w-4 border-2 border-white rounded-full" />
         </div>
 
         <div>

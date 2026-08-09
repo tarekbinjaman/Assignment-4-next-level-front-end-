@@ -66,7 +66,7 @@ const handlePageChange = (page: number) => {
       <div className="xl:flex-none flex gap-4 items-center">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="xl:hidden mb-4 px-4 py-2 border rounded-lg"
+          className="xl:hidden mb-4 px-4 py-2 border-2 border-gray-100 rounded-lg shadow-2xl bg-white/80"
         >
           Filter
         </button>
