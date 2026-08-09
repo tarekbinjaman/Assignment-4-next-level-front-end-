@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { Calendar, Clock3 } from "lucide-react";
 
 type Props = {
   tutor: any;
@@ -8,7 +8,7 @@ type Props = {
 export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) {
   return (
     <aside className="sticky top-24">
-      <div className="rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg">
+      <div className="rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg h-[280px]">
 
 
         {/* Availability */}
@@ -18,8 +18,8 @@ export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) 
           </h3>
 
 
-          <div className="flex gap-4">
-            {/* =============parent div============= */}
+          {/* <div className="flex gap-4">
+            =============parent div=============
             <div>
               <Calendar />
             </div>
@@ -36,7 +36,42 @@ export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) 
               </div>
             ))}
           </div>
+          </div> */}
+
+          {/* new one */}
+                <div className="mt-6 flex-col items-center justify-between rounded-2xl border bg-slate-50 px-5 py-4">
+        {/* Left */}
+        <div className="flex items-center gap-2">
+          <div className="flex h-5 w-5 items-center justify-center rounded-xl bg-white shadow-sm">
+            <Clock3 className="h-5 w-5 text-blue-600" />
           </div>
+
+          <div>
+            <p className="text-xs text-gray-500 whitespace-nowrap">
+              {tutor.availability.length
+                ? `${tutor.availability[0].startTime} - ${tutor.availability[0].endTime}`
+                : "Not Available"}
+            </p>
+          </div>
+        </div>
+
+        {/* Days */}
+        {
+          tutor.availability.length > 0 && (
+
+        <div className="flex gap-2 justify-start mt-2">
+          {tutor.availability.map((day: any) => (
+            <span
+              key={day.id}
+              className="rounded-md bg-white px-1 py-0.5 text-xs font-semibold text-green-700"
+            >
+              {day.day.slice(0, 3)}
+            </span>
+          ))}
+        </div>
+          )
+        }
+      </div>
         </div>
         {/* Book Button */}
         <button 
