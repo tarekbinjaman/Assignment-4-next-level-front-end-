@@ -97,7 +97,7 @@ const handlePageChange = (page: number) => {
               onClick={() => setShowFilters(false)}
             />
 
-            <div className="absolute top-55 md:top-50 z-50 w-80 animate-in fade-in zoom-in-95 duration-200">
+            <div className="absolute top-55 md:top-50 z-80 w-80 animate-in fade-in zoom-in-95 duration-200">
               <TutorFilters
                 category={category}
                 setCategory={handleCategoryChange}

@@ -21,7 +21,7 @@ export default function TutorSearch({ value, onChange }: Props) {
           placeholder="Search tutors by name..."
           className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 
                      focus:outline-none focus:ring-2 focus:ring-blue-500 
-                     focus:border-blue-500 shadow-sm transition"
+                     focus:border-blue-500 shadow-sm transition bg-white"
         />
       </div>
     </div>
