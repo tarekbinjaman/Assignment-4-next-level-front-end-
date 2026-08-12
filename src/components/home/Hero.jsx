@@ -6,10 +6,10 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="mt-10">
+    <section className="">
       {/* Topographic background */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.15] h-[600px]"
+        className="absolute top-13 inset-0 opacity-[0.15] h-[600px]"
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/drvwvre57/image/upload/v1786544721/flowity-topo-contours-1786544657616_ibu5uk.svg')",
