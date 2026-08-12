@@ -2,8 +2,7 @@
 import Hero from "@/src/components/home/Hero"
 export default function Home() {
   return (
-<div>
-  <h1>This is homepage.</h1>
+<div className="w-10/12 mx-auto">
   <Hero />
 </div>
   );
