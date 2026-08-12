@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NavbarWrapper from "../components/Navbar/NavbarWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import CustomCursor  from "@/src/Cursor/CustomCursor"
 const outfit = Outfit({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
@@ -37,6 +37,7 @@ export default function RootLayout({
         </TooltipProvider>
         </AuthProvider>
             </QueryClientProvider>
+            <CustomCursor />
       </body>
     </html>
   );
