@@ -16,7 +16,7 @@ const categories = [
 
 const BottomMarquee = () => {
   return (
-    <div className="mb-10 hidden overflow-hidden md:block">
+    <div className="relative mb-10 hidden overflow-hidden xl:block rounded-2xl">
       <Marquee speed={60} gradient={false}>
         {categories.map((category, index) => (
           <div
@@ -27,7 +27,6 @@ const BottomMarquee = () => {
           </div>
         ))}
 
-        {/* Duplicate for smoother continuous scrolling */}
         {categories.map((category, index) => (
           <div
             key={`duplicate-${index}`}
@@ -37,6 +36,10 @@ const BottomMarquee = () => {
           </div>
         ))}
       </Marquee>
+
+<div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-22 bg-gradient-to-r from-blue-400/40  to-transparent" />
+
+<div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-22 bg-gradient-to-l from-blue-400/40 to-transparent" />
     </div>
   );
 };
