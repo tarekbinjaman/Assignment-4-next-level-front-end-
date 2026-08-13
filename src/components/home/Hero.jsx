@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="">
+    <section className="mt-25">
       {/* Topographic background */}
       <div
         className="absolute top-13 inset-0 opacity-[0.15] h-[600px]"

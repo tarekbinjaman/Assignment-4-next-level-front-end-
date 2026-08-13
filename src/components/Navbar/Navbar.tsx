@@ -16,7 +16,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full border-b px-6 py-4 flex items-center justify-between">
+    <nav className="w-full border-b px-6 py-4 flex items-center justify-between bg-white z-100">
       {/* logo */}
       <Link href="/" className="text-blue-500 font-bold">
         Skill Bridge

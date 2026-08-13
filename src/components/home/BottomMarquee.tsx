@@ -1,0 +1,44 @@
+import React from "react";
+import Marquee from "react-fast-marquee";
+
+const categories = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "English",
+  "Programming",
+  "Web Development",
+  "Accounting",
+  "Biology",
+  "IELTS",
+  "Business",
+];
+
+const BottomMarquee = () => {
+  return (
+    <div className="mb-10 hidden overflow-hidden md:block">
+      <Marquee speed={60} gradient={false}>
+        {categories.map((category, index) => (
+          <div
+            key={index}
+            className="mx-4 rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-medium text-blue-700"
+          >
+            {category}
+          </div>
+        ))}
+
+        {/* Duplicate for smoother continuous scrolling */}
+        {categories.map((category, index) => (
+          <div
+            key={`duplicate-${index}`}
+            className="mx-4 rounded-full border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-medium text-blue-700"
+          >
+            {category}
+          </div>
+        ))}
+      </Marquee>
+    </div>
+  );
+};
+
+export default BottomMarquee;
