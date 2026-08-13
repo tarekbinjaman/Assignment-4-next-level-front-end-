@@ -42,7 +42,7 @@ export default function UserDashboard () {
   return (
     <DropdownMenu>
 <DropdownMenuTrigger asChild>
-  <Button variant="ghost" size="icon" className="rounded-full">
+  <Button variant="ghost" size="icon" className="rounded-full z-100">
     <Avatar>
       <AvatarImage
         src={user?.image ? user?.image : "https://github.com/shadcn.png"}
