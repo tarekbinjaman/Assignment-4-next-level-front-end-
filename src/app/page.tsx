@@ -3,6 +3,7 @@ import Hero from "@/src/components/home/Hero"
 import BottomMarquee from "../components/home/BottomMarquee";
 import TutorGettingStarted from "../components/home/TutorStart";
 import BookingGuide from "../components/home/BookingGuide";
+import ReviewGettingStarted from "../components/home/ReviewGettingStarted";
 export default function Home() {
   return (
 <div>
@@ -12,6 +13,7 @@ export default function Home() {
 </div>
   <BookingGuide />
   <TutorGettingStarted />
+  <ReviewGettingStarted />
 </div>
   );
 }
