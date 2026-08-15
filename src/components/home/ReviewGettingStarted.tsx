@@ -11,40 +11,14 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const steps = [
-  {
-    number: "01",
-    title: "Complete Your Session",
-    description:
-      "Finish your booked learning session with your tutor and make the most of your time together.",
-  },
-  {
-    number: "02",
-    title: "Open Your Booking",
-    description:
-      "Go to My Booking from your dashboard and find the session you have completed.",
-  },
-  {
-    number: "03",
-    title: "Leave Your Review",
-    description:
-      "Open the completed booking and scroll to the bottom to share your rating and experience.",
-  },
-  {
-    number: "04",
-    title: "Share Your Experience",
-    description:
-      "Rate your tutor and leave a helpful comment to help other students make better choices.",
-  },
-];
-
 export default function ReviewGettingStarted() {
   return (
     <section className="relative overflow-hidden py-24">
       {/* Background decoration */}
       <div className="pointer-events-none absolute left-1/2 top-20 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-400/10 blur-3xl" />
 
-      <div className="mx-auto max-w-7xl px-6">
+      {/* Main container */}
+      <div className="mx-auto max-w-[1400px] px-6">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-600">
@@ -59,7 +33,7 @@ export default function ReviewGettingStarted() {
 
           <p className="mt-5 text-base leading-7 text-slate-500 md:text-lg">
             Finished your session? Leave a review in just a few simple steps
-            and help other students find great tutors.
+            and help other students find the right tutor.
           </p>
         </div>
 
