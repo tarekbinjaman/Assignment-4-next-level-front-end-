@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   UserRound,
   GraduationCap,
@@ -9,6 +10,7 @@ import {
   BookOpen,
   CircleDollarSign,
 } from "lucide-react";
+import Link from "next/link";
 
 const steps = [
   {
@@ -242,19 +244,30 @@ export default function TutorGettingStarted() {
         </div>
 
         {/* CTA */}
-        <div className="mx-auto mt-14 flex max-w-2xl flex-col items-center text-center">
-          <p className="text-lg font-semibold text-slate-900">
-            Ready to share your skills?
-          </p>
+<div className="mx-auto mt-14 flex max-w-2xl flex-col items-center text-center">
+  <p className="text-lg font-semibold text-slate-900">
+    Ready to get started with SkillBridge?
+  </p>
 
-          <p className="mt-1 text-sm text-slate-500">
-            Create your tutor profile and start connecting with learners.
-          </p>
+  <p className="mt-1 text-sm text-slate-500">
+    Whether you want to share your knowledge or learn something new,
+    find your path on SkillBridge.
+  </p>
 
-          <button className="mt-5 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-600">
-            Create Tutor Profile
-          </button>
-        </div>
+  <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+    <Button asChild>
+      <Link href="/register">
+        Become a Tutor
+      </Link>
+    </Button>
+
+    <Button asChild variant="outline">
+      <Link href="/tutors">
+        Find a Tutor
+      </Link>
+    </Button>
+  </div>
+</div>
       </div>
     </section>
   );
