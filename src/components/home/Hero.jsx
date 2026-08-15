@@ -22,7 +22,7 @@ export default function Hero() {
           {/* text data */}
           <div className="flex items-center gap-4">
             <p className="text-lg text-blue-400">We are the best</p>
-            <span className="h-px flex-1 bg-blue-200 py-[1px] mr-120" />
+            <span className="h-px flex-1 bg-blue-200 py-[1px] mr-100" />
           </div>
           <h1 className="text-3xl font-bold leading-10 tracking-wide mt-8">
             Learn From Home <br />
