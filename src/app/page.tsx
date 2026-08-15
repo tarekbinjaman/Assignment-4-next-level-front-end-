@@ -6,6 +6,7 @@ import BookingGuide from "../components/home/BookingGuide";
 import ReviewGettingStarted from "../components/home/ReviewGettingStarted";
 import BeATutor from "../components/home/BeATutor";
 import LearnerReviews from "../components/home/LearnerReview";
+import WhySkillBridge from "../components/home/WhySkillBridge";
 export default function Home() {
   return (
 <div>
@@ -18,6 +19,7 @@ export default function Home() {
   <ReviewGettingStarted />
   <BeATutor />
   <TutorGettingStarted />
+  <WhySkillBridge />
 </div>
   );
 }

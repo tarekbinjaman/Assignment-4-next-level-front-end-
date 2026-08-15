@@ -81,7 +81,7 @@ export default function BeATutor() {
 
             <div className="mt-7">
               <p className="text-sm font-semibold text-slate-900">
-                Sarah Rahman
+                Shafin Rahman
               </p>
 
               <p className="mt-1 text-sm text-slate-500">
