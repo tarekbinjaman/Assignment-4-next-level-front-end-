@@ -291,7 +291,7 @@ export default function ReviewGettingStarted() {
         </div>
 
         {/* CTA */}
-        <div className="mx-auto mt-14 flex max-w-2xl flex-col items-center text-center">
+        {/* <div className="mx-auto mt-14 flex max-w-2xl flex-col items-center text-center">
           <p className="text-lg font-semibold text-slate-900">
             Ready to share your experience?
           </p>
@@ -309,7 +309,7 @@ export default function ReviewGettingStarted() {
               <Link href="/tutors">Find a Tutor</Link>
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

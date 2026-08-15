@@ -4,6 +4,8 @@ import BottomMarquee from "../components/home/BottomMarquee";
 import TutorGettingStarted from "../components/home/TutorStart";
 import BookingGuide from "../components/home/BookingGuide";
 import ReviewGettingStarted from "../components/home/ReviewGettingStarted";
+import BeATutor from "../components/home/BeATutor";
+import LearnerReviews from "../components/home/LearnerReview";
 export default function Home() {
   return (
 <div>
@@ -12,8 +14,10 @@ export default function Home() {
   <BottomMarquee />
 </div>
   <BookingGuide />
-  <TutorGettingStarted />
+  <LearnerReviews />
   <ReviewGettingStarted />
+  <BeATutor />
+  <TutorGettingStarted />
 </div>
   );
 }
