@@ -3,13 +3,14 @@
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
     <section className="lg:mt-15 xl:mt-10 md:mb-10 mb-0 md:mt-10 mt-10">
       {/* Topographic background */}
       <div
-        className="pointer-events-none absolute -top-0 inset-0 h-[700px] md:opacity-55 opacity-0 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
+        className="pointer-events-none absolute -top-0 inset-0 h-[700px] md:opacity-18 opacity-0 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/drvwvre57/image/upload/v1786544721/flowity-topo-contours-1786544657616_ibu5uk.svg')",
@@ -49,13 +50,15 @@ export default function Hero() {
           </p>
 
           {/* Button */}
+          <Link href={'/tutors'}>
           <Button className="mt-7 bg-blue-400 px-6 sm:mt-8">
             Browse Tutors
           </Button>
+          </Link>
         </div>
 
         {/* Right image */}
-        <div className="w-full flex-1 lg:w-auto border md:hidden lg:block hidden">
+        <div className="w-full flex-1 lg:w-auto md:hidden lg:block hidden">
           <div className="relative mx-auto w-full 2xl:w-[650px] xl:w-[600px] lg:w-[500px]">
             <Image
               src="https://res.cloudinary.com/drvwvre57/image/upload/v1786527948/website_png_zyd5xd.png"
