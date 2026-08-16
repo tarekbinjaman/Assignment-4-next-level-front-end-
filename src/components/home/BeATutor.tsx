@@ -73,7 +73,7 @@ export default function BeATutor() {
 
           {/* Testimonial */}
           <div className="absolute bottom-7 left-7 right-7 bg-white/95 p-7 shadow-sm backdrop-blur-sm sm:left-10 sm:right-10 sm:bottom-10 sm:p-9">
-            <blockquote className="font-serif text-lg italic leading-8 text-slate-700 sm:text-xl">
+            <blockquote className="font-serif md:text-lg text-[13px] italic md:leading-8 leading-5 text-slate-700 sm:text-xl">
               “Teaching through SkillBridge has been a wonderful experience.
               I can share what I know while helping students reach their
               goals.”

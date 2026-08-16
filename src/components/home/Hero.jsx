@@ -9,7 +9,7 @@ export default function Hero() {
     <section className="lg:mt-15 xl:mt-10 md:mb-10 mb-0 md:mt-10 mt-10">
       {/* Topographic background */}
       <div
-        className="pointer-events-none absolute -top-0 inset-0 h-[700px] opacity-55 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
+        className="pointer-events-none absolute -top-0 inset-0 h-[700px] md:opacity-55 opacity-0 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/drvwvre57/image/upload/v1786544721/flowity-topo-contours-1786544657616_ibu5uk.svg')",
