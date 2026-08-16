@@ -10,7 +10,7 @@ import WhySkillBridge from "../components/home/WhySkillBridge";
 export default function Home() {
   return (
 <div>
-<div  className="w-8/12 mx-auto">
+<div  className="2xl:w-8/12 xl:w-11/12 mx-auto">
   <Hero />
   <BottomMarquee />
 </div>

@@ -16,7 +16,7 @@ const categories = [
 
 const BottomMarquee = () => {
   return (
-    <div className="relative mb-10 hidden overflow-hidden xl:block rounded-2xl">
+    <div className="relative mb-10 hidden overflow-hidden xl:block lg:block lg:w-11/12 lg:mx-auto rounded-2xl">
       <Marquee speed={60} gradient={false}>
         {categories.map((category, index) => (
           <div
