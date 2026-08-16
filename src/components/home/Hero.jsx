@@ -7,10 +7,10 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="lg:mt-15 xl:mt-10 md:mb-10 mb-0 md:mt-10 mt-10">
+    <section className="lg:mt-15 xl:mt-10 md:mb-10 mb-0 md:mt-20 mt-10">
       {/* Topographic background */}
       <div
-        className="pointer-events-none absolute -top-0 inset-0 h-[700px] md:opacity-18 opacity-0 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
+        className="pointer-events-none absolute -top-0 inset-0 h-[700px] md:opacity-18 opacity-0 sm:h-[750px] lg:h-[600px] 2xl:h-[700px] md:h-[900px]"
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/drvwvre57/image/upload/v1786544721/flowity-topo-contours-1786544657616_ibu5uk.svg')",
@@ -29,7 +29,7 @@ export default function Hero() {
               We are the best
             </p>
 
-            <span className="h-px flex-1 bg-blue-200 sm:mr-20 lg:mr-32" />
+            <span className="h-px flex-1 bg-blue-200 sm:mr-20 lg:mr-32 md:mr-6" />
           </div>
 
           {/* Heading */}
