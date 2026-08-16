@@ -2,10 +2,10 @@ import { Calendar, Clock3 } from "lucide-react";
 
 type Props = {
   tutor: any;
-  setOpenBookingModal: any;
+  onBook: () => void;
 };
 
-export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) {
+export default function TutorPricingCard({ tutor, onBook }: Props) {
   return (
     <aside className="sticky top-24">
       <div className="rounded-3xl border bg-white p-8 transition-all duration-300 hover:shadow-lg h-[280px]">
@@ -75,7 +75,7 @@ export default function TutorPricingCard({ tutor, setOpenBookingModal }: Props) 
         </div>
         {/* Book Button */}
         <button 
-        onClick={() =>setOpenBookingModal(true) }
+        onClick={() =>onBook(true) }
         
         className="group relative mt-8 flex w-full items-center justify-center overflow-hidden rounded-xl bg-slate-900 px-5 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
           {/* Shine */}
