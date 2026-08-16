@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/src/context/AuthContext";
-import { logOutUser } from "@/src/services/authService";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -10,17 +9,11 @@ import { useState } from "react";
 import UserDashboard from "./NavbarComponents/userDashboard";
 
 export default function Navbar() {
-  const { user, clearAuth } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const logOutFunction = async () => {
-    await logOutUser();
-    clearAuth();
-    router.push("/login");
-  };
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -73,8 +66,9 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-80 w-full border-b border-gray-100 bg-white/90 backdrop-blur-md">
+    <nav className="sticky top-0 z-[9999] w-full border-b border-gray-100 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
         {/* Logo */}
         <Link
           href="/"
@@ -108,7 +102,8 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Auth */}
-        <div className="hidden items-center gap-3 sm:flex">
+        {/* Hidden until lg so tablet doesn't show the avatar */}
+        <div className="hidden items-center gap-3 lg:flex">
           {user ? (
             <UserDashboard />
           ) : (
@@ -129,75 +124,99 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile + Tablet Menu Button */}
         <button
           onClick={() => setMobileMenuOpen((prev) => !prev)}
-          className="rounded-lg p-2 text-gray-700 transition hover:bg-gray-100 lg:hidden"
+          className="rounded-lg p-2 text-gray-700 transition-all duration-200 hover:bg-gray-100 lg:hidden"
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          <div className="relative h-6 w-6">
+            <Menu
+              className={`absolute inset-0 h-6 w-6 transition-all duration-200 ${
+                mobileMenuOpen
+                  ? "rotate-90 scale-0 opacity-0"
+                  : "rotate-0 scale-100 opacity-100"
+              }`}
+            />
+
+            <X
+              className={`absolute inset-0 h-6 w-6 transition-all duration-200 ${
+                mobileMenuOpen
+                  ? "rotate-0 scale-100 opacity-100"
+                  : "-rotate-90 scale-0 opacity-0"
+              }`}
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="border-t border-gray-100 bg-white px-4 pb-5 pt-3 shadow-lg lg:hidden">
-          <div className="flex flex-col gap-1">
-            {navLinks.map((link) =>
-              link.type === "route" ? (
-                <Link
-                  key={link.label}
-                  href={link.target}
-                  onClick={closeMobileMenu}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-500"
-                >
-                  {link.label}
-                </Link>
+      {/* Mobile + Tablet Navigation */}
+      <div
+        className={`grid overflow-hidden border-t border-gray-100 bg-white shadow-lg transition-all duration-300 ease-out lg:hidden ${
+          mobileMenuOpen
+            ? "grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="min-h-0">
+          <div className="px-4 pb-5 pt-3 sm:px-6">
+
+            {/* Navigation Links */}
+            <div className="flex flex-col gap-1">
+              {navLinks.map((link) =>
+                link.type === "route" ? (
+                  <Link
+                    key={link.label}
+                    href={link.target}
+                    onClick={closeMobileMenu}
+                    className="rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-blue-500"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.target)}
+                    className="rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-blue-500"
+                  >
+                    {link.label}
+                  </button>
+                ),
+              )}
+            </div>
+
+            {/* Mobile + Tablet Auth */}
+            <div className="mt-3 border-t border-gray-100 pt-4">
+              {user ? (
+                <div className="px-4">
+                  <UserDashboard />
+                </div>
               ) : (
-                <button
-                  key={link.label}
-                  onClick={() => scrollToSection(link.target)}
-                  className="rounded-lg px-4 py-3 text-left text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-500"
-                >
-                  {link.label}
-                </button>
-              ),
-            )}
-          </div>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href="/login"
+                    onClick={closeMobileMenu}
+                    className="rounded-lg px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                  >
+                    Login
+                  </Link>
 
-          {/* Mobile Auth */}
-          <div className="mt-3 border-t border-gray-100 pt-4">
-            {user ? (
-              <div className="px-4">
-                <UserDashboard />
-              </div>
-            ) : (
-              <div className="flex flex-col gap-2">
-                <Link
-                  href="/login"
-                  onClick={closeMobileMenu}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                >
-                  Login
-                </Link>
+                  <Link
+                    href="/register"
+                    onClick={closeMobileMenu}
+                  >
+                    <Button className="w-full rounded-full">
+                      Get Started
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
 
-                <Link
-                  href="/register"
-                  onClick={closeMobileMenu}
-                >
-                  <Button className="w-full rounded-full">
-                    Get Started
-                  </Button>
-                </Link>
-              </div>
-            )}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
