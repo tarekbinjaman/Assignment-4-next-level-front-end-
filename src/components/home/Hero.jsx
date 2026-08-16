@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="lg:mt-15 xl:mt-10 mb-10 md:mt-10 mt-10">
+    <section className="lg:mt-15 xl:mt-10 md:mb-10 mb-0 md:mt-10 mt-10">
       {/* Topographic background */}
       <div
         className="pointer-events-none absolute -top-0 inset-0 h-[700px] opacity-55 sm:h-[750px] lg:h-[600px] xl:h-[700px] md:h-[900px]"
@@ -32,7 +32,7 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="xl:mt-6 lg:mt-2 xl:text-3xl lg:text-[25px] font-bold xl:leading-[1.25] lg:leading-8.5 tracking-wide sm:mt-8 sm:text-4xl sm:leading-[1.25] lg:text-4xl">
+          <h1 className="xl:mt-6 lg:mt-2 xl:text-3xl lg:text-[25px] text-2xl mt-3 md:mt-0 font-bold xl:leading-[1.25] lg:leading-8.5 tracking-wide sm:mt-8 sm:text-4xl sm:leading-[1.25] lg:text-4xl">
             Learn From Home <br />
             With
             <span className="text-blue-400"> The Best</span>
@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
 
         {/* Right image */}
-        <div className="w-full flex-1 lg:w-auto border">
+        <div className="w-full flex-1 lg:w-auto border md:hidden lg:block hidden">
           <div className="relative mx-auto w-full 2xl:w-[650px] xl:w-[600px] lg:w-[500px]">
             <Image
               src="https://res.cloudinary.com/drvwvre57/image/upload/v1786527948/website_png_zyd5xd.png"

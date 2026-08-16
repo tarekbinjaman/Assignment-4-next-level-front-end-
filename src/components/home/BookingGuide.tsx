@@ -290,7 +290,7 @@ export default function BookingGuide() {
         </div>
 
         {/* Steps */}
-        <div className="mt-16 grid gap-6 lg:grid-cols-4">
+        <div className="mt-16 grid gap-6 xl:grid-cols-4 lg:grid-cols-2">
           {steps.map((step) => {
             const Icon = step.icon;
 
