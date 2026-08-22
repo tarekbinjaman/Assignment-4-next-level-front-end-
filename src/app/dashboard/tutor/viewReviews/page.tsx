@@ -12,8 +12,10 @@ import { useMe } from "@/src/hooks/useMe/useMe";
 
 export default function ViewReviews() {
   const [search, setSearch] = useState("");
-  const [rating, setRating] = useState("ALL");
+  const [rating, setRating] = useState<number | "ALL">("ALL");
   const [sort, setSort] = useState("Newest");
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
   const [debouncedSearch] = useDebounce(search, 500);
 
@@ -24,7 +26,9 @@ export default function ViewReviews() {
     tutorId,
     sort,
     debouncedSearch,
-    rating
+    rating,
+    page,
+    limit
   );
 
   // Default values until the API responds
@@ -32,8 +36,14 @@ export default function ViewReviews() {
   const averageRating = data?.data?.averageRating ?? 0;
   const totalReviews = data?.data?.totalReviews ?? 0;
 
-  console.log("all in one", {reviews, averageRating, totalReviews, tutorId, data})
-  console.log("Search, rating, sort", search, rating, sort)
+  console.log("all in one", {
+    reviews,
+    averageRating,
+    totalReviews,
+    tutorId,
+    data,
+  });
+  console.log("Search, rating, sort", search, rating, sort);
   return (
     <div className="space-y-8">
       <ReviewHeader />
